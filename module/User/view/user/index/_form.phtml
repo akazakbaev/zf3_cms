@@ -1,0 +1,192 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev@srs.lan
+ * Date: 2/23/18
+ * Time: 2:05 PM
+ */
+/* @var $this \Reserve\Classes\PhpStormPhtmlHelper */
+
+$this->headScript()
+     ->appendFile($this->basePath('externals/select2-4.0.3/dist/js/select2.full.min.js'), 'text/javascript')
+     ->appendFile($this->basePath('js/address.js'), 'text/javascript')
+;
+
+$this->headLink()
+     ->appendStylesheet($this->basePath('externals/select2-4.0.3/dist/css/select2.min.css'))
+;
+
+$error = $this->formElementErrors()->setMessageOpenFormat('<span class="error">')->setMessageCloseString('</span>');
+
+?>
+<div class="col-lg-3 text-center">
+    <div id="profile-photo">
+        <?php if (isset($item)): ?>
+            <?= $this->itemPhoto($item->getPhotoId(), 'thumb.normal', 'profile photo', ['class' => 'photo']) ?>
+        <?php else: ?>
+            <?= $this->itemPhoto(null, 'thumb.normal', 'profile photo', ['class' => 'photo']) ?>
+        <?php endif; ?>
+        <div class="change_avatar">
+            <p>
+                <a href="#" id="change_photo">
+                    <?= $this->translate('Choose Avatar') ?>
+                </a>
+            </p>
+        </div>
+
+    </div>
+    <p class="small m-t-md red">
+        <?= $error->render($form->get('photo')) ?>
+    </p>
+    <p class="small m-t-md">
+
+    </p>
+
+
+</div>
+<div class="col-lg-6">
+    <?php
+    $position        = \Zend\Form\View\Helper\FormLabel::PREPEND;
+    $requiredElement = ' <span class="red">*</span>';
+
+    $form->prepare();
+    echo $this->form()->openTag($form); ?>
+    <h4><?= $this->translate('General Information') ?></h4>
+    <div class="row">
+
+        <div class="form-group col-lg-12">
+            <?= $this->formLabel($form->get('pin'), $requiredElement . $error->render($form->get('pin')), $position) ?>
+            <div class="input-group">
+                <?php echo $this->formInput($form->get('pin')) ?>
+                <span class="input-group-btn">
+                                                <a href="#" class="btn btn-primary"
+                                                   id="find_by_pin"><?= $this->translate('Search') ?></a>
+                                            </span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('fname'), $requiredElement . $error->render($form->get('fname')), $position) ?>
+            <?php echo $this->formInput($form->get('fname')) ?>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('lname'), $requiredElement . $error->render($form->get('lname')), $position) ?>
+            <?php echo $this->formInput($form->get('lname')) ?>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('pname')) ?>
+            <?php echo $this->formInput($form->get('pname')) ?>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('bdate'), $requiredElement . $error->render($form->get('bdate')), $position) ?>
+            <?php echo $this->formInput($form->get('bdate')) ?>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('username'), $requiredElement . $error->render($form->get('username')), $position) ?>
+            <?php echo $this->formInput($form->get('username')) ?>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('password'), $requiredElement . $error->render($form->get('password')), $position) ?>
+            <?php echo $this->formInput($form->get('password')) ?>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('status'), $requiredElement . $error->render($form->get('status')), $position) ?>
+            <?php echo $this->formSelect($form->get('status')) ?>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('level_id'), $requiredElement . $error->render($form->get('level_id')), $position) ?>
+            <?php echo $this->formSelect($form->get('level_id')) ?>
+        </div>
+        <div class="form-group col-lg-6">
+            <?= $this->formLabel($form->get('email'), $requiredElement . $error->render($form->get('email')), $position) ?>
+            <?php echo $this->formInput($form->get('email')) ?>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group col-lg-3 pull-left">
+            <button class="btn btn-success btn-block"><?php echo $this->translate('Save') ?></button>
+        </div>
+    </div>
+    <?= $this->formFile($form->get('photo')) ?>
+    <?= $this->formHidden($form->get('csrf')) ?>
+    <?php echo $this->form()->closeTag(); ?>
+</div>
+
+<?php
+$this->inlineScript()->appendScript(/** language=JavaScript */
+    "
+
+    $(function() {
+        
+        $('#profile-photo').on('click', function(e){
+            e.preventDefault();
+            
+            $('#user_photo_upload_form').click();
+        });
+        
+        $('#user_photo_upload_form').on('change', function(){
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    $('.photo')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+    
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+        
+        $('#find_by_pin').on('click', function(e){
+            e.preventDefault();
+            
+            var pin = $('#pin').val();
+            
+            if(pin == '')
+            {
+                toastr['error']('" . $this->translate('The PIN field can not be empty') . "')       
+               return false;      
+            }
+            
+            var self = this;
+            
+            $.ajax({
+                dataType: 'json',
+                data: {pin: pin},
+                type: 'GET',
+                url: '" . $this->url('infocom_service', array('action' => 'pin-service')) . "'
+            }).done(function( data ) {
+                if(data.status)
+                {
+                    if(data.message !== 'undefined'){
+                        findAddressId(data.message);
+                    }
+                    $(self).closest('form').find('input[type=text] > input:gt(1), textarea').val('');
+                    
+                    $.each( data, function( key, value ) {
+                        $('#'+ key).val(value);
+                    });
+                }
+                else
+                {  
+                    $(self).closest('form').find('input[type=text], textarea').val('');
+                   
+                    toastr['error'](data.message)
+                }
+            });
+        });
+        var findAddressId = function(pin_search){
+             $.ajax({
+                dataType: 'json',
+                data: {pin_search: pin_search},
+                type: 'POST',
+                url: '" . $this->url('person_general', ['action' => 'address']) . "'
+            }).done(function( data ) {
+                if(data.status){
+                    $('[name=\"contact[address]\"]').val(data.address_id);
+                }
+            });
+        };
+    });
+
+") ?>

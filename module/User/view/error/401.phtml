@@ -1,0 +1,60 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev
+ * Date: 5/17/17
+ * Time: 11:33 AM
+ */
+?>
+
+<div class="login-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center m-b-md">
+                <h3><?= $this->translate('PLEASE LOGIN TO APP')?></h3>
+                <small><?= $this->translate('LOGIN_DESCRIPTION')?></small>
+            </div>
+            <div class="hpanel">
+                <div class="panel-body">
+                    <div class="row m-b-md flash-messenger">
+                        <?php
+                        echo $this->flashMessenger()
+                            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissible fade in"><p>')
+                            ->setMessageSeparatorString('</p><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->renderCurrent('error', array(), false);
+
+                        $this->flashMessenger()->getPluginFlashMessenger()->clearCurrentMessagesFromContainer();
+
+                        $position = \Zend\Form\View\Helper\FormLabel::PREPEND;
+                        $requiredElement = ' <span class="red">*</span>';
+
+                        $error = $this->formElementErrors()->setMessageOpenFormat('<span class="error">')->setMessageCloseString('</span>');
+                        ?>
+                    </div>
+                    <?php
+                    $form->setAttribute('action', $this->url('login',array()))->prepare();
+                    echo $this->form()->openTag($form); ?>
+                    <div class="form-group <?php if($this->formElementErrors($form->get('email'))):?>has-error<?php endif;?>">
+                        <?= $this->formLabel($form->get('email'), $requiredElement . $error->render($form->get('email')), $position)?>
+                        <?php echo $this->formInput($form->get('email'))?>
+                        <span class="help-block small"><?= $this->translate('Your e-mail to app')?></span>
+                    </div>
+                    <div class="form-group <?php if($this->formElementErrors($form->get('email'))):?>has-error<?php endif;?>">
+                        <?= $this->formLabel($form->get('password'), $requiredElement . $error->render($form->get('password')), $position)?>
+                        <?php echo $this->formInput($form->get('password'))?>
+                        <span class="help-block small"><?= $this->translate('Yur strong password')?></span>
+                    </div>
+
+                    <button class="btn btn-success btn-block"><?php echo $this->translate('Login')?></button>
+
+                    <a href="<?= $this->url('hrm_auth')?>" class="btn btn-primary btn-block"><?php echo $this->translate('Login with HRM')?></a>
+                    <?php echo $this->formHidden($form->get('return_url'))?>
+                    <?= $this->formHidden($form->get('csrf'))?>
+                    <?php echo $this->form()->closeTag();?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev@srs.lan
+ * Date: 2/2/18
+ * Time: 11:10 AM
+ */
+?>
+<div class="register-container">
+    <div class="row">
+        <div class="col-md-12">
+            <i class="pe-7s-way text-success big-icon"></i>
+
+            <?php if($status):?>
+                <h1><?= $this->translate('REGISTER_VERIFY_SUCCESS_TITLE')?></h1>
+                <p>
+                    <?= sprintf($this->translate('Your account has been verified. Please to be click <a href="%s">login</a>.', $this->url('login')))?>
+                </p>
+                <a href="<?= $this->url('home')?>" class="btn btn-xs btn-success"><?= $this->translate('Go back to dashboard')?></a>
+            <?php else:?>
+
+                <h1><?= $this->translate('ERROR')?></h1>
+                <p>
+                    <?= $this->translate($message)?>
+                </p>
+                <a href="<?= $this->url('home')?>" class="btn btn-xs btn-success"><?= $this->translate('Go back to dashboard')?></a>
+            <?php endif;?>
+        </div>
+    </div>
+</div>

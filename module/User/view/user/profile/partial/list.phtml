@@ -1,0 +1,103 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev@srs.lan
+ * Date: 2/15/18
+ * Time: 3:50 PM
+ */
+/**
+ * @var $this \Reserve\Classes\PhpStormPhtmlHelper
+ * @var \User\Entity\UserUsers $item
+ * @var \Reserve\Entity\ReserveSelection[]|\Zend\Paginator\Paginator $selections
+ */
+?>
+<?php if($selections->count()): ?>
+<table class="table table-striped">
+    <thead>
+        <th><?= $this->translate('Status')?></th>
+        <th><?= $this->translate('reserve_selection_step1_form_title')?></th>
+        <th><?= $this->translate('reserve_selection_step1_form_position')?></th>
+        <th><?= $this->translate('reserve_selection_step1_form_type')?></th>
+        <th></th>
+        <th><?= $this->translate('Options')?></th>
+    </thead>
+    <?php foreach ($selections as $selection): ?>
+        <tr>
+            <td width="6%">
+                <span class="label <?= $selection->getStatusColor() ?> pull-right"><?= $this->translate($selection->getStatus()->getTitle()) ?></span>
+            </td>
+            <td>
+                <a href="<?= $this->url('selection_general',
+                    ['action' => 'view', 'id' => $selection->getSelectionId()]) ?>">
+                    <?= $selection->getTitle() ?></a>
+                <br>
+                <small>
+                    <?= $this->translate('Posted');?>
+
+                    <?= $this->dateFormat($selection->getStartDate(), IntlDateFormatter::MEDIUM)?>,
+
+                    <?= $this->translate('by')?> <?= $this->htmlLink($selection->getUser()->getHref(), $selection->getUser()->getTitle())?>
+                    <?php if($selection->getCommissionByUser($item)->getIsSecretary()):?>
+                    <br>
+                        <span class="label label-info"><?=$this->translate('secretary')?></span>
+                    <?php endif;?>
+
+                </small>
+            </td>
+            <td>
+                <?php if($selection->getPositionId()):?>
+                    <?php
+                    $position = $this->position()->getPostManager()->getPositionById($selection->getPositionId());
+
+                    if($position)
+                    {
+                        echo '<a href="'. $this->url('position_profile', ['id' => $selection->getPositionId()]) .'">'.$this->position()->getPositionName($position).'</a>';
+                    }
+                    ?>
+                <?php endif;?>
+            </td>
+
+            <td>
+                <?= $this->translate($selection->getType()->getTitle())?>
+            </td>
+            <td>
+                <div class="project-people">
+                    <?php foreach ($selection->getApplications(10) as $application):?>
+                        <?php $person = $application->getPerson();?>
+                        <a href="<?= $this->url('person_profile', ['id' => $person->getPersonId()])?>">
+                            <?= $this->itemPhoto($person->getPhotoId(), 'thumb.icon', $person->getFullName(), ['class' => 'img-circle', 'pin' => $person->getPin()])?>
+                        </a>
+                    <?php endforeach;?>
+                </div>
+
+            </td>
+
+            <td>
+                <?php if ($selection->isEditable()): ?>
+                    <a class=""
+                       href="<?= $this->url('selection_general',
+                           ['action' => 'edit', 'id' => $selection->getSelectionId()]) ?>"><i class="fa fa-pencil"></i></a>
+                    <a class=""
+                       onclick="return confirm('<?=$this->translate('are you sure?')?>')"
+                       href="<?= $this->url('selection_general',
+                           ['action' => 'delete', 'id' => $selection->getSelectionId()]) ?>"><i class="fa fa-trash"></i></a>
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+<?php else:?>
+    <div class="alert alert-warning m-t">
+        <i class="fa fa-bolt"></i>  <?= $this->translate('Nobody found with that criteria.')?>
+    </div>
+<?php endif;?>
+<?php if($selections->getPages()->pageCount > 1):?>
+    <div class="clearfix"></div>
+    <div class="text-center">
+        <?php echo $this->paginationControl($selections, 'Sliding', 'pagination/pagination.phtml', array(
+            'query' => array(),
+            'router' => 'user_profile',
+            'params' => ['action' => 'index', 'id' => $item->getUserId()]
+        )); ?>
+    </div>
+<?php endif;?>

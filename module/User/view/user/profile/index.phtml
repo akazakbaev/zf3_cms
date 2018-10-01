@@ -1,0 +1,45 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev@srs.lan
+ * Date: 2/22/18
+ * Time: 10:20 AM
+ */
+?>
+<?php
+$this->pageBreadcrumbs()
+     ->setItems(
+         [
+             'first'  => ['label' => 'Person', 'link' => $this->url('person_general')],
+             'second' => ['label' => 'Person Profile', 'active' => true]
+         ]
+     )
+     ->setTitle('Person Profile')
+     ->setDescription('PERSON_PROFILE_DESCRIPTION');
+?>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="hpanel hgreen">
+            <div class="panel-body">
+                <?= $this->renderWidget('user', 'profile-info', ['item' => $item]) ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="hpanel">
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-0"
+                                      aria-expanded="true"><?= $this->translate('my selection') ?></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-0" class="tab-pane active">
+                    <div class="panel-body projects">
+                        <?= $this->partial('partial/list.phtml', compact('selections', 'item')); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

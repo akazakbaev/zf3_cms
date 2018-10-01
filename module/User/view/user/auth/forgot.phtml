@@ -1,0 +1,55 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev
+ * Date: 6/30/17
+ * Time: 1:11 PM
+ */
+?>
+<div class="login-container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="text-center m-b-md">
+            <h3><?php echo $this->translate('PASSWORD RECOVER')?></h3>
+            <small><?php echo $this->translate('Please fill the form to recover your password')?></small>
+        </div>
+        <div class="hpanel">
+            <div class="panel-body">
+                <p>
+                    <?php echo $this->translate('Enter your email address and your password will be reset and emailed to you.')?>
+                </p>
+
+                <div class="row m-b-md flash-messenger">
+                    <?php
+                    echo $this->flashMessenger()
+                        ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissible fade in"><p>')
+                        ->setMessageSeparatorString('</p><p>')
+                        ->setMessageCloseString('</p></div>')
+                        ->renderCurrent('error');
+
+                    echo $this->flashMessenger()
+                        ->setMessageOpenFormat('<div class="alert alert-success"><p>')
+                        ->setMessageSeparatorString('</p><p>')
+                        ->setMessageCloseString('</p></div>')
+                        ->renderCurrent('success');
+
+                    $this->flashMessenger()->getPluginFlashMessenger()->clearCurrentMessagesFromContainer();
+                    ?>
+                </div>
+
+                <?php
+                $form->setAttribute('action', $this->url('forgot',array()))->prepare();
+                echo $this->form()->openTag($form); ?>
+                    <div class="form-group">
+                        <label class="control-label" for="username"><?php echo $this->translate('Email')?></label>
+                        <?php echo $this->formInput($form->get('email'))?>
+                        <span class="help-block small"><?php echo $this->translate('Your registered email address')?></span>
+                    </div>
+
+                    <button class="btn btn-success btn-block"><?= $this->translate('Reset password')?></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

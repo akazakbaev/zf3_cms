@@ -1,0 +1,54 @@
+<?= $this->doctype() ?>
+
+<?php
+
+$siteTitle = '';
+$description = '';
+$keywords = '';
+?>
+
+<html lang="<?= $this->lang?>">
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle()->prepend($siteTitle)->setSeparator(' - ')->setAutoEscape(false) ?>
+    <meta name="Description" content="<?php echo $description; ?>">
+    <meta name="Keywords" content="<?php echo $keywords; ?>">
+
+    <?= $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+        ->prependStylesheet($this->basePath('css/style.css'))
+
+        ->prependStylesheet($this->basePath('css/helper.css'))
+        ->prependStylesheet($this->basePath('css/pe-icon-7-stroke.css'))
+        ->prependStylesheet($this->basePath('css/bootstrap.css'))
+        ->prependStylesheet($this->basePath('css/animate.css'))
+        ->prependStylesheet($this->basePath('css/metisMenu.css'))
+        ->prependStylesheet($this->basePath('css/font-awesome.css'))
+    ?>
+
+    <!-- Scripts -->
+    <?= $this->headScript()
+        ->prependFile($this->basePath('js/index.js'))
+        ->prependFile($this->basePath('js/bootstrap.min.js'))
+        ->prependFile($this->basePath('js/jquery-ui.min.js'))
+        ->prependFile($this->basePath('js/jquery.min.js'))
+    ?>
+</head>
+<body class="blank">
+    <?php echo  $this->content;?>
+
+    <div class="login-container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <?php echo vsprintf($this->translate('%s company_copyright'), date('Y'))?>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

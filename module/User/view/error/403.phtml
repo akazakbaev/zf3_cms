@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev
+ * Date: 5/17/17
+ * Time: 11:33 AM
+ */
+?>
+
+<div class="error-container">
+    <i class="pe-7s-way text-success big-icon"></i>
+    <h1>403</h1>
+    <strong><?= $this->translate('Private Page') ?></strong>
+    <p>
+        <?php echo $this->translate('You do not have permission to view this private page.') ?>
+    </p>
+    <a href='javascript:void(0);' onClick='history.go(-1);' class="btn btn-xs btn-success"><?= $this->translate('Go Back') ?></a>
+</div>

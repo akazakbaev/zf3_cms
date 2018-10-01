@@ -1,0 +1,29 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev@srs.lan
+ * Date: 2/20/18
+ * Time: 8:56 AM
+ */
+?>
+<?php
+$this->pageBreadcrumbs()
+    ->setItems(
+        [
+            'first' => ['label' => 'Users', 'link' => $this->url('user_general')],
+            'second' => ['label' => 'User Create', 'active' => true]
+        ]
+    )
+    ->setTitle('User Create')
+    ->setDescription('USER_CREATE_DESCRIPTION')
+;
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="hpanel">
+            <div class="panel-body">
+                <?= $this->partial('_form', ['form' => $form, 'item' => $item])?>
+            </div>
+        </div>
+    </div>
+</div>

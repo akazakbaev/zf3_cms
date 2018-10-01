@@ -1,0 +1,67 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev@srs.lan
+ * Date: 2/1/18
+ * Time: 11:18 AM
+ */
+?>
+<div class="register-container">
+    <div class="row">
+        <div class="col-md-12">
+            <?php if(!$send):?>
+                <div class="text-center m-b-md">
+                    <h3><?= $this->translate('Registration')?></h3>
+                    <small><?= $this->translate('REGISTRATION_DESCRIPTION')?> </small>
+                </div>
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <?php
+                        $position = \Zend\Form\View\Helper\FormLabel::PREPEND;
+                        $requiredElement = ' <span class="red">*</span>';
+
+                        $error = $this->formElementErrors()->setMessageOpenFormat('<span class="error">')->setMessageCloseString('</span>');
+
+                        $form->setAttribute('action', $this->url('signup',array()))->prepare();
+                        echo $this->form()->openTag($form); ?>
+                            <div class="row">
+                                <?php foreach ($form->getElements() as $element):?>
+
+                                    <?php
+
+                                    $messages = $element->getMessages();
+                                    $mArray = [];
+                                    foreach($messages as $key => $val)
+                                    {
+                                        $mArray[$key] = $this->translate($val);
+                                    }
+
+                                    $element->setMessages($mArray);
+                                    ?>
+
+                                    <div class="form-group col-lg-6 <?php if($this->formElementErrors($element)):?>has-error<?php endif;?>">
+                                        <?= $this->formLabel($element, $requiredElement . $error->render($element), $position)?>
+                                        <?= $this->formElement()->render($element);?>
+                                    </div>
+                                <?php endforeach;?>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-success" type="submit"><?= $this->translate('Register')?></button>
+                                <a href="<?= $this->url('home')?>" class="btn btn-default"><?= $this->translate('Cancel')?></a>
+                            </div>
+                        <?php echo $this->form()->closeTag();?>
+                    </div>
+                </div>
+            <?php else:?>
+
+                    <i class="pe-7s-way text-success big-icon"></i>
+                    <h1><?= $this->translate('REGISTER_SUCCESS_TITLE')?></h1>
+                    <p>
+                        <?= $this->translate('REGISTER_SUCCESS_DESCRIPTION')?>
+                    </p>
+                    <a href="<?= $this->url('home')?>" class="btn btn-xs btn-success"><?= $this->translate('Go back to dashboard')?></a>
+
+            <?php endif;?>
+        </div>
+    </div>
+</div>
