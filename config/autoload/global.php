@@ -19,7 +19,7 @@ return [
         // настройка миграций
         'migrations_configuration' => [
             'orm_default' => [
-                'directory' => 'data/Migrations',
+                'directory' => 'data/migrations',
                 'name'      => 'Doctrine Database Migrations',
                 'namespace' => 'Migrations',
                 'table'     => 'migrations',

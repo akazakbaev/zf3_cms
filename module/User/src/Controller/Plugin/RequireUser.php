@@ -40,7 +40,7 @@ class RequireUser extends AbstractPlugin
 
         $ret = false;
 
-        if( $viewer instanceof UserUsers && $viewer->getUserId() )
+        if( $viewer instanceof UserUsers && $viewer->getId() )
         {
             $ret = true;
         }

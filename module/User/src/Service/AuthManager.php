@@ -150,13 +150,13 @@ class AuthManager
 
     public function loginOauth($user)
     {
-        $this->authService->getStorage()->write($user->getUserId());
+        $this->authService->getStorage()->write($user->getId());
 
-        $this->loginLog($user->getUserId(), $user->getUsername(), Result::SUCCESS);
+        $this->loginLog($user->getId(), $user->getUsername(), Result::SUCCESS);
 
         return new Result(
             Result::SUCCESS,
-            $user->getUserId(),
+            $user->getId(),
             ['Authenticated successfully.']);
     }
 

@@ -97,7 +97,7 @@
         <?php echo $this->paginationControl($selections, 'Sliding', 'pagination/pagination.phtml', array(
             'query' => array(),
             'router' => 'user_profile',
-            'params' => ['action' => 'index', 'id' => $item->getUserId()]
+            'params' => ['action' => 'index', 'id' => $item->getId()]
         )); ?>
     </div>
 <?php endif;?>

@@ -46,9 +46,6 @@
                     </div>
 
                     <button class="btn btn-success btn-block"><?php echo $this->translate('Login')?></button>
-
-                    <a href="<?= $this->url('hrm_auth')?>" class="btn btn-primary btn-block"><?php echo $this->translate('Login with HRM')?></a>
-<!--                    <a class="btn btn-primary2 btn-block">--><?php //echo $this->translate('Login with EID')?><!--</a>-->
                     <?= $this->formHidden($form->get('csrf'))?>
                     <?= $this->formHidden($form->get('return_url'))?>
                     <?= $this->form()->closeTag();?>

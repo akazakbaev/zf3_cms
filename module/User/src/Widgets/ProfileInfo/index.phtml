@@ -11,14 +11,14 @@
     <div class="col-lg-8">
         <div class="pull-right text-right">
             <div class="btn-group">
-                <a href="<?= $this->url('user_general', ['action' => 'edit', 'id' => $item->getUserId()])?>" class="btn btn-default btn-xs">
+                <a href="<?= $this->url('user_general', ['action' => 'edit', 'id' => $item->getId()])?>" class="btn btn-default btn-xs">
                     <i class="fa fa-pencil"></i> <?= $this->translate('Edit')?>
                 </a>
             </div>
         </div>
         <div class="clearfix"></div>
         <h3 class="text-center">
-            <a href="<?= $this->url('person_profile', ['id' => $item->getUserId()])?>">
+            <a href="<?= $this->url('person_profile', ['id' => $item->getId()])?>">
                 <?= $item->getFullName()?>
             </a>
         </h3>

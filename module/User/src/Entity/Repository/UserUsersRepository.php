@@ -41,7 +41,7 @@ class UserUsersRepository extends EntityRepository
         $result = array();
         foreach ($users as $user) {
             $result['results'][] = array(
-                'id' => $user->getUserId(),
+                'id' => $user->getId(),
                 'text' => $user->getFullName(),
             );
         }

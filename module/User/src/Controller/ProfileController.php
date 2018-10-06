@@ -61,7 +61,7 @@ class ProfileController extends AbstractActionController
 
         $searchData   = new SearchData();
         $repSelection = $this->entityManager->getRepository(ReserveSelection::class);
-        $searchData->setUser($item->getUserId());
+        $searchData->setUser($item->getId());
         $selections = $repSelection->searchByForm($searchData, compact('page'));
 
         return [

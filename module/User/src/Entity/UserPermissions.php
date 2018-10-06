@@ -3,12 +3,11 @@
 namespace User\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use User\Entity\UserAllows;
 
 /**
  * UserPermissions
  *
- * @ORM\Table(name="user_permissions", uniqueConstraints={@ORM\UniqueConstraint(name="user_permission_name_uindex", columns={"name"})})
+ * @ORM\Table(name="user_permissions")
  * @ORM\Entity
  */
 class UserPermissions
@@ -16,35 +15,35 @@ class UserPermissions
     /**
      * @var int
      *
-     * @ORM\Column(name="permission_id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="user_permissions_permission_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $permissionId;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="name", type="string", length=50, precision=0, scale=0, nullable=false, unique=false)
      */
     private $name;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $description;
 
+
     /**
-     * Get permissionId.
+     * Get id.
      *
      * @return int
      */
-    public function getPermissionId()
+    public function getId()
     {
-        return $this->permissionId;
+        return $this->id;
     }
 
     /**
@@ -52,7 +51,7 @@ class UserPermissions
      *
      * @param string $name
      *
-     * @return UserPermission
+     * @return UserPermissions
      */
     public function setName($name)
     {
@@ -76,7 +75,7 @@ class UserPermissions
      *
      * @param string|null $description
      *
-     * @return UserPermission
+     * @return UserPermissions
      */
     public function setDescription($description = null)
     {
@@ -93,13 +92,5 @@ class UserPermissions
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAllow()
-    {
-        return $this->allow;
     }
 }

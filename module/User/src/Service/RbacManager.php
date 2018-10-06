@@ -120,7 +120,7 @@ class RbacManager
         {
             $user = $this->authManager->getViewer();
 
-            if ($user->getUserId() == null)
+            if ($user->getId() == null)
             {
                 return false;
             }

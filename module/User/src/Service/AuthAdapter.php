@@ -93,7 +93,7 @@ class AuthAdapter extends AbstractAdapter implements AdapterInterface
 
             return new Result(
                     Result::SUCCESS, 
-                    $user->getUserId(),
+                    $user->getId(),
                     ['Authenticated successfully.']);        
         }             
         

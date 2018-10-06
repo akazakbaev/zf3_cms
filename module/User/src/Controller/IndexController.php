@@ -93,7 +93,7 @@ class IndexController extends AbstractActionController
 
             $this->userManager->save($values);
 
-            return $this->redirect()->toRoute('user_profile', ['id' => $item->getUserId()]);
+            return $this->redirect()->toRoute('user_profile', ['id' => $item->getId()]);
         }
         else
         {
@@ -147,7 +147,7 @@ class IndexController extends AbstractActionController
 
             $this->userManager->save($values, $item);
 
-            return $this->redirect()->toRoute('user_profile', ['id' => $item->getUserId()]);
+            return $this->redirect()->toRoute('user_profile', ['id' => $item->getId()]);
         }
         else
         {

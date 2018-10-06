@@ -3,8 +3,6 @@
 namespace User\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use User\Entity\UserAllows;
 
 /**
  * UserLevels
@@ -17,12 +15,11 @@ class UserLevels
     /**
      * @var int
      *
-     * @ORM\Column(name="level_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="user_levels_level_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $levelId;
+    private $id;
 
     /**
      * @var string
@@ -34,40 +31,26 @@ class UserLevels
     /**
      * @var string|null
      *
-     * @ORM\Column(name="description", type="text", precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="description", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
      */
     private $description;
 
     /**
-     * @var role_types|null
+     * @var string|null
      *
-     * @ORM\Column(name="type", type="role_types", precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="type", type="string", length=20, precision=0, scale=0, nullable=true, unique=false)
      */
     private $type;
 
 
     /**
-     * One Product has Many Allows.
-     * @ORM\OneToMany(targetEntity="UserAllows", mappedBy="level")
-     */
-    private $allows;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->allows = new ArrayCollection();
-    }
-
-    /**
-     * Get levelId.
+     * Get id.
      *
      * @return int
      */
-    public function getLevelId()
+    public function getId()
     {
-        return $this->levelId;
+        return $this->id;
     }
 
     /**
@@ -121,7 +104,7 @@ class UserLevels
     /**
      * Set type.
      *
-     * @param role_types|null $type
+     * @param string|null $type
      *
      * @return UserLevels
      */
@@ -135,27 +118,10 @@ class UserLevels
     /**
      * Get type.
      *
-     * @return role_types|null
+     * @return string|null
      */
     public function getType()
     {
         return $this->type;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getAllows()
-    {
-        return $this->allows;
-    }
-
-    /**
-     * @param mixed $allows
-     */
-    public function setAllows($allows)
-    {
-        $this->allows = $allows;
-    }
-
 }

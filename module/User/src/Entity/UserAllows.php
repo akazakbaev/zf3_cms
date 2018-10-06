@@ -3,13 +3,11 @@
 namespace User\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use User\Entity\UserLevels;
-use User\Entity\UserPermissions;
-use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * UserAllows
  *
- * @ORM\Table(name="user_allows", uniqueConstraints={@ORM\UniqueConstraint(name="user_allows_level_id_permission_id_pk", columns={"level_id", "permission_id"})}, indexes={@ORM\Index(name="IDX_D0F3F73C5FB14BA7", columns={"level_id"}), @ORM\Index(name="IDX_D0F3F73CFED90CCA", columns={"permission_id"})})
+ * @ORM\Table(name="user_allows", indexes={@ORM\Index(name="user_allows_user_levels__fk", columns={"level_id"}), @ORM\Index(name="user_allows_user_permissions__fk", columns={"permission_id"})})
  * @ORM\Entity
  */
 class UserAllows
@@ -17,19 +15,18 @@ class UserAllows
     /**
      * @var int
      *
-     * @ORM\Column(name="allow_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="user_allows_allow_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $allowId;
+    private $id;
 
     /**
      * @var \User\Entity\UserLevels
      *
-     * @ORM\ManyToOne(targetEntity="UserLevels")
+     * @ORM\ManyToOne(targetEntity="User\Entity\UserLevels")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="level_id", referencedColumnName="level_id", nullable=true)
+     *   @ORM\JoinColumn(name="level_id", referencedColumnName="id", nullable=true)
      * })
      */
     private $level;
@@ -37,20 +34,22 @@ class UserAllows
     /**
      * @var \User\Entity\UserPermissions
      *
-     * @ORM\OneToOne(targetEntity="UserPermissions")
-     *   @ORM\JoinColumn(name="permission_id", referencedColumnName="permission_id")
+     * @ORM\ManyToOne(targetEntity="User\Entity\UserPermissions")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="permission_id", referencedColumnName="id", nullable=true)
+     * })
      */
     private $permission;
 
 
     /**
-     * Get allowId.
+     * Get id.
      *
      * @return int
      */
-    public function getAllowId()
+    public function getId()
     {
-        return $this->allowId;
+        return $this->id;
     }
 
     /**
@@ -58,7 +57,7 @@ class UserAllows
      *
      * @param \User\Entity\UserLevels|null $level
      *
-     * @return \User\UserAllows
+     * @return UserAllows
      */
     public function setLevel(\User\Entity\UserLevels $level = null)
     {

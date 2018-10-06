@@ -49,7 +49,7 @@ class AuthController extends AbstractActionController
 
         $viewer = $this->authManager->getViewer();
 
-        if ($viewer && $viewer->getUserId())
+        if ($viewer && $viewer->getId())
         {
             return $this->redirect()->toRoute('home');
         }
@@ -108,7 +108,7 @@ class AuthController extends AbstractActionController
         // Check if already logged out
         $viewer = $this->authManager->getViewer();
 
-        if (!$viewer->getUserId())
+        if (!$viewer->getId())
         {
             return $this->redirect()->toRoute('login');
         }

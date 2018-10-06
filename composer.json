@@ -19,7 +19,10 @@
         "doctrine/doctrine-orm-module": "^2.1",
         "doctrine/doctrine-module": "^2.1",
         "zendframework/zend-session": "^2.8",
-        "zendframework/zend-mvc-i18n": "^1.1"
+        "zendframework/zend-mvc-i18n": "^1.1",
+        "doctrine/migrations": "^1.8",
+        "zendframework/zend-mvc-plugin-flashmessenger": "^1.1",
+        "zendframework/zend-crypt": "^3.3"
     },
     "autoload": {
         "psr-4": {

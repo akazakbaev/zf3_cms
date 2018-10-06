@@ -3,12 +3,11 @@
 namespace User\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\DBAL\Types\DateType;
 
 /**
  * UserLogins
  *
- * @ORM\Table(name="user_logins", indexes={@ORM\Index(name="user_logins_user_id_index", columns={"user_id"}), @ORM\Index(name="user_logins_username_index", columns={"username"})})
+ * @ORM\Table(name="user_logins")
  * @ORM\Entity
  */
 class UserLogins
@@ -16,38 +15,37 @@ class UserLogins
     /**
      * @var int
      *
-     * @ORM\Column(name="login_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="user_logins_login_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $loginId;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="user_id", type="integer", precision=0, scale=0, nullable=true, unique=false)
-     */
-    private $userId;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="username", type="string", length=50, precision=0, scale=0, nullable=true, unique=false)
-     */
-    private $username;
+    private $id;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="smallint", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="user_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $userId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=50, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $username;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="status", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      */
     private $status;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip", type="string", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="ip", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
      */
     private $ip;
 
@@ -60,23 +58,23 @@ class UserLogins
 
 
     /**
-     * Get loginId.
+     * Get id.
      *
      * @return int
      */
-    public function getLoginId()
+    public function getId()
     {
-        return $this->loginId;
+        return $this->id;
     }
 
     /**
      * Set userId.
      *
-     * @param int|null $userId
+     * @param int $userId
      *
      * @return UserLogins
      */
-    public function setUserId($userId = null)
+    public function setUserId($userId)
     {
         $this->userId = $userId;
 
@@ -86,7 +84,7 @@ class UserLogins
     /**
      * Get userId.
      *
-     * @return int|null
+     * @return int
      */
     public function getUserId()
     {
@@ -96,11 +94,11 @@ class UserLogins
     /**
      * Set username.
      *
-     * @param string|null $username
+     * @param string $username
      *
      * @return UserLogins
      */
-    public function setUsername($username = null)
+    public function setUsername($username)
     {
         $this->username = $username;
 
@@ -110,7 +108,7 @@ class UserLogins
     /**
      * Get username.
      *
-     * @return string|null
+     * @return string
      */
     public function getUsername()
     {
@@ -120,7 +118,7 @@ class UserLogins
     /**
      * Set status.
      *
-     * @param int $status
+     * @param bool $status
      *
      * @return UserLogins
      */
@@ -134,7 +132,7 @@ class UserLogins
     /**
      * Get status.
      *
-     * @return int
+     * @return bool
      */
     public function getStatus()
     {
