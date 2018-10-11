@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserUsers
 {
+    const STATUS_ENABLED = 1;
+    const STATUS_DISABLED = 0;
+
     /**
      * @var int
      *

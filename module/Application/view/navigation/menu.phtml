@@ -1,0 +1,48 @@
+<?php
+/**
+ * Navigation
+ *
+ * @copyright  Copyright (c) 2013 Azbe.net
+ * @author     Berdimurat Masaliev
+ */
+?>
+
+<ul class="nav" id="side-menu">
+    <?php foreach($this->container as $parent){
+        if($parent->hasPages()){
+            $submenu = '';
+            $isParentActive = false;
+            $submenu .= '<ul class="nav nav-second-level collapse" aria-expanded="'.($isParentActive ? "true" : "false").'\">';
+            foreach($parent as $page){
+                if($page->isActive()){
+                    $isParentActive = true;
+                }
+                $submenu .= "<li ".($page->isActive()?"class='active'":"").">";
+                $submenu .= "<a href='{$page->getHref()}'>{$this->translate($page->getLabel())}</a>";
+                $submenu .= "</li>";
+            }
+            $submenu .= "</ul>";
+
+            echo "<li ".($isParentActive?"class='active'":"").">";
+            echo "<a href='#' aria-expanded='".($isParentActive ? 'true' : 'false')."'>";
+
+            echo "<span class='nav-label'> {$this->translate($parent->getLabel())} </span>";
+            echo "<span class='fa arrow'></span>";
+            echo "</a>";
+            echo $submenu;
+            echo "</li>";
+        }else{
+            echo "<li ".($parent->isActive()?"class='active'":"").">";
+            echo "<a href='{$parent->getHref()}'>";
+            echo "<span class='nav-label'>";
+            echo $this->translate($parent->getLabel());
+            echo '</span>';
+//            echo '<span class="label label-success pull-right">Special</span>';
+            echo "</a>";
+            echo "</li>";
+        }
+
+        ?>
+
+    <?php } ?>
+</ul>

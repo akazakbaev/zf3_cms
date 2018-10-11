@@ -83,7 +83,7 @@ class RbacManager
             $rbac->setCreateMissingRoles(true);
 
             $roles = $this->entityManager->getRepository(UserLevels::class)
-                    ->findBy([], ['levelId'=>'ASC']);
+                    ->findBy([], ['id'=>'ASC']);
 
             foreach ($roles as $role)
             {
@@ -153,7 +153,7 @@ class RbacManager
 
     private function getLevelName(UserLevels $level)
     {
-        return $level->getType()->getValue().'_'.$level->getLevelId();
+        return $level->getType().'_'.$level->getId();
     }
 }
 

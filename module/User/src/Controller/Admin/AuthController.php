@@ -6,7 +6,7 @@
  * Time: 23:54
  */
 
-namespace User\Controller;
+namespace User\Controller\Admin;
 
 
 use User\Entity\UserUsers;
@@ -16,8 +16,6 @@ use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zf\Infocom\Core\Exception\HrmAuthIdException;
-use Zf\Infocom\Core\Service\HrmAuthIdManager;
 
 class AuthController extends AbstractActionController
 {

@@ -1,0 +1,176 @@
+<?= $this->doctype() ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('ZF Skeleton Application')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+            ->prependStylesheet($this->basePath('styles/style.css'))
+            ->prependStylesheet($this->basePath('fonts/pe-icon-7-stroke/css/helper.css'))
+            ->prependStylesheet($this->basePath('fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css'))
+            ->prependStylesheet($this->basePath('vendor/bootstrap/dist/css/bootstrap.css'))
+            ->prependStylesheet($this->basePath('vendor/animate.css/animate.css'))
+            ->prependStylesheet($this->basePath('vendor/metisMenu/dist/metisMenu.css'))
+            ->prependStylesheet($this->basePath('vendor/fontawesome/css/font-awesome.css'))
+        ?>
+
+        <!-- Scripts -->
+        <?= $this->headScript()
+            ->prependFile($this->basePath('scripts/homer.js'))
+            ->prependFile($this->basePath('vendor/sparkline/index.js'))
+            ->prependFile($this->basePath('vendor/iCheck/icheck.min.js'))
+            ->prependFile($this->basePath('vendor/metisMenu/dist/metisMenu.min.js'))
+            ->prependFile($this->basePath('vendor/bootstrap/dist/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('vendor/slimScroll/jquery.slimscroll.min.js'))
+            ->prependFile($this->basePath('vendor/jquery-ui/jquery-ui.min.js'))
+            ->prependFile($this->basePath('vendor/jquery/dist/jquery.min.js'))
+
+        ;
+        ?>
+    </head>
+    <body class=" fixed-navbar sidebar-scroll ">
+    <div id="header">
+        <div class="color-line">
+        </div>
+        <div id="logo" class="light-version">
+        <span>
+            <?= $this->translate('AIS Frame rate')?>
+        </span>
+        </div>
+        <nav role="navigation">
+            <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+            <div class="small-logo">
+                <span class="text-primary"><?= $this->translate('NRK')?></span>
+            </div>
+            <form role="search" class="navbar-form-custom" method="post" action="#">
+                <div class="form-group">
+                    <input placeholder="<?php echo $this->translate('Search')?>" class="form-control" name="search" type="text" id="main_search">
+                </div>
+            </form>
+            <div class="mobile-menu">
+                <button type="button" class="navbar-toggle mobile-menu-toggle" data-toggle="collapse" data-target="#mobile-collapse">
+                    <i class="fa fa-chevron-down"></i>
+                </button>
+                <div class="collapse mobile-navbar" id="mobile-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="" href="<?php echo $this->url('logout')?>"><?php echo $this->translate('Logout')?></a>
+                        </li>
+                        <li>
+                            <a class="" href="<?php echo $this->url('user_profile', array('id' => $this->viewer()->getId()))?>">
+                                <?php echo $this->translate('Profile')?>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav no-borders">
+                    <li class="dropdown" id="notification_block">
+                        <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown"  id="notification">
+                            <i class="pe-7s-speaker"></i>
+                            <span class="label label-success" id="notification_count"></span>
+                        </a>
+                        <ul class="dropdown-menu hdropdown animated flipInX" id="notification_list" aria-labelledby="notification">
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                            <i class="pe-7s-keypad"></i>
+                        </a>
+
+                        <div class="dropdown-menu hdropdown bigmenu animated flipInX">
+                            <table>
+                                <tbody>
+<!--                                <tr>-->
+<!--                                    <td>-->
+<!--                                        <a href="--><?//= $this->url('admin_settings')?><!--">-->
+<!--                                            <i class="pe pe-7s-tools text-info"></i>-->
+<!--                                            <h5>--><?//= $this->translate('General Settings')?><!--</h5>-->
+<!--                                        </a>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <a href="--><?//= $this->url('settings', array('action' => 'templates'))?><!--">-->
+<!--                                            <i class="pe pe-7s-note2 text-warning"></i>-->
+<!--                                            <h5>--><?//= $this->translate('Email Templates')?><!--</h5>-->
+<!--                                        </a>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <a href="--><?//= $this->url('settings', array('action' => 'mail'))?><!--">-->
+<!--                                            <i class="pe pe-7s-mail text-success"></i>-->
+<!--                                            <h5>--><?//= $this->translate('Email Settings')?><!--</h5>-->
+<!--                                        </a>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+                                <tr>
+                                    <td>
+                                        <a href="<?= $this->url('admin_languages', array())?>">
+                                            <i class="pe pe-7s-global text-info"></i>
+                                            <h5><?= $this->translate('Languages')?></h5>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="<?= $this->url('admin_permissions')?>">
+                                            <i class="pe pe-7s-lock text-danger"></i>
+                                            <h5><?= $this->translate('Permissions')?></h5>
+                                        </a>
+                                    </td>
+<!--                                    <td>-->
+<!--                                        <a href="--><?//= $this->url('user_general')?><!--">-->
+<!--                                            <i class="pe pe-7s-users text-success"></i>-->
+<!--                                            <h5>--><?//= $this->translate('Users')?><!--</h5>-->
+<!--                                        </a>-->
+<!--                                    </td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo $this->url('logout')?>">
+                            <i class="pe-7s-upload pe-rotate-90"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <aside id="menu" class="tour-1">
+        <div class="slimScrollDiv" >
+
+            <?php echo $this->navigation('main_navigation')->menu()->setPartial('navigation/menu'); ?>
+
+
+        </div>
+
+        <footer class="footer">
+            <?php echo vsprintf($this->translate('%s company_copyright'), date('Y'))?>
+        </footer>
+    </aside>
+
+
+
+
+    <div id="wrapper">
+<!--        --><?php //echo $this->pageBreadcrumbs()
+//            ->setPartial('default/breadcrumbs')
+//            ->render();?>
+
+        <div class="content">
+            <?= $this->content?>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal" role="dialog" aria-hidden="true"></div>
+
+    <?= $this->inlineScript() ?>
+    </body>
+</html>

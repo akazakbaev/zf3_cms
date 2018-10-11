@@ -5,12 +5,13 @@
  * Date: 1/31/18
  * Time: 10:06 AM
  */
-namespace User\Controller;
+namespace User\Controller\Admin;
 
+use Application\Classes\AdminController;
 use User\Form\Permissions;
 use Zend\Mvc\Controller\AbstractActionController;
 
-class PermissionsController extends AbstractActionController
+class PermissionsController extends AdminController
 {
     /**
      * Doctrine entity manager.
@@ -73,6 +74,6 @@ class PermissionsController extends AbstractActionController
 
         $this->permissionManager->save($values);
 
-        return $this->redirect()->toRoute('permissions', [], ['query' => ['level_id' => $level_id]]);
+        return $this->redirect()->toRoute('admin_permissions', [], ['query' => ['level_id' => $level_id]]);
     }
 }

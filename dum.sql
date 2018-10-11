@@ -83,7 +83,7 @@ CREATE TABLE `user_allows` (
   KEY `user_allows_user_permissions__fk` (`permission_id`),
   CONSTRAINT `user_allows_user_levels__fk` FOREIGN KEY (`level_id`) REFERENCES `user_levels` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_allows_user_permissions__fk` FOREIGN KEY (`permission_id`) REFERENCES `user_permissions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +92,7 @@ CREATE TABLE `user_allows` (
 
 LOCK TABLES `user_allows` WRITE;
 /*!40000 ALTER TABLE `user_allows` DISABLE KEYS */;
+INSERT INTO `user_allows` VALUES (8,1,1),(9,1,2);
 /*!40000 ALTER TABLE `user_allows` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +109,7 @@ CREATE TABLE `user_levels` (
   `description` text,
   `type` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,6 +118,7 @@ CREATE TABLE `user_levels` (
 
 LOCK TABLES `user_levels` WRITE;
 /*!40000 ALTER TABLE `user_levels` DISABLE KEYS */;
+INSERT INTO `user_levels` VALUES (1,'admin','admin','admin');
 /*!40000 ALTER TABLE `user_levels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +137,7 @@ CREATE TABLE `user_logins` (
   `ip` varchar(255) NOT NULL,
   `creation_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +146,7 @@ CREATE TABLE `user_logins` (
 
 LOCK TABLES `user_logins` WRITE;
 /*!40000 ALTER TABLE `user_logins` DISABLE KEYS */;
+INSERT INTO `user_logins` VALUES (1,1,'admin',1,'127.0.0.1','2018-10-09 11:56:37'),(2,1,'admin',1,'127.0.0.1','2018-10-09 11:57:45'),(3,1,'admin',1,'127.0.0.1','2018-10-09 12:15:02'),(4,1,'admin',1,'127.0.0.1','2018-10-10 11:09:52'),(5,1,'admin',1,'127.0.0.1','2018-10-10 12:58:21');
 /*!40000 ALTER TABLE `user_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +162,7 @@ CREATE TABLE `user_permissions` (
   `name` varchar(50) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,6 +171,7 @@ CREATE TABLE `user_permissions` (
 
 LOCK TABLES `user_permissions` WRITE;
 /*!40000 ALTER TABLE `user_permissions` DISABLE KEYS */;
+INSERT INTO `user_permissions` VALUES (1,'languages.list','Languages List Page'),(2,'settings.permissions','Permission Page');
 /*!40000 ALTER TABLE `user_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +195,7 @@ CREATE TABLE `user_users` (
   UNIQUE KEY `user_users_username_uindex` (`username`),
   KEY `user_users_user_levels__fk` (`level_id`),
   CONSTRAINT `user_users_user_levels__fk` FOREIGN KEY (`level_id`) REFERENCES `user_levels` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,6 +204,7 @@ CREATE TABLE `user_users` (
 
 LOCK TABLES `user_users` WRITE;
 /*!40000 ALTER TABLE `user_users` DISABLE KEYS */;
+INSERT INTO `user_users` VALUES (1,'kazakbaev-89@mail.ru','admin','$2y$10$FEznmCetodvLsMrr5/raPuupsdZp2WxmXgYcm3TH2ZBrHq.DYGDQG',1,1,'2018-10-09 11:55:21');
 /*!40000 ALTER TABLE `user_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -212,4 +217,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-06 16:21:48
+-- Dump completed on 2018-10-11 17:54:12

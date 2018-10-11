@@ -9,7 +9,7 @@ namespace User;
 
 
 use User\Factory\Controller\IndexControllerFactory;
-use User\Factory\Controller\PermissionsControllerFactory;
+use User\Factory\Controller\Admin\PermissionsControllerFactory;
 use User\Factory\Controller\ProfileControllerFactory;
 use User\Factory\View\ViewerFactory;
 use User\View\Helper\Viewer;
@@ -25,9 +25,9 @@ return [
             'login' => [
                 'type'    => Literal::class,
                 'options' => [
-                    'route'    => '/login',
+                    'route'    => ADMIN_PATH . '/login',
                     'defaults' => [
-                        'controller' => Controller\AuthController::class,
+                        'controller' => Controller\Admin\AuthController::class,
                         'action'     => 'login',
                     ],
                 ],
@@ -35,23 +35,14 @@ return [
             'logout' => [
                 'type'    => Literal::class,
                 'options' => [
-                    'route'    => '/logout',
+                    'route'    => ADMIN_PATH . '/logout',
                     'defaults' => [
-                        'controller' => Controller\AuthController::class,
+                        'controller' => Controller\Admin\AuthController::class,
                         'action'     => 'logout',
                     ],
                 ],
             ],
-            'hrm_auth' => [
-                'type'    => Literal::class,
-                'options' => [
-                    'route'    => '/auth/hrm',
-                    'defaults' => [
-                        'controller' => Controller\AuthController::class,
-                        'action'     => 'hrm',
-                    ],
-                ],
-            ],
+
             'user_profile' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -65,12 +56,12 @@ return [
                     ],
                 ],
             ],
-            'permissions' => [
+            'admin_permissions' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route'    => '/permission[/:action]',
+                    'route'    => ADMIN_PATH .'/permission[/:action]',
                     'defaults' => [
-                        'controller' => Controller\PermissionsController::class,
+                        'controller' => Controller\Admin\PermissionsController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -92,9 +83,9 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\AuthController::class => \User\Factory\Controller\AuthControllerFactory::class,
+            Controller\Admin\AuthController::class => \User\Factory\Controller\Admin\AuthControllerFactory::class,
             Controller\IndexController::class => IndexControllerFactory::class,
-            Controller\PermissionsController::class => PermissionsControllerFactory::class,
+            Controller\Admin\PermissionsController::class => PermissionsControllerFactory::class,
             Controller\ProfileController::class => ProfileControllerFactory::class,
         ],
     ],

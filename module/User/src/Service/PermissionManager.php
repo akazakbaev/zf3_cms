@@ -47,7 +47,7 @@ class PermissionManager
 
         foreach ($items as $item)
         {
-            $data[$item->getLevelId()] = $item->getTitle();
+            $data[$item->getId()] = $item->getTitle();
         }
 
         if($filtered)
@@ -80,7 +80,7 @@ class PermissionManager
 
         foreach ($allows as $allow)
         {
-            $id = $allow->getPermission()->getPermissionId();
+            $id = $allow->getPermission()->getId();
             $allowsData[$id] = $id;
         }
 
@@ -90,9 +90,9 @@ class PermissionManager
         foreach ($items as $item)
         {
             $data[] = [
-             'value' => $item->getPermissionId(),
+             'value' => $item->getId(),
                 'label' => $item->getDescription(),
-                'selected' => (in_array($item->getPermissionId(), $allowsData) ? true : false)
+                'selected' => (in_array($item->getId(), $allowsData) ? true : false)
             ];
         }
 

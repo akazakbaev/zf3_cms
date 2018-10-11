@@ -7,6 +7,15 @@
 
 namespace Application;
 
+use Application\Controller\Admin\IndexController as AdminIndexController;
+use Application\Controller\Admin\LanguagesController as AdminLanguagesController;
+use Application\Factory\Controller\Admin\LanguagesControllerFactory as AdminLanguagesControllerFactory;
+use Application\Factory\Controller\Admin\IndexControllerFactory as AdminIndexControllerFactory;
+use Application\Factory\Options\LanguageOptionsFactory;
+use Application\Factory\Service\CacheManagerFactory;
+use Application\Factory\Service\DatabaseTranslationLoaderFactory;
+use Application\Factory\Service\LangugeManagerFactory;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -20,6 +29,36 @@ return [
                     'route'    => '/',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'admin_home' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => ADMIN_PATH.'[/]',
+                    'defaults' => [
+                        'controller' => AdminIndexController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'admin_settings' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => ADMIN_PATH.'/settings[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\SettingsController::class,
+                        'action'     => 'general',
+                    ],
+                ],
+            ],
+            'admin_languages' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => ADMIN_PATH.'/languages[/:action][/:id]',
+                    'defaults' => [
+                        'controller' => AdminLanguagesController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -39,6 +78,9 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            AdminIndexController::class => AdminIndexControllerFactory::class,
+            Controller\SettingsController::class => \Application\Factory\Controller\SettingsControllerFactory::class,
+            AdminLanguagesController::class => AdminLanguagesControllerFactory::class,
         ],
     ],
     'view_manager' => [
@@ -49,6 +91,7 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/admin'           => __DIR__ . '/../view/layout/admin.phtml',
             'layout/login'           => __DIR__ . '/../view/layout/login.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
@@ -57,10 +100,58 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+        'strategies' => [
+            'ViewJsonStrategy'
+        ]
     ],
     'view_helpers' => [
         'invokables' => [
             'translate' => \Zend\I18n\View\Helper\Translate::class,
+            'pageBreadcrumbs' => View\Helper\Breadcrumbs::class,
+            'formRender' => \Application\View\Helper\FormRender::class,
+            'formRowDefault' => \Application\View\Helper\FormRowDefault::class,
+        ],
+        'factories' => [
+            View\Helper\Breadcrumbs::class => InvokableFactory::class,
         ],
     ],
+    'service_manager' => [
+        'aliases' => [
+
+        ],
+        'factories' => [
+            'main_navigation' => \Application\Factory\Service\MainNavigationFactory::class,
+            Service\CacheManager::class => CacheManagerFactory::class,
+            Service\LanguageManager::class => LangugeManagerFactory::class,
+            Options\LanguageOptions::class => LanguageOptionsFactory::class,
+            Service\DatabaseTranslationLoader::class => DatabaseTranslationLoaderFactory::class,
+        ],
+        'delegators' => [
+            'HttpRouter' => [ \Application\Factory\Mvc\Router\Http\LanguageTreeRouteStackDelegatorFactory::class ],
+            TreeRouteStack::class => [ \Application\Factory\Mvc\Router\Http\LanguageTreeRouteStackDelegatorFactory::class ],
+        ]
+    ],
+    'doctrine' => [
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => AnnotationDriver::class,
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/../src/Entity']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ]
+            ]
+        ]
+    ],
+    'navigation' => [
+        'default' => [
+            'home' => [
+                'label' => 'Home',
+                'route' => 'home',
+                'order' => 1
+            ]
+        ],
+    ]
 ];

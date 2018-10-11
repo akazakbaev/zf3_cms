@@ -1,0 +1,40 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: akazakbaev
+ * Date: 4/11/17
+ * Time: 9:30 AM
+ */
+?>
+
+<?php if($this->pages):?>
+<div class="normalheader small-header">
+    <div class="hpanel">
+        <div class="panel-body <?php echo $this->description == '' ? 'without_description' : ''?>">
+
+            <div id="hbreadcrumb" class="pull-right">
+                <ol class="hbreadcrumb breadcrumb">
+                    <li>
+                        <a href="<?php echo $this->url('home')?>"><?php echo $this->translate('Home')?></a>
+                    </li>
+                    <?php foreach ($this->pages as $k => $page):?>
+                        <?php if(isset($page['active'])):?>
+                            <li  class="active" >
+                               <span> <?php echo $this->translate($page['label'])?></span>
+                            </li>
+                        <?php else:?>
+                            <li>
+                                <a href="<?php echo $page['link']?>"><?php echo $this->translate($page['label'])?></a>
+                            </li>
+                        <?php endif;?>
+                    <?php endforeach;?>
+                </ol>
+            </div>
+            <h2 class="font-light m-b-xs">
+                <?php echo $this->truncate($this->translate($this->title), 75);?>
+            </h2>
+            <small><?php echo $this->translate($this->description);?></small>
+        </div>
+    </div>
+</div>
+<?php endif;?>

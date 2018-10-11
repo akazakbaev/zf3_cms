@@ -22,7 +22,11 @@
         "zendframework/zend-mvc-i18n": "^1.1",
         "doctrine/migrations": "^1.8",
         "zendframework/zend-mvc-plugin-flashmessenger": "^1.1",
-        "zendframework/zend-crypt": "^3.3"
+        "zendframework/zend-crypt": "^3.3",
+        "zendframework/zend-navigation": "^2.9",
+        "akazakbaev/zf-page": "dev-master",
+        "zendframework/zend-permissions-rbac": "^3.0",
+        "zendframework/zend-serializer": "^2.9"
     },
     "autoload": {
         "psr-4": {
@@ -47,5 +51,11 @@
         ],
         "serve": "php -S 0.0.0.0:8080 -t public public/index.php",
         "test": "phpunit"
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/akazakbaev/zf-page.git"
+        }
+    ]
 }

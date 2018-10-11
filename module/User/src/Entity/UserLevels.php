@@ -2,6 +2,7 @@
 
 namespace User\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +42,20 @@ class UserLevels
      * @ORM\Column(name="type", type="string", length=20, precision=0, scale=0, nullable=true, unique=false)
      */
     private $type;
+
+    /**
+     * One Product has Many Allows.
+     * @ORM\OneToMany(targetEntity="UserAllows", mappedBy="level")
+     */
+    private $allows;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->allows = new ArrayCollection();
+    }
 
 
     /**
@@ -123,5 +138,21 @@ class UserLevels
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllows()
+    {
+        return $this->allows;
+    }
+
+    /**
+     * @param mixed $allows
+     */
+    public function setAllows($allows)
+    {
+        $this->allows = $allows;
     }
 }
