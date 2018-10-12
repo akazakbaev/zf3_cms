@@ -27,7 +27,7 @@ return [
     'Zend\Validator',
     'DoctrineModule',
     'DoctrineORMModule',
-    'Zf\Page',
     'Application',
     'User',
+    'Page'
 ];

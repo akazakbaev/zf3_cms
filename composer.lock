@@ -4,47 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "11f6870f5bac56b34c127aed2c87764a",
+    "content-hash": "a0e31da2860569be040599b4d7438439",
     "packages": [
-        {
-            "name": "akazakbaev/zf-page",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/akazakbaev/zf-page.git",
-                "reference": "529bd78d7cc11e79db03b6be7706288287cd2d36"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/akazakbaev/zf-page/zipball/529bd78d7cc11e79db03b6be7706288287cd2d36",
-                "reference": "529bd78d7cc11e79db03b6be7706288287cd2d36",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1.0",
-                "zendframework/zend-json": "^3.1",
-                "zendframework/zend-mvc": "^3.0.1"
-            },
-            "type": "library",
-            "extra": {
-                "zf": {
-                    "module": "Zf\\Page"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zf\\Page\\": "src/"
-                }
-            },
-            "keywords": [
-                "PHP"
-            ],
-            "support": {
-                "source": "https://github.com/akazakbaev/zf-page/tree/master",
-                "issues": "https://github.com/akazakbaev/zf-page/issues"
-            },
-            "time": "2018-10-10T12:37:03+00:00"
-        },
         {
             "name": "container-interop/container-interop",
             "version": "1.2.0",
@@ -3609,8 +3570,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "zendframework/zend-component-installer": 20,
-        "akazakbaev/zf-page": 20
+        "zendframework/zend-component-installer": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

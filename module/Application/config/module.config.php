@@ -121,6 +121,7 @@ return [
         ],
         'factories' => [
             'main_navigation' => \Application\Factory\Service\MainNavigationFactory::class,
+            'admin_navigation' => \Application\Factory\Service\AdminNavigationFactory::class,
             Service\CacheManager::class => CacheManagerFactory::class,
             Service\LanguageManager::class => LangugeManagerFactory::class,
             Options\LanguageOptions::class => LanguageOptionsFactory::class,
@@ -146,6 +147,13 @@ return [
         ]
     ],
     'navigation' => [
+        'admin' => [
+            'home' => [
+                'label' => 'Home',
+                'route' => 'home',
+                'order' => 1
+            ]
+        ],
         'default' => [
             'home' => [
                 'label' => 'Home',

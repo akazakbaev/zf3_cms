@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?= $this->headTitle('ZF Skeleton Application')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?= $this->headTitle('Evidence Research Institute')->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?= $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -24,10 +24,14 @@
 
         <!-- Scripts -->
         <?= $this->headScript()
-            ->prependFile($this->basePath('scripts/index.js'))
-            ->prependFile($this->basePath('scripts/bootstrap.min.js'))
-            ->prependFile($this->basePath('scripts/jquery-ui.min.js'))
-            ->prependFile($this->basePath('scripts/jquery.min.js'))
+            ->prependFile($this->basePath('scripts/homer.js'))
+            ->prependFile($this->basePath('vendor/sparkline/index.js'))
+            ->prependFile($this->basePath('vendor/iCheck/icheck.min.js'))
+            ->prependFile($this->basePath('vendor/metisMenu/dist/metisMenu.min.js'))
+            ->prependFile($this->basePath('vendor/bootstrap/dist/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('vendor/slimScroll/jquery.slimscroll.min.js'))
+            ->prependFile($this->basePath('vendor/jquery-ui/jquery-ui.min.js'))
+            ->prependFile($this->basePath('vendor/jquery/dist/jquery.min.js'))
         ?>
     </head>
     <body class="landing-page">
@@ -49,18 +53,33 @@
                     <a href="index.html" class="navbar-brand">
                         <img src="<?= $this->basePath('themes/images/logo.png')?>" alt="">
                     </a>
-<!--                    <div class="brand-desc">-->
-<!--                        Landing page for Homer app-->
-<!--                    </div>-->
+                    <div class="brand-desc">
+                        Research Institute
+                    </div>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active">
-                            <a class="page-scroll" href="#page-top">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
                                 <?= $this->translate('About us')?>
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href=""><?= $this->translate('Our team')?></a>
+                                </li>
+                                <li>
+                                    <a href=""><?= $this->translate('Mission and Values')?></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <?= $this->translate('Solutions')?>
+                                <span class="caret"></span>
                             </a>
                         </li>
-                        <li><a class="page-scroll" page-scroll href="#components"><?= $this->translate('Solutions')?></a></li>
                         <li><a class="page-scroll" page-scroll href="#features"><?= $this->translate('Analytics')?></a></li>
                         <li><a class="page-scroll" page-scroll href="#team"><?= $this->translate('Trainings')?></a></li>
                         <li><a class="page-scroll" page-scroll href="#pricing"><?= $this->translate('News')?> </a></li>

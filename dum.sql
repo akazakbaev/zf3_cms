@@ -68,6 +68,37 @@ LOCK TABLES `application_translates` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `page_pages`
+--
+
+DROP TABLE IF EXISTS `page_pages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `page_pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title_en` varchar(255) DEFAULT NULL,
+  `title_ru` varchar(255) DEFAULT NULL,
+  `description_en` longtext,
+  `description_ru` longtext,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `page_pages_user_users__fk` (`user_id`),
+  CONSTRAINT `page_pages_user_users__fk` FOREIGN KEY (`user_id`) REFERENCES `user_users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `page_pages`
+--
+
+LOCK TABLES `page_pages` WRITE;
+/*!40000 ALTER TABLE `page_pages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `page_pages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user_allows`
 --
 
@@ -137,7 +168,7 @@ CREATE TABLE `user_logins` (
   `ip` varchar(255) NOT NULL,
   `creation_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +177,7 @@ CREATE TABLE `user_logins` (
 
 LOCK TABLES `user_logins` WRITE;
 /*!40000 ALTER TABLE `user_logins` DISABLE KEYS */;
-INSERT INTO `user_logins` VALUES (1,1,'admin',1,'127.0.0.1','2018-10-09 11:56:37'),(2,1,'admin',1,'127.0.0.1','2018-10-09 11:57:45'),(3,1,'admin',1,'127.0.0.1','2018-10-09 12:15:02'),(4,1,'admin',1,'127.0.0.1','2018-10-10 11:09:52'),(5,1,'admin',1,'127.0.0.1','2018-10-10 12:58:21');
+INSERT INTO `user_logins` VALUES (1,1,'admin',1,'127.0.0.1','2018-10-09 11:56:37'),(2,1,'admin',1,'127.0.0.1','2018-10-09 11:57:45'),(3,1,'admin',1,'127.0.0.1','2018-10-09 12:15:02'),(4,1,'admin',1,'127.0.0.1','2018-10-10 11:09:52'),(5,1,'admin',1,'127.0.0.1','2018-10-10 12:58:21'),(6,1,'admin',1,'127.0.0.1','2018-10-12 11:50:18'),(7,1,'admin',1,'127.0.0.1','2018-10-12 13:40:41');
 /*!40000 ALTER TABLE `user_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-11 17:54:12
+-- Dump completed on 2018-10-12 19:46:24
