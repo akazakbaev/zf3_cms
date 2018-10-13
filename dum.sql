@@ -16,6 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `application_teams`
+--
+
+DROP TABLE IF EXISTS `application_teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `application_teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `application_teams`
+--
+
+LOCK TABLES `application_teams` WRITE;
+/*!40000 ALTER TABLE `application_teams` DISABLE KEYS */;
+/*!40000 ALTER TABLE `application_teams` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `application_translate_key`
 --
 
@@ -83,7 +105,9 @@ CREATE TABLE `page_pages` (
   `creation_date` datetime NOT NULL,
   `modified_date` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `page_pages_name_uindex` (`name`),
   KEY `page_pages_user_users__fk` (`user_id`),
   CONSTRAINT `page_pages_user_users__fk` FOREIGN KEY (`user_id`) REFERENCES `user_users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -96,6 +120,100 @@ CREATE TABLE `page_pages` (
 LOCK TABLES `page_pages` WRITE;
 /*!40000 ALTER TABLE `page_pages` DISABLE KEYS */;
 /*!40000 ALTER TABLE `page_pages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `storage_files`
+--
+
+DROP TABLE IF EXISTS `storage_files`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `storage_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_file_id` int(11) DEFAULT NULL,
+  `type` tinytext,
+  `storage_path` varchar(255) DEFAULT NULL,
+  `parent_type` tinytext,
+  `parent_id` int(11) DEFAULT NULL,
+  `extension` tinytext,
+  `name` varchar(255) DEFAULT NULL,
+  `mime_major` tinytext,
+  `mime_minor` tinytext,
+  `size` int(10) unsigned DEFAULT NULL,
+  `hash` tinytext,
+  `owner_id` int(11) DEFAULT NULL,
+  `owner_type` varchar(255) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `storage_files_storage_services__fk` (`service_id`),
+  CONSTRAINT `storage_files_storage_services__fk` FOREIGN KEY (`service_id`) REFERENCES `storage_services` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `storage_files`
+--
+
+LOCK TABLES `storage_files` WRITE;
+/*!40000 ALTER TABLE `storage_files` DISABLE KEYS */;
+/*!40000 ALTER TABLE `storage_files` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `storage_services`
+--
+
+DROP TABLE IF EXISTS `storage_services`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `storage_services` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_id` int(11) DEFAULT NULL,
+  `config` text,
+  `enabled` smallint(6) DEFAULT NULL,
+  `default` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `storage_services_storage_types__fk` (`type_id`),
+  CONSTRAINT `storage_services_storage_types__fk` FOREIGN KEY (`type_id`) REFERENCES `storage_types` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `storage_services`
+--
+
+LOCK TABLES `storage_services` WRITE;
+/*!40000 ALTER TABLE `storage_services` DISABLE KEYS */;
+INSERT INTO `storage_services` VALUES (1,1,NULL,1,0),(2,2,'{\"params\": {\"host\": \"10.51.2.206\", \"path\": \"/var/www/nrk/public\", \"password\": \"Lan2018KeyTgBLan@)!^\", \"username\": \"akazakbaev\"}, \"adapter\": \"ssh\", \"baseUrl\": \"https://tandoo.gov.kg/\"}',1,1);
+/*!40000 ALTER TABLE `storage_services` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `storage_types`
+--
+
+DROP TABLE IF EXISTS `storage_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `storage_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(128) DEFAULT NULL,
+  `plugin` varchar(128) DEFAULT NULL,
+  `form` varchar(128) DEFAULT NULL,
+  `enabled` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `storage_types`
+--
+
+LOCK TABLES `storage_types` WRITE;
+/*!40000 ALTER TABLE `storage_types` DISABLE KEYS */;
+INSERT INTO `storage_types` VALUES (1,'Local Storage','Zf\\Infocom\\Storage\\Storage\\Local','',1),(2,'Virtual File System','Zf\\Infocom\\Storage\\Storage\\Vfs',NULL,NULL);
+/*!40000 ALTER TABLE `storage_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -248,4 +366,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-12 19:46:24
+-- Dump completed on 2018-10-13 13:56:39

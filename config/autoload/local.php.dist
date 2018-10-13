@@ -11,25 +11,135 @@
  * credentials from accidentally being committed into version control.
  */
 
+use Doctrine\DBAL\Driver\PDOPgSql\Driver as PDOPgSqlDriver;
 use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
+
 
 return [
     'doctrine' => [
         'connection' => [
             'orm_default' => [
+                'driverClass' => PDOPgSqlDriver::class,
+                'params' => [
+                    'host'     => '10.51.1.28',
+                    'port'     => '5432',
+                    'user'     => 'postgres',
+                    'password' => 'diboxID',
+                    'dbname'   => 'nrk',
+                ],
+                'doctrine_type_mappings' => [
+                    'citext' => 'string',
+                    'cidr' => 'string',
+                    'role_types' => 'role_types',
+                ],
+            ],
+            'orm_ishrm' => [
                 'driverClass' => PDOMySqlDriver::class,
                 'params' => [
-                    'host'     => 'localhost',
+                    'host'     => '10.51.1.47',
                     'port'     => '3306',
-                    'user'     => 'root',
-                    'password' => '123456',
-                    'dbname'   => 'zf3_cms',
+                    'user'     => 'kadryuser',
+                    'password' => 'AIST@)!^kadry(**999',
+                    'dbname'   => 'ais_kadry3',
                     'charset'  => 'utf8',
                     'driverOptions' => array(
                         1002 => 'SET NAMES utf8'
                     )
                 ]
             ],
+//            'orm_default' => [
+//                'driverClass' => PDOMySqlDriver::class,
+//                'params' => [
+//                    'host'     => '10.10.5.69',
+//                    'port'     => '3306',
+//                    'user'     => 'nrk',
+//                    'password' => '123456',
+//                    'dbname'   => 'kadry_1',
+//                    'charset'  => 'utf8',
+//                    'driverOptions' => array(
+//                        1002 => 'SET NAMES utf8'
+//                    )
+//                ]
+//            ],
         ],
+    ],
+    'cacheSettings' => [
+        'adapter' => [
+            'name' => \Zend\Cache\Storage\Adapter\Redis::class,
+            'options' => [
+                'server' => [
+                    'host' => '127.0.0.1',
+                    'port' => 6379,
+                ],
+                'ttl' => 60*60*24*10
+            ]
+        ],
+        'plugins' => [
+            [
+                'name' => 'serializer',
+                'options' => [
+                ],
+            ],
+        ],
+    ],
+    'integrator' => [
+        'url' => 'https://integrator2.srs.kg/ws/claim',
+        'clientid' => 'nrk',
+        'secret' => '123456',
+        'photoToken' => '393615DCF80841E28CDA391438D0D93B',
+        'photoUrl' => 'http://192.168.137.5/GetPhoto/api/'
+    ],
+    'zags' => [
+        'key' => 'ls8dfh3jd7fhsd89fnosdf8j7s8j',
+        'token' => ''
+    ],
+    'storage' => [
+        'type' => \Zf\Infocom\Storage\Storage\Local::class,
+        'options' => [
+
+        ],
+        'service_id' => 2
+    ],
+    'address_register' => [
+        'url' => 'https://address.infocom.kg/ws/AddressApi',
+        'token' => '9381a180b8f6a460fc22be9ef103b2e5'
+    ],
+    'jasper' => [
+        'host' => 'http://jasper.srs.kg:8081/jasperserver',
+        'user' => 'akazakbaev',
+        'password' => 'akaz123!',
+    ],
+    'session_config' => [
+        'save_handler' => 'redis',
+        'save_path' => 'tcp://127.0.0.1:6379',
+    ],
+    'hrm_auth_id' => [
+        'clientId' => 'nrk',
+        'clientSecret' => 'nrk',
+        'authorizeUrl' => 'http://hrm-auth-id.local/oauth/authorize',
+        'accessTokenUrl' => 'http://hrm-auth-id.local/oauth/access_token',
+        'apiUrl' => 'http://hrm-auth-id.local/api'
+    ],
+    'curl_options' => [
+        'sslverifyhost' => false,
+        'sslverifypeer' => false,
+        'rfc3986strict' => false,
+        'maxredirects' => 10,
+        'timeout' => 120,
+        'connecttimeout' => 120,
+        'curloptions' => [
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_TIMEOUT => 120,
+            CURLOPT_CONNECTTIMEOUT => 120,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+        ],
+    ],
+    'hrm_api' => [
+        'clientId' => 'nrk',
+        'clientSecret' => '05a6022e98651586b78fb6b56bca678c',
+        'apiUrl' => 'http://kadry-api.local/api/'
     ],
 ];

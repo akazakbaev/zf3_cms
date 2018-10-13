@@ -8,6 +8,7 @@
 namespace Page\Controller\Admin;
 
 use Application\Classes\AdminController;
+use Page\Entity\PagePages;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AdminController

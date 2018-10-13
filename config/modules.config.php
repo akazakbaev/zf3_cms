@@ -29,5 +29,6 @@ return [
     'DoctrineORMModule',
     'Application',
     'User',
-    'Page'
+    'Page',
+    'Storage'
 ];

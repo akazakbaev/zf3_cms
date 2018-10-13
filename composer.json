@@ -31,6 +31,7 @@
         "psr-4": {
             "Application\\": "module/Application/src/",
             "User\\": "module/User/src/",
+            "Storage\\": "module/Storage/src",
             "Page\\": "module/Page/src"
         }
     },
