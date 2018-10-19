@@ -5,19 +5,19 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application\Controller;
+namespace Application\Controller\Admin;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Application\Classes\AdminController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class TeamController extends AdminController
 {
     public function indexAction()
     {
         return new ViewModel();
     }
 
-    public function contactsAction()
+    public function createAction()
     {
 
     }

@@ -8,6 +8,8 @@
 namespace Application;
 
 use Application\Controller\Admin\IndexController as AdminIndexController;
+use Application\Controller\Admin\TeamController as AdminTeamController;
+use Application\Factory\Controller\Admin\TeamControllerFactory as AdminTeamControllerFactory;
 use Application\Controller\Admin\LanguagesController as AdminLanguagesController;
 use Application\Factory\Controller\Admin\LanguagesControllerFactory as AdminLanguagesControllerFactory;
 use Application\Factory\Controller\Admin\IndexControllerFactory as AdminIndexControllerFactory;
@@ -30,6 +32,16 @@ return [
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
+                    ],
+                ],
+            ],
+            'contacts' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/contacts',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'contacts',
                     ],
                 ],
             ],
@@ -63,12 +75,12 @@ return [
                     ],
                 ],
             ],
-            'application' => [
-                'type'    => Segment::class,
+            'admin_team' => [
+                'type' => Segment::class,
                 'options' => [
-                    'route'    => '/application[/:action]',
+                    'route'    => ADMIN_PATH.'/team[/:action][/:id]',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => AdminTeamController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -81,6 +93,7 @@ return [
             AdminIndexController::class => AdminIndexControllerFactory::class,
             Controller\SettingsController::class => \Application\Factory\Controller\SettingsControllerFactory::class,
             AdminLanguagesController::class => AdminLanguagesControllerFactory::class,
+            AdminTeamController::class => AdminTeamControllerFactory::class
         ],
     ],
     'view_manager' => [
@@ -152,7 +165,12 @@ return [
                 'label' => 'Home',
                 'route' => 'home',
                 'order' => 1
-            ]
+            ],
+            'admin_team' => [
+                'label' => 'Team',
+                'route' => 'admin_team',
+                'order' => 2
+            ],
         ],
         'default' => [
             'home' => [
