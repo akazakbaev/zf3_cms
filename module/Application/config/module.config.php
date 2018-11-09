@@ -17,6 +17,7 @@ use Application\Factory\Options\LanguageOptionsFactory;
 use Application\Factory\Service\CacheManagerFactory;
 use Application\Factory\Service\DatabaseTranslationLoaderFactory;
 use Application\Factory\Service\LangugeManagerFactory;
+use Application\View\Helper\Truncate;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
@@ -109,6 +110,7 @@ return [
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'admin/breadcrumbs'        => __DIR__ . '/../view/navigation/admin-breadcrumbs.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
@@ -123,6 +125,7 @@ return [
             'pageBreadcrumbs' => View\Helper\Breadcrumbs::class,
             'formRender' => \Application\View\Helper\FormRender::class,
             'formRowDefault' => \Application\View\Helper\FormRowDefault::class,
+            'truncate' => Truncate::class,
         ],
         'factories' => [
             View\Helper\Breadcrumbs::class => InvokableFactory::class,

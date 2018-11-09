@@ -23,6 +23,8 @@ class AdminController extends AbstractActionController
     {
         $this->layout()->setTemplate('layout/admin');
 
+        if(!$this->requireUser()) return;
+
         return parent::onDispatch($e);
     }
 }

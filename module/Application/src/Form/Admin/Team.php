@@ -27,7 +27,7 @@ class Team extends Form
     public function __construct($scenario = 'create')
     {
         // Define form name
-        parent::__construct('user-form');
+        parent::__construct($scenario);
 
         $this->setAttributes(array('method' => 'post', 'class' => 'form-horizontal'));
 
@@ -52,7 +52,10 @@ class Team extends Form
             'type'       => 'text',
             'name'       => 'pin',
             'options'    => [
-                'label' => 'PIN'
+                'label' => 'PIN',
+                'label_attributes' => [
+                    'class' => 'col-sm-3 control-label no-padding-right',
+                ]
             ],
             'attributes' => [
                 'class'     => 'form-control',
