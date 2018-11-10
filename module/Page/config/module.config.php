@@ -64,11 +64,11 @@ return [
         ]
     ],
     'navigation' => [
-        'default' => [
-            'home' => [
-                'label' => 'Home',
-                'route' => 'home',
-                'order' => 1
+        'admin' => [
+            'pages' => [
+                'label' => 'Pages',
+                'route' => 'admin_pages',
+                'order' => 2
             ]
         ],
     ]

@@ -9,10 +9,12 @@ namespace Application;
 
 use Application\Controller\Admin\IndexController as AdminIndexController;
 use Application\Controller\Admin\TeamController as AdminTeamController;
+use Application\Controller\Admin\ServicesController as AdminServicesController;
 use Application\Factory\Controller\Admin\TeamControllerFactory as AdminTeamControllerFactory;
 use Application\Controller\Admin\LanguagesController as AdminLanguagesController;
 use Application\Factory\Controller\Admin\LanguagesControllerFactory as AdminLanguagesControllerFactory;
 use Application\Factory\Controller\Admin\IndexControllerFactory as AdminIndexControllerFactory;
+use Application\Factory\Controller\Admin\ServicesControllerFactory as AdminServicesControllerFactory;
 use Application\Factory\Options\LanguageOptionsFactory;
 use Application\Factory\Service\CacheManagerFactory;
 use Application\Factory\Service\DatabaseTranslationLoaderFactory;
@@ -86,6 +88,16 @@ return [
                     ],
                 ],
             ],
+            'admin_services' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => ADMIN_PATH.'/services[/:action][/:id]',
+                    'defaults' => [
+                        'controller' => AdminServicesController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -94,7 +106,8 @@ return [
             AdminIndexController::class => AdminIndexControllerFactory::class,
             Controller\SettingsController::class => \Application\Factory\Controller\SettingsControllerFactory::class,
             AdminLanguagesController::class => AdminLanguagesControllerFactory::class,
-            AdminTeamController::class => AdminTeamControllerFactory::class
+            AdminTeamController::class => AdminTeamControllerFactory::class,
+            AdminServicesController::class => AdminServicesControllerFactory::class,
         ],
     ],
     'view_manager' => [
@@ -173,6 +186,11 @@ return [
                 'label' => 'Team',
                 'route' => 'admin_team',
                 'order' => 2
+            ],
+            'admin_services' => [
+                'label' => 'Services',
+                'route' => 'admin_services',
+                'order' => 3
             ],
         ],
         'default' => [
