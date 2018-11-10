@@ -25,6 +25,6 @@ return [
     ],
     'languages' => [
         'defaultLocale' => 'ru_RU',
-        'languages' => ['ru' => 'ru_RU', 'ky' => 'ky_KG'],
+        'languages' => ['ru' => 'ru_RU', 'en' => 'en_EN'],
     ]
 ];

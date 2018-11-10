@@ -1,0 +1,30 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: azim
+ * Date: 11/10/18
+ * Time: 9:31 AM
+ */
+?>
+<?php
+$this->pageBreadcrumbs()
+    ->setItems(array(
+        'first' => array('label' => 'Pages', 'active' => true)))
+    ->setTitle('Pages')
+    ->setDescription('PAGES_DESCRIPTION')
+;
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="hpanel">
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="panel-body">
+                        <?php echo $this->formRender()->render($form); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

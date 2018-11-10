@@ -19,6 +19,8 @@ use Application\Factory\Options\LanguageOptionsFactory;
 use Application\Factory\Service\CacheManagerFactory;
 use Application\Factory\Service\DatabaseTranslationLoaderFactory;
 use Application\Factory\Service\LangugeManagerFactory;
+use Application\Factory\View\FormRenderFactory;
+use Application\View\Helper\FormRender;
 use Application\View\Helper\Truncate;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Zend\Router\Http\Literal;
@@ -136,13 +138,17 @@ return [
         'invokables' => [
             'translate' => \Zend\I18n\View\Helper\Translate::class,
             'pageBreadcrumbs' => View\Helper\Breadcrumbs::class,
-            'formRender' => \Application\View\Helper\FormRender::class,
+
             'formRowDefault' => \Application\View\Helper\FormRowDefault::class,
             'truncate' => Truncate::class,
         ],
         'factories' => [
             View\Helper\Breadcrumbs::class => InvokableFactory::class,
+            FormRender::class => FormRenderFactory::class
         ],
+        'aliases' => [
+            'formRender' => FormRender::class
+        ]
     ],
     'service_manager' => [
         'aliases' => [

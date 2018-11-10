@@ -9,6 +9,7 @@
 
 namespace Application\View\Helper;
 
+use Application\Options\LanguageOptions;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\FormInterface;
 use Zend\View\Helper\Doctype;
@@ -34,6 +35,13 @@ class FormRender extends AbstractHelper
         'novalidate'     => true,
         'target'         => true,
     ];
+
+    protected $languageOptions;
+
+    public function __construct(LanguageOptions $languageOptions)
+    {
+        $this->languageOptions = $languageOptions;
+    }
 
     /**
      * Invoke as function

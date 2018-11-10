@@ -13,7 +13,7 @@ class LanguageOptions extends AbstractOptions
      * locale  (e.g. 'en_US')
      * @var array
      */
-    protected $languages = ['ru' => 'ru_RU', 'ky' => 'ky_KG'];
+    protected $languages = ['ru' => 'ru_RU', 'en' => 'en_EN'];
 
     /**
      * This route name will be used if no RouteMatch instance is provided to
@@ -100,19 +100,23 @@ class LanguageOptions extends AbstractOptions
     }
 
 
-    function getLanguages() {
+    function getLanguages()
+    {
         return $this->languages;
     }
 
-    function setLanguages(array $languages) {
+    function setLanguages(array $languages)
+    {
         $this->languages = $languages;
     }
 
-    function getHomeRoute() {
+    function getHomeRoute()
+    {
         return $this->homeRoute;
     }
 
-    function setHomeRoute($homeRoute) {
+    function setHomeRoute($homeRoute)
+    {
         $this->homeRoute = $homeRoute;
     }
 }

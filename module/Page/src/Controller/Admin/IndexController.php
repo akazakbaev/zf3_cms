@@ -8,7 +8,9 @@
 namespace Page\Controller\Admin;
 
 use Application\Classes\AdminController;
+use Application\Options\LanguageOptions;
 use Page\Entity\PagePages;
+use Page\Form\Create;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AdminController
@@ -32,6 +34,16 @@ class IndexController extends AdminController
 
         return [
             'items' => $paginator
+        ];
+    }
+
+    public function createAction()
+    {
+        $languageOptions = $this->getEvent()->getApplication()->getServiceManager()->get(LanguageOptions::class);
+        $form = new Create('create', $this->entityManager, $languageOptions);
+
+        return [
+            'form' => $form
         ];
     }
 

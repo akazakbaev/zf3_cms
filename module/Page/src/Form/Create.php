@@ -6,15 +6,16 @@
  * Date: 10/27/13
  * @license    http://www.about.kg/license/
  */
-namespace Application\Form\Page;
+namespace Page\Form;
 
+use Application\Options\LanguageOptions;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class Create extends Form
 {
-    public function __construct($name = null, $entityManager)
+    public function __construct($name = null, $entityManager, LanguageOptions $languageOptions)
     {
         parent::__construct($name);
 
@@ -22,65 +23,40 @@ class Create extends Form
 
         $this->setHydrator(new DoctrineHydrator($entityManager));
 
-        $this->add(array(
-            'name' => 'title',
-            'type' => 'Text',
-            'attributes' => array(
-                'placeholder' => 'Title in russian',
-                'class' => 'form-control'
-            ),
-            'options' => array(
-                'label' => 'Title in russian',
-                'label_attributes' => [
-                    'class' => 'col-sm-3 control-label'
-                ],
-            )
-        ));
+        $languages = $languageOptions->getLanguages();
 
-        $this->add(array(
-            'name' => 'body',
-            'type' => 'Textarea',
-            'attributes' => array(
-                'placeholder' => 'Description in russian',
-                'class' => 'form-control summernote',
-            ),
-            'options' =>  array(
-                'label' => 'Description in russian',
-                'label_attributes' => [
-                    'class' => 'col-sm-3 control-label'
-                ],
-            )
-        ));
+        foreach ($languages as $language) {
 
-        $this->add(array(
-            'name' => 'titleKg',
-            'type' => 'Text',
-            'attributes' => array(
-                'placeholder' => 'Title in kyrgyz',
-                'class' => 'form-control'
-            ),
-            'options' => array(
-                'label' => 'Title in kyrgyz',
-                'label_attributes' => [
-                    'class' => 'col-sm-3 control-label'
-                ],
-            )
-        ));
+            $this->add(array(
+                'name' => 'title'.$language,
+                'type' => 'Text',
+                'attributes' => array(
+                    'placeholder' => 'Title in russian',
+                    'class' => 'form-control'
+                ),
+                'options' => array(
+                    'label' => 'Title in russian',
+                    'label_attributes' => [
+                        'class' => 'col-sm-3 control-label'
+                    ],
+                )
+            ));
 
-        $this->add(array(
-            'name' => 'bodyKg',
-            'type' => 'Textarea',
-            'attributes' => array(
-                'placeholder' => 'Description in kyrgyz',
-                'class' => 'form-control summernote',
-            ),
-            'options' =>  array(
-                'label' => 'Description in kyrgyz',
-                'label_attributes' => [
-                    'class' => 'col-sm-3 control-label'
-                ],
-            )
-        ));
+            $this->add(array(
+                'name' => 'description'.$language,
+                'type' => 'Textarea',
+                'attributes' => array(
+                    'placeholder' => 'Description in russian',
+                    'class' => 'form-control summernote',
+                ),
+                'options' => array(
+                    'label' => 'Description in russian',
+                    'label_attributes' => [
+                        'class' => 'col-sm-3 control-label'
+                    ],
+                )
+            ));
+        }
 
         // Buttons
         $this->add(array(
