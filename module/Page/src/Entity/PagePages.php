@@ -74,5 +74,139 @@ class PagePages
      */
     private $user;
 
+    public function __construct()
+    {
+        $this->creationDate = new \DateTime('now');
+        $this->modifiedDate = new \DateTime('now');
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getTitleEn(): ?string
+    {
+        return $this->titleEn;
+    }
+
+    /**
+     * @param null|string $titleEn
+     */
+    public function setTitleEn(?string $titleEn): void
+    {
+        $this->titleEn = $titleEn;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getTitleRu(): ?string
+    {
+        return $this->titleRu;
+    }
+
+    /**
+     * @param null|string $titleRu
+     */
+    public function setTitleRu(?string $titleRu): void
+    {
+        $this->titleRu = $titleRu;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDescriptionEn(): ?string
+    {
+        return $this->descriptionEn;
+    }
+
+    /**
+     * @param null|string $descriptionEn
+     */
+    public function setDescriptionEn(?string $descriptionEn): void
+    {
+        $this->descriptionEn = $descriptionEn;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDescriptionRu(): ?string
+    {
+        return $this->descriptionRu;
+    }
+
+    /**
+     * @param null|string $descriptionRu
+     */
+    public function setDescriptionRu(?string $descriptionRu): void
+    {
+        $this->descriptionRu = $descriptionRu;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate(): \DateTime
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \DateTime $creationDate
+     */
+    public function setCreationDate(\DateTime $creationDate): void
+    {
+        $this->creationDate = $creationDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModifiedDate(): \DateTime
+    {
+        return $this->modifiedDate;
+    }
+
+    /**
+     * @param \DateTime $modifiedDate
+     */
+    public function setModifiedDate(\DateTime $modifiedDate): void
+    {
+        $this->modifiedDate = $modifiedDate;
+    }
+
+    /**
+     * @return \User\Entity\UserUsers
+     */
+    public function getUser(): ?\User\Entity\UserUsers
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param \User\Entity\UserUsers $user
+     */
+    public function setUser(?\User\Entity\UserUsers $user): void
+    {
+        $this->user = $user;
+    }
+
 
 }

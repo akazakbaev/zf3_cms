@@ -2,9 +2,9 @@
 namespace Storage\Service;
 
 use Application\Entity\ApplicationFiles;
-use Zf\Infocom\Core\Exception\ImageException;
-use Zf\Infocom\Core\Image\Image;
-use Zf\Infocom\Core\Classes\AbstractEntityItem;
+use Application\Exception\ImageException;
+use Application\Image\Image;
+use Application\Classes\AbstractEntityItem;
 use Storage\Entity\StorageFiles;
 use Storage\Entity\StorageServices;
 
@@ -80,12 +80,12 @@ class FileManager
     }
 
     /**
-     * @param $item
      * @param $photo
-     * @return ApplicationFiles
+     * @param $entityItem
+     * @return StorageFiles
      * @throws ImageException
      * @throws \Application\Image\Exception
-     * @throws \Core\Image\Exception
+     * @throws \Application\Image\Exception
      */
 
     public function addPhoto($photo, AbstractEntityItem $entityItem)

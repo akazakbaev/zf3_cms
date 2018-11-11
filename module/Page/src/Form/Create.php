@@ -19,23 +19,45 @@ class Create extends AbstractLanguageForm
     public function getArrayElements()
     {
         return [
-            'default' => [
+            'translate' => [
                 [
                     'name' => 'title',
                     'type' => 'Text',
                     'attributes' => [
-                        'placeholder' => 'Title in russian',
+                        'placeholder' => 'Title',
                         'class' => 'form-control'
                     ],
                     'options' => [
-                        'label' => 'Title in russian',
+                        'label' => 'Title',
+                        'label_attributes' => [
+                            'class' => 'col-sm-3 control-label'
+                        ],
+                    ]
+                ],
+                [
+                    'name' => 'description',
+                    'type' => 'Textarea',
+                    'attributes' => [
+                        'placeholder' => 'Description',
+                        'class' => 'form-control summernote',
+                    ],
+                    'options' => [
+                        'label' => 'Description',
                         'label_attributes' => [
                             'class' => 'col-sm-3 control-label'
                         ],
                     ]
                 ]
             ],
-            'translate' => [
+            'default' => [
+                [
+                    'name'       => 'photo',
+                    'type'       => 'Zend\Form\Element\File',
+                    'attributes' => [
+                        'type' => 'file',
+                        'id'   => 'user_photo_upload_form'
+                    ]
+                ],
                 [
                     'name' => 'send',
                     'type' => 'Zend\Form\Element\Button',
@@ -52,103 +74,32 @@ class Create extends AbstractLanguageForm
         ];
     }
 
+    public function getArrayInputFilters()
+    {
+        return [
+            'translate' => [
+                [
+                    'name'     => 'title',
+                    'required' => true,
+                    'filters'  => [
+                        ['name' => 'StringTrim'],
+                    ],
+                ],
+            ],
+            'default' => [
+
+            ]
+        ];
+    }
+
     public function __construct($name = null, $entityManager, LanguageOptions $languageOptions)
     {
+        $this->setLanguageOptions($languageOptions);
+
         parent::__construct($name);
 
         $this->setAttributes(array('method' => 'post', 'class' => 'form-horizontal'));
 
         $this->setHydrator(new DoctrineHydrator($entityManager));
-
-        $languages = $languageOptions->getLanguages();
-
-        foreach ($languages as $language) {
-
-            $this->add(array(
-                'name' => 'title'.$language,
-                'type' => 'Text',
-                'attributes' => array(
-                    'placeholder' => 'Title in russian',
-                    'class' => 'form-control'
-                ),
-                'options' => array(
-                    'label' => 'Title in russian',
-                    'label_attributes' => [
-                        'class' => 'col-sm-3 control-label'
-                    ],
-                )
-            ));
-
-            $this->add(array(
-                'name' => 'description'.$language,
-                'type' => 'Textarea',
-                'attributes' => array(
-                    'placeholder' => 'Description in russian',
-                    'class' => 'form-control summernote',
-                ),
-                'options' => array(
-                    'label' => 'Description in russian',
-                    'label_attributes' => [
-                        'class' => 'col-sm-3 control-label'
-                    ],
-                )
-            ));
-        }
-
-        // Buttons
-        $this->add(array(
-            'name' => 'send',
-            'type' => 'Zend\Form\Element\Button',
-            'attributes' => array(
-                'class' => 'btn btn-small btn-success',
-                'type' => 'submit',
-                'value' => 'Save'
-            ),
-            'options' => array(
-                'label' => 'Save',
-            ),
-        ));
-
-        $this->addInputFilter();
-    }
-
-    public function addInputFilter()
-    {
-        // Create main input filter
-        $inputFilter = new InputFilter();
-        $this->setInputFilter($inputFilter);
-
-        $inputFilter->add([
-            'name'     => 'title',
-            'required' => true,
-            'filters'  => [
-                ['name' => 'StringTrim'],
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name'     => 'body',
-            'required' => true,
-            'filters'  => [
-
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name'     => 'titleKg',
-            'required' => true,
-            'filters'  => [
-
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name'     => 'bodyKg',
-            'required' => true,
-            'filters'  => [
-
-            ],
-        ]);
-
     }
 }

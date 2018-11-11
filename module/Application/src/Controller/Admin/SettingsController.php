@@ -3,14 +3,16 @@
  *
  */
 
-namespace Application\Controller;
+namespace Application\Controller\Admin;
 
 
+use Application\Classes\AdminController;
 use Application\Options\LanguageOptions;
-use Zend\Mvc\Controller\AbstractActionController;
+use Application\Service\SettingsManager;
+
 use Zf\Infocom\Core\Entity\CoreMailtemplates;
 
-class SettingsController extends AbstractActionController
+class SettingsController extends AdminController
 {
     /**
      * Doctrine entity manager.
@@ -20,7 +22,7 @@ class SettingsController extends AbstractActionController
 
     /**
      * User manager.
-     * @var \Zf\Infocom\Core\Service\SettingsManager
+     * @var SettingsManager
      */
     private $settingsManager;
 
@@ -39,7 +41,7 @@ class SettingsController extends AbstractActionController
         if(!$this->requireAccess('settings.general', null)) return;
 
         $lang = $this->params()->fromQuery('lang', 'ru');
-        $prefix = '_admin';
+        $prefix = '';
 
         $languageOptions = $this->getEvent()->getApplication()->getServiceManager()->get(LanguageOptions::class);
         $form = new \Application\Form\Settings\General('general_settings', $prefix, $languageOptions);

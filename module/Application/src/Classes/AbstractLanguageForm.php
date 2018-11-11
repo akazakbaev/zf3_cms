@@ -16,64 +16,92 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 abstract class AbstractLanguageForm extends Form implements FormTranslateInterface
 {
-    public function te($name = null, $entityManager, LanguageOptions $languageOptions)
+    /**
+     * @var LanguageOptions
+     */
+    protected $languageOptions;
+
+    public function __construct($name = null)
     {
         parent::__construct($name);
 
-        $this->setAttributes(array('method' => 'post', 'class' => 'form-horizontal'));
-
-        $this->setHydrator(new DoctrineHydrator($entityManager));
-
-        $languages = $languageOptions->getLanguages();
-
-        foreach ($languages as $language) {
-
-            $this->add(array(
-                'name' => 'title'.$language,
-                'type' => 'Text',
-                'attributes' => array(
-                    'placeholder' => 'Title in russian',
-                    'class' => 'form-control'
-                ),
-                'options' => array(
-                    'label' => 'Title in russian',
-                    'label_attributes' => [
-                        'class' => 'col-sm-3 control-label'
-                    ],
-                )
-            ));
-
-            $this->add(array(
-                'name' => 'description'.$language,
-                'type' => 'Textarea',
-                'attributes' => array(
-                    'placeholder' => 'Description in russian',
-                    'class' => 'form-control summernote',
-                ),
-                'options' => array(
-                    'label' => 'Description in russian',
-                    'label_attributes' => [
-                        'class' => 'col-sm-3 control-label'
-                    ],
-                )
-            ));
-        }
-
-        // Buttons
-        $this->add(array(
-            'name' => 'send',
-            'type' => 'Zend\Form\Element\Button',
-            'attributes' => array(
-                'class' => 'btn btn-small btn-success',
-                'type' => 'submit',
-                'value' => 'Save'
-            ),
-            'options' => array(
-                'label' => 'Save',
-            ),
-        ));
+        $this->addDefaultElements();
+        $this->addTranslateElements();
 
         $this->addInputFilter();
+    }
+
+    public function setLanguageOptions(LanguageOptions $languageOptions)
+    {
+        $this->languageOptions = $languageOptions;
+    }
+
+    public function getLanguageOptions()
+    {
+        return $this->languageOptions;
+    }
+
+    public function addDefaultElements()
+    {
+        $allElements = $this->getArrayElements();
+
+        $defaultElements = $allElements['default'] ?? [];
+
+        foreach ($defaultElements as $element)
+        {
+            $this->add($element);
+        }
+    }
+
+    public function addTranslateElements()
+    {
+        $allElements = $this->getArrayElements();
+
+        $translateElements = $allElements['translate'] ?? [];
+
+        foreach ($this->getLanguageOptions()->getLanguages() as $key => $language)
+        {
+            foreach ($translateElements as $element)
+            {
+                $element['name'] = $element['name'].ucfirst($key);
+                $this->add($element);
+            }
+        }
+
+    }
+
+    public function getTranslateElements($lang)
+    {
+        $allElements = $this->getArrayElements();
+
+        $elements = $allElements['translate'] ?? [];
+
+        $elementsData = [];
+
+        foreach ($elements as $element)
+        {
+            if($this->has($element['name'].ucfirst($lang)))
+                $elementsData[] = $this->get($element['name'].ucfirst($lang));
+        }
+
+        return $elementsData;
+    }
+
+    public function getDefaultElements()
+    {
+        $allElements = $this->getArrayElements();
+
+        $elements = $allElements['default'] ?? [];
+
+        $elementsData = [];
+
+        foreach ($elements as $element)
+        {
+            if($this->has($element['name']))
+                $elementsData[] = $this->get($element['name']);
+        }
+
+        return $elementsData;
     }
 
     public function addInputFilter()
@@ -82,37 +110,25 @@ abstract class AbstractLanguageForm extends Form implements FormTranslateInterfa
         $inputFilter = new InputFilter();
         $this->setInputFilter($inputFilter);
 
-        $inputFilter->add([
-            'name'     => 'title',
-            'required' => true,
-            'filters'  => [
-                ['name' => 'StringTrim'],
-            ],
-        ]);
 
-        $inputFilter->add([
-            'name'     => 'body',
-            'required' => true,
-            'filters'  => [
+        $allInputFiltersElements = $this->getArrayInputFilters();
 
-            ],
-        ]);
+        $translateElements = $allInputFiltersElements['translate'] ?? [];
 
-        $inputFilter->add([
-            'name'     => 'titleKg',
-            'required' => true,
-            'filters'  => [
+        foreach ($this->getLanguageOptions()->getLanguages() as $key => $language)
+        {
+            foreach ($translateElements as $element)
+            {
+                $element['name'] = $element['name'].ucfirst($key);
+                $inputFilter->add($element);
+            }
+        }
 
-            ],
-        ]);
+        $defaultInputFiltersElement =  $allInputFiltersElements['default'] ?? [];
 
-        $inputFilter->add([
-            'name'     => 'bodyKg',
-            'required' => true,
-            'filters'  => [
-
-            ],
-        ]);
-
+        foreach ($defaultInputFiltersElement as $element)
+        {
+            $inputFilter->add($element);
+        }
     }
 }

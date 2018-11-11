@@ -10,6 +10,7 @@
 namespace Application\View\Helper;
 
 use Application\Options\LanguageOptions;
+use Application\Provider\FormTranslateInterface;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\FormInterface;
 use Zend\View\Helper\Doctype;
@@ -92,7 +93,7 @@ class FormRender extends AbstractHelper
 
         $inputFilters = $form->getInputFilter();
 
-        if(false)
+        if(!$form instanceof FormTranslateInterface)
         {
             foreach ($form as $element)
             {
@@ -107,7 +108,7 @@ class FormRender extends AbstractHelper
         }
         else
         {
-            $formContent .= '<div class="tabs-left">';
+
 
             $formContent .= '<ul class="nav nav-tabs">';
 
@@ -116,7 +117,7 @@ class FormRender extends AbstractHelper
             foreach ($this->languageOptions->getLanguages() as $key => $value)
             {
             $formContent .= '<li class=" '. ($default == $value ? 'active' : '') .'">
-                    <a data-toggle="tab" href="#tab-'.$key.'" aria-expanded="true">'. $value .'</a>
+                    <a data-toggle="tab" href="#tab-'.$key.'" aria-expanded="true"><span class="lang-sm lang-lbl" lang="'. $key .'"></span> '. $value .'</a>
                 </li>';
             }
 
@@ -129,7 +130,7 @@ class FormRender extends AbstractHelper
 
                 $formContent .= '';
 
-                foreach ($form->getElements() as $element)
+                foreach ($form->getTranslateElements($key) as $element)
                 {
                     if ($element instanceof FieldsetInterface) {
                         $formContent .= $this->getView()->formCollection($element);
@@ -140,9 +141,22 @@ class FormRender extends AbstractHelper
                     }
                 }
 
-            $formContent .= '</div>
-                </div>';
+                $formContent .= '</div></div>';
             }
+
+            $formContent .= '<div> <hr>';
+
+            foreach ($form->getDefaultElements() as $element)
+            {
+                if ($element instanceof FieldsetInterface) {
+                    $formContent .= $this->getView()->formCollection($element);
+                } else {
+                    $input = $inputFilters->get($element->getName());
+
+                    $formContent .= $this->getView()->formRowDefault($element, null, null, null, $input->isRequired());
+                }
+            }
+            
             $formContent .= '</div></div>';
         }
 

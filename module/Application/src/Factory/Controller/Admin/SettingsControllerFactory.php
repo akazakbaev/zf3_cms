@@ -5,12 +5,12 @@
  * Date: 2/12/18
  * Time: 3:22 PM
  */
-namespace Application\Factory\Controller;
+namespace Application\Factory\Controller\Admin;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Zf\Infocom\Core\Service\SettingsManager;
-use Application\Controller\SettingsController;
+use Application\Service\SettingsManager;
+use Application\Controller\Admin\SettingsController;
 /**
  * This is the factory for UserController. Its purpose is to instantiate the
  * controller and inject dependencies into it.

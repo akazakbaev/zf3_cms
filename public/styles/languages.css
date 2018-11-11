@@ -1,0 +1,207 @@
+/* ========================================================================== *
+ * Copyright 2014 USRZ.com and Pier Paolo Fumagalli                           *
+ * -------------------------------------------------------------------------- *
+ * Licensed under the Apache License, Version 2.0 (the "License");            *
+ * you may not use this file except in compliance with the License.           *
+ * You may obtain a copy of the License at                                    *
+ *                                                                            *
+ *  http://www.apache.org/licenses/LICENSE-2.0                                *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an "AS IS" BASIS,          *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ * ========================================================================== */
+
+/* Define properties for our icons (default to the unknown language flag) */
+.lang-xs { background-position: 0px  -473px; min-width: 14px; height: 11px; min-height: 11px; max-height: 11px; background-repeat: no-repeat; display: inline-block; background-image: url('../images/languages.png'); }
+.lang-sm { background-position: 0px -1172px; min-width: 22px; height: 16px; min-height: 16px; max-height: 16px; background-repeat: no-repeat; display: inline-block; background-image: url('../images/languages.png'); }
+.lang-lg { background-position: 0px -2134px; min-width: 30px; height: 22px; min-height: 22px; max-height: 22px; background-repeat: no-repeat; display: inline-block; background-image: url('../images/languages.png'); }
+
+/* Positions in our sprite for xs-sized images */
+.lang-xs[lang=ar] { background-position: 0px     0px; }
+.lang-xs[lang=be] { background-position: 0px   -11px; }
+.lang-xs[lang=bg] { background-position: 0px   -22px; }
+.lang-xs[lang=cs] { background-position: 0px   -33px; }
+.lang-xs[lang=da] { background-position: 0px   -44px; }
+.lang-xs[lang=de] { background-position: 0px   -55px; }
+.lang-xs[lang=el] { background-position: 0px   -66px; }
+.lang-xs[lang=en] { background-position: 0px   -77px; }
+.lang-xs[lang=es] { background-position: 0px   -88px; }
+.lang-xs[lang=et] { background-position: 0px   -99px; }
+.lang-xs[lang=fi] { background-position: 0px  -110px; }
+.lang-xs[lang=fr] { background-position: 0px  -121px; }
+.lang-xs[lang=ga] { background-position: 0px  -132px; }
+.lang-xs[lang=hi] { background-position: 0px  -143px; }
+.lang-xs[lang=hr] { background-position: 0px  -154px; }
+.lang-xs[lang=hu] { background-position: 0px  -165px; }
+.lang-xs[lang=in] { background-position: 0px  -176px; }
+.lang-xs[lang=is] { background-position: 0px  -187px; }
+.lang-xs[lang=it] { background-position: 0px  -198px; }
+.lang-xs[lang=iw] { background-position: 0px  -209px; }
+.lang-xs[lang=ja] { background-position: 0px  -220px; }
+.lang-xs[lang=ko] { background-position: 0px  -231px; }
+.lang-xs[lang=lt] { background-position: 0px  -242px; }
+.lang-xs[lang=lv] { background-position: 0px  -253px; }
+.lang-xs[lang=mk] { background-position: 0px  -264px; }
+.lang-xs[lang=ms] { background-position: 0px  -275px; }
+.lang-xs[lang=mt] { background-position: 0px  -286px; }
+.lang-xs[lang=nl] { background-position: 0px  -297px; }
+.lang-xs[lang=no] { background-position: 0px  -308px; }
+.lang-xs[lang=pl] { background-position: 0px  -319px; }
+.lang-xs[lang=pt] { background-position: 0px  -330px; }
+.lang-xs[lang=ro] { background-position: 0px  -341px; }
+.lang-xs[lang=ru] { background-position: 0px  -352px; }
+.lang-xs[lang=sk] { background-position: 0px  -363px; }
+.lang-xs[lang=sl] { background-position: 0px  -374px; }
+.lang-xs[lang=sq] { background-position: 0px  -385px; }
+.lang-xs[lang=sr] { background-position: 0px  -396px; }
+.lang-xs[lang=sv] { background-position: 0px  -407px; }
+.lang-xs[lang=th] { background-position: 0px  -418px; }
+.lang-xs[lang=tr] { background-position: 0px  -429px; }
+.lang-xs[lang=uk] { background-position: 0px  -440px; }
+.lang-xs[lang=vi] { background-position: 0px  -451px; }
+.lang-xs[lang=zh] { background-position: 0px  -462px; }
+
+/* Positions in our sprite for sm-sized images */
+.lang-sm[lang=kg] { background-position: 0px  -484px; }
+.lang-sm[lang=ky] { background-position: 0px  -484px; }
+.lang-sm[lang=en] { background-position: 0px  -596px; }
+.lang-sm[lang=ru] { background-position: 0px  -996px; }
+/* Positions in our sprite for lg-sized images */
+.lang-lg[lang=kg] { background-position: 0px -1188px; }
+.lang-lg[lang=ky] { background-position: 0px -1188px; }
+.lang-lg[lang=en] { background-position: 0px -1342px; }
+.lang-lg[lang=ru] { background-position: 0px -1892px; }
+
+/* Labels for the unknown language */
+
+.lang-lbl-full:after { content: "Unknown language"; }
+
+/* Labels in native (default) language */
+.language-option .lang-lbl[lang=kg]:after { content: "Кыргызча"; }
+.language-option .lang-lbl[lang=ky]:after { content: "Кыргызча"; }
+.language-option .lang-lbl[lang=en]:after { content: "English"; }
+
+.language-option .lang-lbl[lang=ru]:after { content: "\000420\000443\000441\000441\00043A\000438\000439"; }
+
+
+/* Labels in english language */
+.lang-lbl-ru[lang=kg]:after { content: "Кыргызский"; }
+.lang-lbl-ru[lang=ky]:after { content: "Кыргызский"; }
+.lang-lbl-ru[lang=ru]:after { content: "Русский"; }
+
+/* Combined native/english labels */
+
+.lang-lbl-full[lang=el]:after { content: "\000395\0003BB\0003BB\0003B7\0003BD\0003B9\0003BA\0003AC\0000A0/\0000A0Greek"; }
+.lang-lbl-full[lang=en]:after { content: "English\0000A0/\0000A0English"; }
+.lang-lbl-full[lang=ru]:after { content: "\000420\000443\000441\000441\00043A\000438\000439\0000A0/\0000A0Russian"; }
+
+/* One breaking space if we have an image */
+.lang-xs:before,
+.lang-sm:before,
+.lang-lg:before  { content: '\0000A0'; }
+
+/* Pad the image and remove the non-breaking space when we have both an icon and a label */
+.lang-xs.lang-lbl,
+.lang-xs.lang-lbl-en,
+.lang-xs.lang-lbl-full  { padding-left: 16px; }
+.lang-sm.lang-lbl,
+.lang-sm.lang-lbl-en,
+.lang-sm.lang-lbl-full  { padding-left: 24px; }
+.lang-lg.lang-lbl,
+.lang-lg.lang-lbl-en,
+.lang-lg.lang-lbl-full  { padding-left: 32px; }
+
+.lang-xs.lang-lbl:before,
+.lang-sm.lang-lbl:before,
+.lang-lg.lang-lbl:before,
+.lang-xs.lang-lbl-en:before,
+.lang-sm.lang-lbl-en:before,
+.lang-lg.lang-lbl-en:before,
+.lang-xs.lang-lbl-full:before,
+.lang-sm.lang-lbl-full:before,
+.lang-lg.lang-lbl-full:before  { content: ''; }
+
+/* Adjustments for paragraphs */
+.lang-lg,
+.lang-lg:after       { top:   0px; position: relative; }
+.lang-sm             { top:   1px; position: relative; }
+.lang-sm:after       { top:  -1px; position: relative; }
+.lang-xs             { top:   4px; position: relative; }
+.lang-xs:after       { top:  -4px; position: relative; }
+
+.lead>.lang-lg       { top:   2px; }
+.lead>.lang-lg:after { top:  -2px; }
+.lead>.lang-sm       { top:   6px; }
+.lead>.lang-sm:after { top:  -6px; }
+.lead>.lang-xs       { top:   8px; }
+.lead>.lang-xs:after { top:  -8px; }
+
+small>.lang-sm       { top:  -1px; }
+small>.lang-sm:after { top:   1px; }
+small>.lang-xs       { top:   2px; }
+small>.lang-xs:after { top:  -2px; }
+
+/* Adjustments for headings */
+h1>.lang-lg       { top:   9px; }
+h1>.lang-lg:after { top:  -9px; }
+h1>.lang-sm       { top:  12px; }
+h1>.lang-sm:after { top: -12px; }
+h1>.lang-xs       { top:  14px; }
+h1>.lang-xs:after { top: -14px; }
+
+h2>.lang-lg       { top:   5px; }
+h2>.lang-lg:after { top:  -5px; }
+h2>.lang-sm       { top:   8px; }
+h2>.lang-sm:after { top:  -8px; }
+h2>.lang-xs       { top:  10px; }
+h2>.lang-xs:after { top: -10px; }
+
+h3>.lang-lg       { top:   1px; }
+h3>.lang-lg:after { top:  -1px; }
+h3>.lang-sm       { top:   5px; }
+h3>.lang-sm:after { top:  -5px; }
+h3>.lang-xs       { top:   8px; }
+h3>.lang-xs:after { top:  -8px; }
+
+h4>.lang-lg       { top:  -1px; }
+h4>.lang-lg:after { top:   1px; }
+h4>.lang-sm       { top:   1px; }
+h4>.lang-sm:after { top:  -1px; }
+h4>.lang-xs       { top:   4px; }
+h4>.lang-xs:after { top:  -4px; }
+
+h5>.lang-sm,
+h5>.lang-sm:after { top:   0px; }
+h5>.lang-xs       { top:   2px; }
+h5>.lang-xs:after { top:  -2px; }
+
+h6>.lang-sm,      
+h6>.lang-sm:after { top:   0px; }
+h6>.lang-xs       { top:   1px; }
+h6>.lang-xs:after { top:  -1px; }
+
+/* Adjustments for buttons */
+.btn>.lang-sm              { top:   2px; }
+.btn>.lang-sm:after        { top:  -2px; }
+.btn>.lang-xs              { top:   4px; }
+.btn>.lang-xs:after        { top:  -4px; }
+
+.btn.btn-xs>.lang-sm,
+.btn.btn-xs>.lang-sm:after { top:   0px; }
+.btn.btn-xs>.lang-xs       { top:   3px; }
+.btn.btn-xs>.lang-xs:after { top:  -3px; }
+
+.btn.btn-sm>.lang-sm,
+.btn.btn-sm>.lang-sm:after { top:   0px; }
+.btn.btn-sm>.lang-xs       { top:   3px; }
+.btn.btn-sm>.lang-xs:after { top:  -3px; }
+
+.btn.btn-lg>.lang-lg       { top:   1px; }
+.btn.btn-lg>.lang-lg:after { top:  -1px; }
+.btn.btn-lg>.lang-sm       { top:   3px; }
+.btn.btn-lg>.lang-sm:after { top:  -3px; }
+.btn.btn-lg>.lang-xs       { top:   6px; }
+.btn.btn-lg>.lang-xs:after { top:  -6px; }

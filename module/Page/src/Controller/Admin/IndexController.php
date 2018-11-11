@@ -42,6 +42,38 @@ class IndexController extends AdminController
         $languageOptions = $this->getEvent()->getApplication()->getServiceManager()->get(LanguageOptions::class);
         $form = new Create('create', $this->entityManager, $languageOptions);
 
+        $item = new PagePages();
+
+        $form->bind($item);
+
+        if ($this->request->isPost())
+        {
+            $form->setData($this->request->getPost());
+
+            if ($form->isValid())
+            {
+                $conn = $this->entityManager->getConnection();
+                $conn->beginTransaction();
+                try{
+
+                    $item->setUser($this->viewer());
+
+                    $this->entityManager->persist($item);
+                    $this->entityManager->flush();
+
+                    $this->entityManager->getConnection()->commit();
+
+                    $this->redirect()->toRoute('pages_general');
+                }
+                catch(\Exception $e)
+                {
+                    $this->entityManager->getConnection()->rollBack();
+
+                    $this->flashMessenger()->setNamespace('error')->addMessage($e->getMessage());
+                }
+            }
+        }
+
         return [
             'form' => $form
         ];

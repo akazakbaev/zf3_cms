@@ -8,23 +8,44 @@
 namespace Application\Controller\Admin;
 
 use Application\Classes\AdminController;
+use Application\Entity\ApplicationTeams;
 use Application\Form\Admin\Team;
 use Zend\View\Model\ViewModel;
 
 class TeamController extends AdminController
 {
+    /**
+     * Entity manager.
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
+
+    private $languageOptions;
+
+    public function __construct($entityManager, $languageOptions)
+    {
+        $this->entityManager = $entityManager;
+
+        $this->languageOptions = $languageOptions;
+    }
+
     public function indexAction()
     {
-//        return [
-//
-//        ];
+
+        return [
+
+        ];
     }
 
     public function createAction()
     {
-        $form = new Team('create');
+        $form = new Team('create', $this->entityManager, $this->languageOptions);
 
         $request = $this->getRequest();
+
+        $item = new ApplicationTeams();
+
+        $form->bind($item);
 
         if ($request->isPost())
         {
@@ -32,7 +53,7 @@ class TeamController extends AdminController
 
             $form->setData($post);
 
-            if (!$form->isValid($post))
+            if (!$form->isValid())
             {
                 $this->flashMessenger()->setNamespace('error')->addMessage('Invalid data');
 
@@ -41,19 +62,22 @@ class TeamController extends AdminController
                 );
             }
 
-            $values = $form->getData();
+            $conn = $this->entityManager->getConnection();
+            $conn->beginTransaction();
+            try{
 
-            if($this->languageManager->save($values))
-            {
-                return $this->redirect()->toRoute('languages', array('action' => 'index'));
+                $this->entityManager->persist($item);
+                $this->entityManager->flush();
+
+                $this->entityManager->getConnection()->commit();
+
+                $this->redirect()->toRoute('admin_team');
             }
-            else
+            catch(\Exception $e)
             {
-                $this->flashMessenger()->setNamespace('error')->addMessage('Word already added');
+                $this->entityManager->getConnection()->rollBack();
 
-                return array(
-                    'form' => $form
-                );
+                $this->flashMessenger()->setNamespace('error')->addMessage($e->getMessage());
             }
         }
         else

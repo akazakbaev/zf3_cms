@@ -9,16 +9,19 @@ namespace Application;
 
 use Application\Controller\Admin\IndexController as AdminIndexController;
 use Application\Controller\Admin\TeamController as AdminTeamController;
+use Application\Controller\Admin\SettingsController as AdminSettingsController;
 use Application\Controller\Admin\ServicesController as AdminServicesController;
 use Application\Factory\Controller\Admin\TeamControllerFactory as AdminTeamControllerFactory;
 use Application\Controller\Admin\LanguagesController as AdminLanguagesController;
 use Application\Factory\Controller\Admin\LanguagesControllerFactory as AdminLanguagesControllerFactory;
 use Application\Factory\Controller\Admin\IndexControllerFactory as AdminIndexControllerFactory;
 use Application\Factory\Controller\Admin\ServicesControllerFactory as AdminServicesControllerFactory;
+use Application\Factory\Controller\Admin\SettingsControllerFactory as AdminSettingsControllerFactory;
 use Application\Factory\Options\LanguageOptionsFactory;
 use Application\Factory\Service\CacheManagerFactory;
 use Application\Factory\Service\DatabaseTranslationLoaderFactory;
 use Application\Factory\Service\LangugeManagerFactory;
+use Application\Factory\Service\SettingsManagerFactory;
 use Application\Factory\View\FormRenderFactory;
 use Application\View\Helper\FormRender;
 use Application\View\Helper\Truncate;
@@ -65,7 +68,7 @@ return [
                 'options' => [
                     'route'    => ADMIN_PATH.'/settings[/:action]',
                     'defaults' => [
-                        'controller' => Controller\SettingsController::class,
+                        'controller' => AdminSettingsController::class,
                         'action'     => 'general',
                     ],
                 ],
@@ -106,7 +109,7 @@ return [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
             AdminIndexController::class => AdminIndexControllerFactory::class,
-            Controller\SettingsController::class => \Application\Factory\Controller\SettingsControllerFactory::class,
+            AdminSettingsController::class => AdminSettingsControllerFactory::class,
             AdminLanguagesController::class => AdminLanguagesControllerFactory::class,
             AdminTeamController::class => AdminTeamControllerFactory::class,
             AdminServicesController::class => AdminServicesControllerFactory::class,
@@ -161,6 +164,7 @@ return [
             Service\LanguageManager::class => LangugeManagerFactory::class,
             Options\LanguageOptions::class => LanguageOptionsFactory::class,
             Service\DatabaseTranslationLoader::class => DatabaseTranslationLoaderFactory::class,
+            Service\SettingsManager::class => SettingsManagerFactory::class
         ],
         'delegators' => [
             'HttpRouter' => [ \Application\Factory\Mvc\Router\Http\LanguageTreeRouteStackDelegatorFactory::class ],

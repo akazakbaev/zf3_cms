@@ -8,114 +8,103 @@
 
 namespace Application\Form\Admin;
 
-use User\Entity\UserUsers;
-use User\Validator\UserNameExistsValidator;
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
-use User\Validator\UserExistsValidator;
-use User\Validator\PinExistsValidator;
+use Application\Classes\AbstractLanguageForm;
+use Application\Options\LanguageOptions;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
-class Team extends Form
+class Team extends AbstractLanguageForm
 {
-    /**
-     * Scenario ('create' or 'update').
-     * @var string
-     */
-    private $scenario;
-
-
-    public function __construct($scenario = 'create')
+    public function getArrayElements()
     {
-        // Define form name
-        parent::__construct($scenario);
-
-        $this->setAttributes(array('method' => 'post', 'class' => 'form-horizontal'));
-
-        // Set POST method for this form
-        $this->setAttribute('method', 'post');
-
-        // Save parameters for internal use.
-        $this->scenario      = $scenario;
-
-
-        $this->addElements();
-        $this->addInputFilter();
-    }
-
-    /**
-     * This method adds elements to form (input fields and submit button).
-     */
-    protected function addElements()
-    {
-        // Add "email" field
-        $this->add([
-            'type'       => 'text',
-            'name'       => 'pin',
-            'options'    => [
-                'label' => 'PIN',
-                'label_attributes' => [
-                    'class' => 'col-sm-3 control-label no-padding-right',
+        return [
+            'translate' => [
+                [
+                    'name' => 'title',
+                    'type' => 'Text',
+                    'attributes' => [
+                        'placeholder' => 'Title',
+                        'class' => 'form-control'
+                    ],
+                    'options' => [
+                        'label' => 'Title',
+                        'label_attributes' => [
+                            'class' => 'col-sm-3 control-label'
+                        ],
+                    ]
+                ],
+                [
+                    'name' => 'description',
+                    'type' => 'Textarea',
+                    'attributes' => [
+                        'placeholder' => 'Description',
+                        'class' => 'form-control summernote',
+                    ],
+                    'options' => [
+                        'label' => 'Description',
+                        'label_attributes' => [
+                            'class' => 'col-sm-3 control-label'
+                        ],
+                    ]
                 ]
             ],
-            'attributes' => [
-                'class'     => 'form-control',
-                'id'        => 'pin',
-                'maxlength' => 14
-            ],
-        ]);
-
-
-        $this->add([
-            'name'       => 'photo',
-            'type'       => 'Zend\Form\Element\File',
-            'attributes' => [
-                'type' => 'file',
-                'id'   => 'user_photo_upload_form'
+            'default' => [
+                [
+                    'name'       => 'photo',
+                    'type'       => 'Zend\Form\Element\File',
+                    'attributes' => [
+                        'type' => 'file',
+                        'id'   => 'user_photo_upload_form'
+                    ]
+                ],
+                [
+                    'name' => 'send',
+                    'type' => 'Zend\Form\Element\Button',
+                    'attributes' => [
+                        'class' => 'btn btn-small btn-success',
+                        'type' => 'submit',
+                        'value' => 'Save'
+                    ],
+                    'options' => [
+                        'label' => 'Save',
+                    ]
+                ]
             ]
-        ]);
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Csrf',
-            'name' => 'csrf',
-        ));
-
-
-        // Add the Submit button
-        $this->add([
-            'type'       => 'submit',
-            'name'       => 'submit',
-            'attributes' => [
-                'value' => 'Save',
-                'class' => 'btn btn-small btn-success',
-            ],
-        ]);
+        ];
     }
 
-    /**
-     * This method creates input filter (used for form filtering/validation).
-     */
-    private function addInputFilter()
+    public function getArrayInputFilters()
     {
-        // Create main input filter
-        $inputFilter = new InputFilter();
-        $this->setInputFilter($inputFilter);
-
-        // Add input for "pin" field
-        $inputFilter->add([
-            'name'       => 'pin',
-            'required'   => true,
-            'filters'    => [
-                ['name' => 'StringTrim'],
-            ],
-            'validators' => [
+        return [
+            'translate' => [
                 [
-                    'name'    => 'StringLength',
-                    'options' => [
-                        'max' => 14
+                    'name'     => 'title',
+                    'required' => true,
+                    'filters'  => [
+                        ['name' => 'StringTrim'],
+                    ],
+                ],
+                [
+                    'name'     => 'description',
+                    'required' => true,
+                    'filters'  => [
+                        ['name' => 'StringTrim'],
                     ],
                 ],
             ],
-        ]);
+            'default' => [
 
+            ]
+        ];
+    }
+    public function __construct($scenario = 'create', $entityManager, LanguageOptions $languageOptions)
+    {
+        $this->setLanguageOptions($languageOptions);
+
+        $this->setAttributes(array('method' => 'post', 'class' => 'form-horizontal'));
+
+        $this->setHydrator(new DoctrineHydrator($entityManager));
+
+        // Define form name
+        parent::__construct($scenario);
     }
 }

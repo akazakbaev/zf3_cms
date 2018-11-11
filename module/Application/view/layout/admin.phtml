@@ -19,6 +19,7 @@
             ->prependStylesheet($this->basePath('vendor/animate.css/animate.css'))
             ->prependStylesheet($this->basePath('vendor/metisMenu/dist/metisMenu.css'))
             ->prependStylesheet($this->basePath('vendor/fontawesome/css/font-awesome.css'))
+            ->prependStylesheet($this->basePath('styles/languages.css'))
         ?>
 
         <!-- Scripts -->
@@ -41,13 +42,13 @@
         </div>
         <div id="logo" class="light-version">
         <span>
-            <?= $this->translate('AIS Frame rate')?>
+            <?= $this->translate('Admin Panel')?>
         </span>
         </div>
         <nav role="navigation">
             <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
             <div class="small-logo">
-                <span class="text-primary"><?= $this->translate('NRK')?></span>
+                <span class="text-primary"><?= $this->translate('Admin Panel')?></span>
             </div>
             <form role="search" class="navbar-form-custom" method="post" action="#">
                 <div class="form-group">
@@ -89,26 +90,26 @@
                         <div class="dropdown-menu hdropdown bigmenu animated flipInX">
                             <table>
                                 <tbody>
-<!--                                <tr>-->
-<!--                                    <td>-->
-<!--                                        <a href="--><?//= $this->url('admin_settings')?><!--">-->
-<!--                                            <i class="pe pe-7s-tools text-info"></i>-->
-<!--                                            <h5>--><?//= $this->translate('General Settings')?><!--</h5>-->
-<!--                                        </a>-->
-<!--                                    </td>-->
-<!--                                    <td>-->
-<!--                                        <a href="--><?//= $this->url('settings', array('action' => 'templates'))?><!--">-->
-<!--                                            <i class="pe pe-7s-note2 text-warning"></i>-->
-<!--                                            <h5>--><?//= $this->translate('Email Templates')?><!--</h5>-->
-<!--                                        </a>-->
-<!--                                    </td>-->
-<!--                                    <td>-->
-<!--                                        <a href="--><?//= $this->url('settings', array('action' => 'mail'))?><!--">-->
-<!--                                            <i class="pe pe-7s-mail text-success"></i>-->
-<!--                                            <h5>--><?//= $this->translate('Email Settings')?><!--</h5>-->
-<!--                                        </a>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
+                                <tr>
+                                    <td>
+                                        <a href="<?= $this->url('admin_settings')?>">
+                                            <i class="pe pe-7s-tools text-info"></i>
+                                            <h5><?= $this->translate('General Settings')?></h5>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="<?= $this->url('admin_settings', array('action' => 'templates'))?>">
+                                            <i class="pe pe-7s-note2 text-warning"></i>
+                                            <h5><?= $this->translate('Email Templates')?></h5>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="<?= $this->url('admin_settings', array('action' => 'mail'))?>">
+                                            <i class="pe pe-7s-mail text-success"></i>
+                                            <h5><?= $this->translate('Email Settings')?></h5>
+                                        </a>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         <a href="<?= $this->url('admin_languages', array())?>">

@@ -10,4 +10,6 @@ namespace Application\Provider;
 interface FormTranslateInterface
 {
     public function getArrayElements();
+
+    public function getArrayInputFilters();
 }
