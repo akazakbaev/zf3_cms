@@ -92,14 +92,58 @@ class FormRender extends AbstractHelper
 
         $inputFilters = $form->getInputFilter();
 
-        foreach ($form as $element) {
-            if ($element instanceof FieldsetInterface) {
-                $formContent .= $this->getView()->formCollection($element);
-            } else {
-                $input = $inputFilters->get($element->getName());
+        if(false)
+        {
+            foreach ($form as $element)
+            {
+                if ($element instanceof FieldsetInterface) {
+                    $formContent .= $this->getView()->formCollection($element);
+                } else {
+                    $input = $inputFilters->get($element->getName());
 
-                $formContent .= $this->getView()->formRowDefault($element, null, null, null, $input->isRequired());
+                    $formContent .= $this->getView()->formRowDefault($element, null, null, null, $input->isRequired());
+                }
             }
+        }
+        else
+        {
+            $formContent .= '<div class="tabs-left">';
+
+            $formContent .= '<ul class="nav nav-tabs">';
+
+            $default = $this->languageOptions->getDefaultLocale();
+
+            foreach ($this->languageOptions->getLanguages() as $key => $value)
+            {
+            $formContent .= '<li class=" '. ($default == $value ? 'active' : '') .'">
+                    <a data-toggle="tab" href="#tab-'.$key.'" aria-expanded="true">'. $value .'</a>
+                </li>';
+            }
+
+            $formContent .= '</ul><div class="tab-content">';
+
+            foreach ($this->languageOptions->getLanguages() as $key => $value)
+            {
+                $formContent .= '<div id="tab-'.$key.'" class="tab-pane '. ($default == $value ? 'active' : '') .'">
+                    <div class="panel-body">';
+
+                $formContent .= '';
+
+                foreach ($form->getElements() as $element)
+                {
+                    if ($element instanceof FieldsetInterface) {
+                        $formContent .= $this->getView()->formCollection($element);
+                    } else {
+                        $input = $inputFilters->get($element->getName());
+
+                        $formContent .= $this->getView()->formRowDefault($element, null, null, null, $input->isRequired());
+                    }
+                }
+
+            $formContent .= '</div>
+                </div>';
+            }
+            $formContent .= '</div></div>';
         }
 
         return $flashContent. $this->openTag($form) . $formContent . $this->closeTag();
