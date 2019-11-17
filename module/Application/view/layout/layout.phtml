@@ -19,6 +19,7 @@
             ->prependStylesheet($this->basePath('vendor-js/bootstrap/dist/css/bootstrap.css'))
             ->prependStylesheet($this->basePath('vendor-js/animate.css/animate.css'))
             ->prependStylesheet($this->basePath('vendor-js/fontawesome/css/font-awesome.css'))
+            ->prependStylesheet($this->basePath('vendor-js/jquery-hs-mega-menu-master/css/hs-menu.min.css'))
             ->prependStylesheet($this->basePath('themes/styles/languages.css'))
         ?>
 
@@ -26,6 +27,7 @@
         <?= $this->headScript()
             ->prependFile($this->basePath('scripts/homer.js'))
             ->prependFile($this->basePath('vendor-js/sparkline/index.js'))
+            ->prependFile($this->basePath('vendor-js/jquery-hs-mega-menu-master/js/jquery.hsmenu.min.js'))
             ->prependFile($this->basePath('vendor-js/iCheck/icheck.min.js'))
             ->prependFile($this->basePath('vendor-js/bootstrap/dist/js/bootstrap.min.js'))
             ->prependFile($this->basePath('vendor-js/slimScroll/jquery.slimscroll.min.js'))

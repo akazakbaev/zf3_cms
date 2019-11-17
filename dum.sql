@@ -60,11 +60,29 @@ CREATE TABLE IF NOT EXISTS `application_translates` (
   CONSTRAINT `application_translates_application_translate_key__fk` FOREIGN KEY (`translate_key_id`) REFERENCES `application_translate_key` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы zf3_cms.application_translates: ~0 rows (приблизительно)
+-- Дамп данных таблицы zf3_cms.application_translates: ~2 rows (приблизительно)
 /*!40000 ALTER TABLE `application_translates` DISABLE KEYS */;
 INSERT IGNORE INTO `application_translates` (`id`, `locale`, `translate`, `translate_key_id`) VALUES
 	(1, 'ru_RU', 'О нас', 3),
-	(2, 'en_EN', 'About us', 3);
+	(2, 'en_EN', 'About us', 3),
+	(3, 'ru_RU', 'Что мы предлагаем', 4),
+	(4, 'en_EN', 'Solutions', 4),
+	(5, 'ru_RU', 'Аналитика', 5),
+	(6, 'en_EN', 'Analytics', 5),
+	(7, 'ru_RU', 'Обучение', 6),
+	(8, 'en_EN', 'Training', 6),
+	(9, 'ru_RU', 'Контакты', 7),
+	(10, 'en_EN', 'Contacts', 7),
+	(11, 'ru_RU', 'Социологическое исследование', 8),
+	(12, 'en_EN', 'Sociological research', 8),
+	(13, 'ru_RU', 'Маркетинговое исследование', 9),
+	(14, 'en_EN', 'Market research', 9),
+	(15, 'ru_RU', 'Мониторинг и проектная оценка', 10),
+	(16, 'en_EN', 'Monitoring and Project Evaluation', 10),
+	(17, 'ru_RU', 'Наша команда', 11),
+	(18, 'en_EN', 'Our team', 11),
+	(19, 'ru_RU', 'Миссия и Ценности', 12),
+	(20, 'en_EN', 'Mission and Values', 12);
 /*!40000 ALTER TABLE `application_translates` ENABLE KEYS */;
 
 -- Дамп структуры для таблица zf3_cms.application_translate_key
@@ -79,7 +97,16 @@ CREATE TABLE IF NOT EXISTS `application_translate_key` (
 -- Дамп данных таблицы zf3_cms.application_translate_key: ~1 rows (приблизительно)
 /*!40000 ALTER TABLE `application_translate_key` DISABLE KEYS */;
 INSERT IGNORE INTO `application_translate_key` (`id`, `module`, `translate_text`, `js`) VALUES
-	(3, 'application', 'About us', 0);
+	(3, 'application', 'About us', 0),
+	(4, 'application', 'Solutions', 0),
+	(5, 'application', 'Analytics', 0),
+	(6, 'application', 'Training', 0),
+	(7, 'application', 'Contacts', 0),
+	(8, 'application', 'Sociological research', 0),
+	(9, 'application', 'Market research', 0),
+	(10, 'application', 'Monitoring and Project Evaluation', 0),
+	(11, 'application', 'Our team', 0),
+	(12, 'application', 'Mission and Values', 0);
 /*!40000 ALTER TABLE `application_translate_key` ENABLE KEYS */;
 
 -- Дамп структуры для таблица zf3_cms.page_pages
@@ -125,12 +152,33 @@ CREATE TABLE IF NOT EXISTS `storage_files` (
   CONSTRAINT `storage_files_storage_services__fk` FOREIGN KEY (`service_id`) REFERENCES `storage_services` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы zf3_cms.storage_files: ~0 rows (приблизительно)
+-- Дамп данных таблицы zf3_cms.storage_files: ~3 rows (приблизительно)
 /*!40000 ALTER TABLE `storage_files` DISABLE KEYS */;
 INSERT IGNORE INTO `storage_files` (`id`, `parent_file_id`, `type`, `storage_path`, `parent_type`, `parent_id`, `extension`, `name`, `mime_major`, `mime_minor`, `size`, `hash`, `owner_id`, `owner_type`, `service_id`) VALUES
 	(1, NULL, NULL, 'files/application_sliders/3/0000_6279.jpg', 'application_sliders', 3, 'jpg', 'c1.jpg', 'image', 'jpeg', 8127, 'b9fa6279463e1e45ed3cd6cfa7f64ba3', 1, 'user_users', 1),
 	(2, 1, 'thumb.normal', 'files/application_sliders/3/0000_6279.jpg', 'application_sliders', 3, 'jpg', 'c1.jpg', 'image', 'jpeg', 8127, 'b9fa6279463e1e45ed3cd6cfa7f64ba3', 1, 'user_users', 1),
-	(3, 1, 'thumb.icon', 'files/application_sliders/3/0000_1e5b.jpg', 'application_sliders', 3, 'jpg', 'c1.jpg', 'image', 'jpeg', 2204, '89be1e5b9def7c91f547135d8a359534', 1, 'user_users', 1);
+	(3, 1, 'thumb.icon', 'files/application_sliders/3/0000_1e5b.jpg', 'application_sliders', 3, 'jpg', 'c1.jpg', 'image', 'jpeg', 2204, '89be1e5b9def7c91f547135d8a359534', 1, 'user_users', 1),
+	(4, NULL, NULL, 'files/application_sliders/4/0000_d56c.jpg', 'application_sliders', 4, 'jpg', 'c2.jpg', 'image', 'jpeg', 7815, '5507d56c7378e0e46b5986b100337ac1', 1, 'user_users', 1),
+	(5, 4, 'thumb.normal', 'files/application_sliders/4/0000_d56c.jpg', 'application_sliders', 4, 'jpg', 'c2.jpg', 'image', 'jpeg', 7815, '5507d56c7378e0e46b5986b100337ac1', 1, 'user_users', 1),
+	(6, 4, 'thumb.icon', 'files/application_sliders/4/0000_3c9b.jpg', 'application_sliders', 4, 'jpg', 'c2.jpg', 'image', 'jpeg', 2184, '75913c9b7c79e3778989375101623152', 1, 'user_users', 1),
+	(7, NULL, NULL, 'files/application_sliders/5/0000_80ab.jpg', 'application_sliders', 5, 'jpg', 'c3.jpg', 'image', 'jpeg', 8506, 'e52d80abeb49a4c2f8dcaee2bba99a4f', 1, 'user_users', 1),
+	(8, 7, 'thumb.normal', 'files/application_sliders/5/0000_80ab.jpg', 'application_sliders', 5, 'jpg', 'c3.jpg', 'image', 'jpeg', 8506, 'e52d80abeb49a4c2f8dcaee2bba99a4f', 1, 'user_users', 1),
+	(9, 7, 'thumb.icon', 'files/application_sliders/5/0000_66c1.jpg', 'application_sliders', 5, 'jpg', 'c3.jpg', 'image', 'jpeg', 2238, '7f6c66c19d4d92c71dd9654b8acff78c', 1, 'user_users', 1),
+	(10, NULL, NULL, 'files/application_sliders/6/0000_d10a.jpg', 'application_sliders', 6, 'jpg', 'c4.jpg', 'image', 'jpeg', 7661, '3d68d10af631838668921b7fb78a7ead', 1, 'user_users', 1),
+	(11, 10, 'thumb.normal', 'files/application_sliders/6/0000_d10a.jpg', 'application_sliders', 6, 'jpg', 'c4.jpg', 'image', 'jpeg', 7661, '3d68d10af631838668921b7fb78a7ead', 1, 'user_users', 1),
+	(12, 10, 'thumb.icon', 'files/application_sliders/6/0000_a809.jpg', 'application_sliders', 6, 'jpg', 'c4.jpg', 'image', 'jpeg', 2410, '30c5a809859e6556a102a2b77b31ec33', 1, 'user_users', 1),
+	(13, NULL, NULL, 'files/application_sliders/7/0000_61d6.jpg', 'application_sliders', 7, 'jpg', 'c5.jpg', 'image', 'jpeg', 7870, 'bdaa61d6da3d340bd3e2832cb24f24a3', 1, 'user_users', 1),
+	(14, 13, 'thumb.normal', 'files/application_sliders/7/0000_61d6.jpg', 'application_sliders', 7, 'jpg', 'c5.jpg', 'image', 'jpeg', 7870, 'bdaa61d6da3d340bd3e2832cb24f24a3', 1, 'user_users', 1),
+	(15, 13, 'thumb.icon', 'files/application_sliders/7/0000_d659.jpg', 'application_sliders', 7, 'jpg', 'c5.jpg', 'image', 'jpeg', 2474, '0831d6593eb4514ecb3541003e490f08', 1, 'user_users', 1),
+	(16, NULL, NULL, 'files/application_sliders/8/0000_f962.jpg', 'application_sliders', 8, 'jpg', 'c6.jpg', 'image', 'jpeg', 9275, 'c743f96282c484983f6951ef71bcaa34', 1, 'user_users', 1),
+	(17, 16, 'thumb.normal', 'files/application_sliders/8/0000_f962.jpg', 'application_sliders', 8, 'jpg', 'c6.jpg', 'image', 'jpeg', 9275, 'c743f96282c484983f6951ef71bcaa34', 1, 'user_users', 1),
+	(18, 16, 'thumb.icon', 'files/application_sliders/8/0000_f161.jpg', 'application_sliders', 8, 'jpg', 'c6.jpg', 'image', 'jpeg', 2387, '79cff161483948b7787c66c0ccecc9ee', 1, 'user_users', 1),
+	(19, NULL, NULL, 'files/application_sliders/9/0000_1eaf.jpg', 'application_sliders', 9, 'jpg', 'c7.jpg', 'image', 'jpeg', 8034, '2f321eaf91647a683bf75970bf10965d', 1, 'user_users', 1),
+	(20, 19, 'thumb.normal', 'files/application_sliders/9/0000_1eaf.jpg', 'application_sliders', 9, 'jpg', 'c7.jpg', 'image', 'jpeg', 8034, '2f321eaf91647a683bf75970bf10965d', 1, 'user_users', 1),
+	(21, 19, 'thumb.icon', 'files/application_sliders/9/0000_1ee5.jpg', 'application_sliders', 9, 'jpg', 'c7.jpg', 'image', 'jpeg', 2132, 'c5ce1ee59bcbe800a355200de9d505d2', 1, 'user_users', 1),
+	(22, NULL, NULL, 'files/application_sliders/10/0000_f1d2.jpg', 'application_sliders', 10, 'jpg', 'c8.jpg', 'image', 'jpeg', 6932, '34b4f1d232a62bfdb241d3bd68897c57', 1, 'user_users', 1),
+	(23, 22, 'thumb.normal', 'files/application_sliders/10/0000_f1d2.jpg', 'application_sliders', 10, 'jpg', 'c8.jpg', 'image', 'jpeg', 6932, '34b4f1d232a62bfdb241d3bd68897c57', 1, 'user_users', 1),
+	(24, 22, 'thumb.icon', 'files/application_sliders/10/0000_8e17.jpg', 'application_sliders', 10, 'jpg', 'c8.jpg', 'image', 'jpeg', 2164, '43d28e178f64cf1725deea766d1e7480', 1, 'user_users', 1);
 /*!40000 ALTER TABLE `storage_files` ENABLE KEYS */;
 
 -- Дамп структуры для таблица zf3_cms.storage_services
@@ -145,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `storage_services` (
   CONSTRAINT `storage_services_storage_types__fk` FOREIGN KEY (`type_id`) REFERENCES `storage_types` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы zf3_cms.storage_services: ~2 rows (приблизительно)
+-- Дамп данных таблицы zf3_cms.storage_services: ~1 rows (приблизительно)
 /*!40000 ALTER TABLE `storage_services` DISABLE KEYS */;
 INSERT IGNORE INTO `storage_services` (`id`, `type_id`, `config`, `enabled`, `default`) VALUES
 	(1, 1, NULL, 1, 1);
@@ -199,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `user_levels` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы zf3_cms.user_levels: ~0 rows (приблизительно)
+-- Дамп данных таблицы zf3_cms.user_levels: ~1 rows (приблизительно)
 /*!40000 ALTER TABLE `user_levels` DISABLE KEYS */;
 INSERT IGNORE INTO `user_levels` (`id`, `title`, `description`, `type`) VALUES
 	(1, 'admin', 'admin', 'admin');
@@ -216,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `user_logins` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы zf3_cms.user_logins: ~19 rows (приблизительно)
+-- Дамп данных таблицы zf3_cms.user_logins: ~22 rows (приблизительно)
 /*!40000 ALTER TABLE `user_logins` DISABLE KEYS */;
 INSERT IGNORE INTO `user_logins` (`id`, `user_id`, `username`, `status`, `ip`, `creation_date`) VALUES
 	(1, 1, 'admin', 1, '127.0.0.1', '2018-10-09 11:56:37'),
@@ -251,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `user_permissions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы zf3_cms.user_permissions: ~4 rows (приблизительно)
+-- Дамп данных таблицы zf3_cms.user_permissions: ~5 rows (приблизительно)
 /*!40000 ALTER TABLE `user_permissions` DISABLE KEYS */;
 INSERT IGNORE INTO `user_permissions` (`id`, `name`, `description`) VALUES
 	(1, 'languages.list', 'Languages List Page'),

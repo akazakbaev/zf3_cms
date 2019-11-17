@@ -6,6 +6,8 @@
 
 $(document).ready(function () {
 
+    $(".hs-menubar").hsMenu();
+
     // Add special class to minimalize page elements when screen is less than 768px
     setBodySmall();
 
