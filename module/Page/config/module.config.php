@@ -8,6 +8,8 @@
 namespace Page;
 
 
+use Application\Factory\Controller\ItemInvokableControllerFactory;
+use Page\Controller\IndexController;
 use Zend\Router\Http\Segment;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Page\Controller\Admin\IndexController as AdminIndexController;
@@ -16,10 +18,23 @@ use Page\Factory\Controller\Admin\IndexControllerFactory as AdminIndexController
 return [
     'router' => [
         'routes' => [
+            'page' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/page[/:name][/]',
+                    'defaults' => [
+                        'controller' => IndexController::class,
+                        'action' => 'view'
+                    ],
+                    'constraints' => [
+                        'name' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ]
+                ]
+            ],
             'admin_pages' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route'    => ADMIN_PATH .'/pages[/:action][/]',
+                    'route'    => ADMIN_PATH .'/pages[/:action][/:id][/]',
                     'defaults' => [
                         'controller' => AdminIndexController::class,
                         'action' => 'index'
@@ -33,7 +48,8 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            AdminIndexController::class => AdminIndexControllerFactory::class
+            AdminIndexController::class => AdminIndexControllerFactory::class,
+            IndexController::class => ItemInvokableControllerFactory::class
         ]
     ],
     'service_manager' => [
@@ -68,7 +84,7 @@ return [
             'pages' => [
                 'label' => 'Pages',
                 'route' => 'admin_pages',
-                'order' => 2
+                'order' => 3
             ]
         ],
     ]

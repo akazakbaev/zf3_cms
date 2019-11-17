@@ -15,23 +15,23 @@
             ->prependStylesheet($this->basePath('styles/style.css'))
             ->prependStylesheet($this->basePath('fonts/pe-icon-7-stroke/css/helper.css'))
             ->prependStylesheet($this->basePath('fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css'))
-            ->prependStylesheet($this->basePath('vendor/bootstrap/dist/css/bootstrap.css'))
-            ->prependStylesheet($this->basePath('vendor/animate.css/animate.css'))
-            ->prependStylesheet($this->basePath('vendor/metisMenu/dist/metisMenu.css'))
-            ->prependStylesheet($this->basePath('vendor/fontawesome/css/font-awesome.css'))
+            ->prependStylesheet($this->basePath('vendor-js/bootstrap/dist/css/bootstrap.css'))
+            ->prependStylesheet($this->basePath('vendor-js/animate.css/animate.css'))
+            ->prependStylesheet($this->basePath('vendor-js/metisMenu/dist/metisMenu.css'))
+            ->prependStylesheet($this->basePath('vendor-js/fontawesome/css/font-awesome.css'))
             ->prependStylesheet($this->basePath('styles/languages.css'))
         ?>
 
         <!-- Scripts -->
         <?= $this->headScript()
             ->prependFile($this->basePath('scripts/homer.js'))
-            ->prependFile($this->basePath('vendor/sparkline/index.js'))
-            ->prependFile($this->basePath('vendor/iCheck/icheck.min.js'))
-            ->prependFile($this->basePath('vendor/metisMenu/dist/metisMenu.min.js'))
-            ->prependFile($this->basePath('vendor/bootstrap/dist/js/bootstrap.min.js'))
-            ->prependFile($this->basePath('vendor/slimScroll/jquery.slimscroll.min.js'))
-            ->prependFile($this->basePath('vendor/jquery-ui/jquery-ui.min.js'))
-            ->prependFile($this->basePath('vendor/jquery/dist/jquery.min.js'))
+            ->prependFile($this->basePath('vendor-js/sparkline/index.js'))
+            ->prependFile($this->basePath('vendor-js/iCheck/icheck.min.js'))
+            ->prependFile($this->basePath('vendor-js/metisMenu/dist/metisMenu.min.js'))
+            ->prependFile($this->basePath('vendor-js/bootstrap/dist/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('vendor-js/slimScroll/jquery.slimscroll.min.js'))
+            ->prependFile($this->basePath('vendor-js/jquery-ui/jquery-ui.min.js'))
+            ->prependFile($this->basePath('vendor-js/jquery/dist/jquery.min.js'))
 
         ;
         ?>

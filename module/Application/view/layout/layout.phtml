@@ -16,21 +16,21 @@
             ->prependStylesheet($this->basePath('styles/style.css'))
             ->prependStylesheet($this->basePath('fonts/pe-icon-7-stroke/css/helper.css'))
             ->prependStylesheet($this->basePath('fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css'))
-            ->prependStylesheet($this->basePath('vendor/bootstrap/dist/css/bootstrap.css'))
-            ->prependStylesheet($this->basePath('vendor/animate.css/animate.css'))
-            ->prependStylesheet($this->basePath('vendor/fontawesome/css/font-awesome.css'))
+            ->prependStylesheet($this->basePath('vendor-js/bootstrap/dist/css/bootstrap.css'))
+            ->prependStylesheet($this->basePath('vendor-js/animate.css/animate.css'))
+            ->prependStylesheet($this->basePath('vendor-js/fontawesome/css/font-awesome.css'))
             ->prependStylesheet($this->basePath('themes/styles/languages.css'))
         ?>
 
         <!-- Scripts -->
         <?= $this->headScript()
             ->prependFile($this->basePath('scripts/homer.js'))
-            ->prependFile($this->basePath('vendor/sparkline/index.js'))
-            ->prependFile($this->basePath('vendor/iCheck/icheck.min.js'))
-            ->prependFile($this->basePath('vendor/bootstrap/dist/js/bootstrap.min.js'))
-            ->prependFile($this->basePath('vendor/slimScroll/jquery.slimscroll.min.js'))
-            ->prependFile($this->basePath('vendor/jquery-ui/jquery-ui.min.js'))
-            ->prependFile($this->basePath('vendor/jquery/dist/jquery.min.js'))
+            ->prependFile($this->basePath('vendor-js/sparkline/index.js'))
+            ->prependFile($this->basePath('vendor-js/iCheck/icheck.min.js'))
+            ->prependFile($this->basePath('vendor-js/bootstrap/dist/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('vendor-js/slimScroll/jquery.slimscroll.min.js'))
+            ->prependFile($this->basePath('vendor-js/jquery-ui/jquery-ui.min.js'))
+            ->prependFile($this->basePath('vendor-js/jquery/dist/jquery.min.js'))
         ?>
     </head>
     <body class="landing-page">
@@ -70,16 +70,28 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="#">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
                                 <?= $this->translate('Solutions')?>
                                 <span class="caret"></span>
                             </a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href=""><?= $this->translate('Sociological research')?></a>
+                                </li>
+                                <li>
+                                    <a href=""><?= $this->translate('Market research')?></a>
+                                </li>
+                                <li>
+                                    <a href=""><?= $this->translate('Monitoring and Project Evaluation')?></a>
+                                </li>
+                            </ul>
                         </li>
                         <li><a class="page-scroll" page-scroll href="#features"><?= $this->translate('Analytics')?></a></li>
-                        <li><a class="page-scroll" page-scroll href="#team"><?= $this->translate('Trainings')?></a></li>
+                        <li><a class="page-scroll" page-scroll href="#team"><?= $this->translate('Training')?></a></li>
                         <li><a class="page-scroll" page-scroll href="#pricing"><?= $this->translate('News')?> </a></li>
-                        <li><a class="page-scroll" page-scroll href="#clients"><?= $this->translate('Contacts')?>  </a></li>
+                        <li><a href="<?= $this->url('contacts')?>"><?= $this->translate('Contacts')?>  </a></li>
                         <?= $this->languageSwitch()?>
                     </ul>
                 </div>

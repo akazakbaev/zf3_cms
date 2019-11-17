@@ -1,0 +1,30 @@
+<?php /** @var $item \Article\Entity\ArticleArticles */?>
+<section>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <h2>Последние новости энергосектора</h2>
+        </div>
+        <?php
+        //Columns must be a factor of 12 (1,2,3,4,6,12)
+        $numOfCols = 3;
+        $rowCount = 0;
+        $bootstrapColWidth = 12 / $numOfCols;
+        ?>
+        <div class="row">
+            <?php foreach ($items as $item):?>
+
+                <div class="col-md-4">
+                    <h4>
+                        <a href="<?= $item->getHref()?>">
+                            <?= $item->getTitle()?>
+                        </a>
+                    </h4>
+                    <p><?= $item->getDescription(null, 300)?></p>
+                </div>
+                <?php
+                $rowCount++;
+                if($rowCount % $numOfCols == 0) echo '</div><div class="row text-center">';
+                ?>
+            <?php endforeach;?>
+    </div>
+</section>

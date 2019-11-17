@@ -1,0 +1,32 @@
+<?php
+/** @var \Article\Entity\ArticleArticles $item */
+
+$this->headLink()
+    ->appendStylesheet($this->basePath('theme/front/css/blog.css'))
+;
+
+$this->pageBreadcrumbs()
+    ->setItems(array(
+        'first' => array('label' => 'Blog', 'active' => true)))
+    ->setTitle('Blog')
+;
+?>
+
+<div class="blog-wrapper landing-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-centered blog-left">
+                <div class="bl-inner">
+                <?php foreach ($this->items as $item): ?>
+                    <?= $this->partial('_item.phtml', ['item' => $item, 'short' => true])?>
+                <?php endforeach; ?>
+                <?php echo $this->paginationControl($this->items, 'Sliding', 'pagination/pagination.phtml', array(
+                    'query' => array(),
+                    'router' => 'projects',
+                    'params' => array()
+                )); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: azim
+ * Date: 11/25/18
+ * Time: 12:39 PM
+ */
+
+
+$this->headLink()
+    ->appendStylesheet($this->basePath('theme/front/css/blog.css'))
+;
+
+/** @var \Article\Entity\ArticleArticles $item */
+$this->pageBreadcrumbs()
+    ->setItems(array(
+            'first' => array('label' => 'Blog', 'link' => $this->url('articles_general')),
+            'second' => array('label' => $item->getTitle(), 'active' => true),
+        )
+    )
+    ->setTitle($item->getTitle())
+;
+?>
+<div class="blog-wrapper landing-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-centered blog-left">
+                <div class="bl-inner">
+                    <?= $this->partial('_item.phtml', ['item' => $item, 'short' => false])?>
+                    <!--/.item-blog-post-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

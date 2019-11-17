@@ -1,0 +1,28 @@
+<div class="item-blog-post">
+    <div class="post-header clearfix">
+        <h2 class="wow  fadeIn   animated" data-wow-duration="0.2s">
+            <a href="<?= $item->getHref()?>">
+                <?= $item->getTitle()?>
+            </a>
+        </h2>
+
+        <div class="post-info">
+<!--            --><?//= $this->translate('by')?>
+<!--            <span><a class="userBy">--><?//= $item->getUser()->getTitle()?><!--</a></span>,-->
+            <span><?= $this->dateFormat($item->getCreationDate(), IntlDateFormatter::MEDIUM)?></span>
+        </div>
+    </div>
+    <div class="post-main-view">
+        <div class="post-lead-image wow  fadeIn   animated" >
+            <img src="<?php echo $item->getFile()->map(); ?>" class="img-responsive" alt="<?= $item->getTitle();?>">
+        </div>
+        <div class="post-description wow  fadeIn   animated" >
+            <?php if($short):?>
+                <?php echo $item->getDescription(null, 300)?>
+            <?php else:?>
+                <?= $item->getDescription()?>
+            <?php endif;?>
+        </div>
+    </div>
+</div>
+<!--/.item-blog-post-->

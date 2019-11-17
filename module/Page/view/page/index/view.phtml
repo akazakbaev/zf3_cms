@@ -1,0 +1,39 @@
+<?php
+$this->headLink()
+    ->appendStylesheet($this->basePath('theme/front/css/blog.css'))
+;
+?>
+
+<div class="blog-wrapper landing-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-md-10 col-centered blog-left">
+                    <div class="bl-inner">
+                        <div class="item-blog-post">
+                            <div class="post-header clearfix">
+                                <h2 class="wow  fadeIn   animated" data-wow-duration="0.2s">
+                                    <a href="<?= $item->getHref()?>">
+                                        <?= $item->getTitle()?>
+                                    </a>
+                                </h2>
+
+                            </div>
+                            <div class="post-main-view">
+                                <div class="post-lead-image wow  fadeIn   animated" >
+<!--                                    <img src="--><?php //echo $item->getFile()->map(); ?><!--" class="img-responsive" alt="--><?//= $item->getTitle();?><!--">-->
+                                </div>
+                                <div class="post-description wow  fadeIn   animated" >
+                                    <?= $item->getDescription()?>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.item-blog-post-->
+                        <hr>
+                    </div>
+                </div>
+                <!--/row end-->
+            </div>
+        </div>
+    </div>
+</div>
