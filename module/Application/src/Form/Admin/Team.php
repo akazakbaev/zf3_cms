@@ -9,11 +9,12 @@
 namespace Application\Form\Admin;
 
 use Application\Classes\AbstractLanguageForm;
-use Application\Options\LanguageOptions;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class Team extends AbstractLanguageForm
 {
+    protected $scenario;
+
     public function getArrayElements()
     {
         return [
@@ -27,6 +28,20 @@ class Team extends AbstractLanguageForm
                     ],
                     'options' => [
                         'label' => 'Title',
+                        'label_attributes' => [
+                            'class' => 'col-sm-3 control-label'
+                        ],
+                    ]
+                ],
+                [
+                    'name' => 'shortDescription',
+                    'type' => 'Textarea',
+                    'attributes' => [
+                        'placeholder' => 'Short Description',
+                        'class' => 'form-control',
+                    ],
+                    'options' => [
+                        'label' => 'Short Description',
                         'label_attributes' => [
                             'class' => 'col-sm-3 control-label'
                         ],
@@ -84,7 +99,7 @@ class Team extends AbstractLanguageForm
                     ],
                 ],
                 [
-                    'name'     => 'description',
+                    'name'     => 'shortDescription',
                     'required' => true,
                     'filters'  => [
                         ['name' => 'StringTrim'],
@@ -92,19 +107,40 @@ class Team extends AbstractLanguageForm
                 ],
             ],
             'default' => [
+                [
+                    'name'     => 'photo',
+                    'type'     => 'Zend\InputFilter\FileInput',
+                    'required' => ($this->scenario === 'create' ? true : false),
+                    'validators' => [
+                        ['name'    => 'FileUploadFile'],
+                        ['name'    => 'FileIsImage'],
+                        [
+                            'name'    => 'FileImageSize',
+                            'options' => [
+                                'minWidth'  => 128,
+                                'minHeight' => 128,
+                                'maxWidth'  => 4096,
+                                'maxHeight' => 4096
+                            ]
+                        ],
 
+                    ]
+                ]
             ]
         ];
     }
-    public function __construct($scenario = 'create', $entityManager, LanguageOptions $languageOptions)
+
+    public function __construct($scenario = null, $entityManager, array $languages)
     {
-        $this->setLanguageOptions($languageOptions);
+        $this->setLanguages($languages);
+
+        // Define form name
+        parent::__construct($scenario);
+
+        $this->scenario = $scenario;
 
         $this->setAttributes(array('method' => 'post', 'class' => 'form-horizontal'));
 
         $this->setHydrator(new DoctrineHydrator($entityManager));
-
-        // Define form name
-        parent::__construct($scenario);
     }
 }

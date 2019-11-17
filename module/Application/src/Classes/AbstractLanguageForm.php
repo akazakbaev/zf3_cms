@@ -17,13 +17,19 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 abstract class AbstractLanguageForm extends Form implements FormTranslateInterface
 {
     /**
-     * @var LanguageOptions
+     * @var array
      */
-    protected $languageOptions;
+    protected $languages;
+
+    protected $entityManager;
+
+    protected $scenario;
 
     public function __construct($name = null)
     {
         parent::__construct($name);
+
+        $this->scenario = $name;
 
         $this->addDefaultElements();
         $this->addTranslateElements();
@@ -31,14 +37,14 @@ abstract class AbstractLanguageForm extends Form implements FormTranslateInterfa
         $this->addInputFilter();
     }
 
-    public function setLanguageOptions(LanguageOptions $languageOptions)
+    public function setLanguages(array $languages)
     {
-        $this->languageOptions = $languageOptions;
+        $this->languages = $languages;
     }
 
-    public function getLanguageOptions()
+    public function getLanguages()
     {
-        return $this->languageOptions;
+        return $this->languages;
     }
 
     public function addDefaultElements()
@@ -59,7 +65,7 @@ abstract class AbstractLanguageForm extends Form implements FormTranslateInterfa
 
         $translateElements = $allElements['translate'] ?? [];
 
-        foreach ($this->getLanguageOptions()->getLanguages() as $key => $language)
+        foreach ($this->getLanguages() as $key => $language)
         {
             foreach ($translateElements as $element)
             {
@@ -115,7 +121,7 @@ abstract class AbstractLanguageForm extends Form implements FormTranslateInterfa
 
         $translateElements = $allInputFiltersElements['translate'] ?? [];
 
-        foreach ($this->getLanguageOptions()->getLanguages() as $key => $language)
+        foreach ($this->getLanguages() as $key => $language)
         {
             foreach ($translateElements as $element)
             {

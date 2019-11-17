@@ -1,102 +1,89 @@
--- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
---
--- Host: 127.0.0.1    Database: zf3_cms
--- ------------------------------------------------------
--- Server version	5.7.23-0ubuntu0.16.04.1
+-- --------------------------------------------------------
+-- Хост:                         127.0.0.1
+-- Версия сервера:               5.7.27-0ubuntu0.16.04.1 - (Ubuntu)
+-- Операционная система:         Linux
+-- HeidiSQL Версия:              10.1.0.5464
+-- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Table structure for table `application_teams`
---
-
-DROP TABLE IF EXISTS `application_teams`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `application_teams` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
+-- Дамп структуры для таблица zf3_cms.application_settings
+CREATE TABLE IF NOT EXISTS `application_settings` (
+  `name` varchar(255) NOT NULL,
+  `value` text,
+  PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `application_teams`
---
+-- Дамп данных таблицы zf3_cms.application_settings: ~9 rows (приблизительно)
+/*!40000 ALTER TABLE `application_settings` DISABLE KEYS */;
+INSERT IGNORE INTO `application_settings` (`name`, `value`) VALUES
+	('en.site.description', 'erfer'),
+	('en.site.keywords', 'ferferf'),
+	('en.site.title', 'erferf'),
+	('mail.smtp.authentication', '0'),
+	('mail.smtp.send', '0'),
+	('mail.smtp.ssl', 'ssl'),
+	('ru.site.description', 'dfvdfv'),
+	('ru.site.keywords', 'dvdfv'),
+	('ru.site.title', 'dfvgfv');
+/*!40000 ALTER TABLE `application_settings` ENABLE KEYS */;
 
-LOCK TABLES `application_teams` WRITE;
+-- Дамп структуры для таблица zf3_cms.application_teams
+CREATE TABLE IF NOT EXISTS `application_teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title_en` varchar(255) NOT NULL,
+  `title_ru` varchar(255) NOT NULL,
+  `description_en` text NOT NULL,
+  `description_ru` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Дамп данных таблицы zf3_cms.application_teams: ~2 rows (приблизительно)
 /*!40000 ALTER TABLE `application_teams` DISABLE KEYS */;
+INSERT IGNORE INTO `application_teams` (`id`, `title_en`, `title_ru`, `description_en`, `description_ru`) VALUES
+	(1, '546456546', '546456456', 'tyhthtrh', 'tyhtyhtyh'),
+	(2, '546456546', '546456456', 'tyhthtrh', 'tyhtyhtyh');
 /*!40000 ALTER TABLE `application_teams` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `application_translate_key`
---
-
-DROP TABLE IF EXISTS `application_translate_key`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `application_translate_key` (
+-- Дамп структуры для таблица zf3_cms.application_translates
+CREATE TABLE IF NOT EXISTS `application_translates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `module` varchar(20) NOT NULL,
-  `translate_text` text NOT NULL,
-  `js` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `application_translate_key`
---
-
-LOCK TABLES `application_translate_key` WRITE;
-/*!40000 ALTER TABLE `application_translate_key` DISABLE KEYS */;
-/*!40000 ALTER TABLE `application_translate_key` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `application_translates`
---
-
-DROP TABLE IF EXISTS `application_translates`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `application_translates` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `locale` int(11) NOT NULL,
+  `locale` varchar(5) NOT NULL,
   `translate` text NOT NULL,
   `translate_key_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `application_translates_application_translate_key__fk` (`translate_key_id`),
   CONSTRAINT `application_translates_application_translate_key__fk` FOREIGN KEY (`translate_key_id`) REFERENCES `application_translate_key` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `application_translates`
---
-
-LOCK TABLES `application_translates` WRITE;
+-- Дамп данных таблицы zf3_cms.application_translates: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `application_translates` DISABLE KEYS */;
+INSERT IGNORE INTO `application_translates` (`id`, `locale`, `translate`, `translate_key_id`) VALUES
+	(1, 'ru_RU', 'О нас', 3),
+	(2, 'en_EN', 'About us', 3);
 /*!40000 ALTER TABLE `application_translates` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `page_pages`
---
+-- Дамп структуры для таблица zf3_cms.application_translate_key
+CREATE TABLE IF NOT EXISTS `application_translate_key` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `module` varchar(20) NOT NULL,
+  `translate_text` text NOT NULL,
+  `js` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `page_pages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `page_pages` (
+-- Дамп данных таблицы zf3_cms.application_translate_key: ~1 rows (приблизительно)
+/*!40000 ALTER TABLE `application_translate_key` DISABLE KEYS */;
+INSERT IGNORE INTO `application_translate_key` (`id`, `module`, `translate_text`, `js`) VALUES
+	(3, 'application', 'About us', 0);
+/*!40000 ALTER TABLE `application_translate_key` ENABLE KEYS */;
+
+-- Дамп структуры для таблица zf3_cms.page_pages
+CREATE TABLE IF NOT EXISTS `page_pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title_en` varchar(255) DEFAULT NULL,
   `title_ru` varchar(255) DEFAULT NULL,
@@ -111,25 +98,13 @@ CREATE TABLE `page_pages` (
   KEY `page_pages_user_users__fk` (`user_id`),
   CONSTRAINT `page_pages_user_users__fk` FOREIGN KEY (`user_id`) REFERENCES `user_users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `page_pages`
---
-
-LOCK TABLES `page_pages` WRITE;
+-- Дамп данных таблицы zf3_cms.page_pages: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `page_pages` DISABLE KEYS */;
 /*!40000 ALTER TABLE `page_pages` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `storage_files`
---
-
-DROP TABLE IF EXISTS `storage_files`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `storage_files` (
+-- Дамп структуры для таблица zf3_cms.storage_files
+CREATE TABLE IF NOT EXISTS `storage_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_file_id` int(11) DEFAULT NULL,
   `type` tinytext,
@@ -148,26 +123,18 @@ CREATE TABLE `storage_files` (
   PRIMARY KEY (`id`),
   KEY `storage_files_storage_services__fk` (`service_id`),
   CONSTRAINT `storage_files_storage_services__fk` FOREIGN KEY (`service_id`) REFERENCES `storage_services` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `storage_files`
---
-
-LOCK TABLES `storage_files` WRITE;
+-- Дамп данных таблицы zf3_cms.storage_files: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `storage_files` DISABLE KEYS */;
+INSERT IGNORE INTO `storage_files` (`id`, `parent_file_id`, `type`, `storage_path`, `parent_type`, `parent_id`, `extension`, `name`, `mime_major`, `mime_minor`, `size`, `hash`, `owner_id`, `owner_type`, `service_id`) VALUES
+	(1, NULL, NULL, 'files/application_sliders/3/0000_6279.jpg', 'application_sliders', 3, 'jpg', 'c1.jpg', 'image', 'jpeg', 8127, 'b9fa6279463e1e45ed3cd6cfa7f64ba3', 1, 'user_users', 1),
+	(2, 1, 'thumb.normal', 'files/application_sliders/3/0000_6279.jpg', 'application_sliders', 3, 'jpg', 'c1.jpg', 'image', 'jpeg', 8127, 'b9fa6279463e1e45ed3cd6cfa7f64ba3', 1, 'user_users', 1),
+	(3, 1, 'thumb.icon', 'files/application_sliders/3/0000_1e5b.jpg', 'application_sliders', 3, 'jpg', 'c1.jpg', 'image', 'jpeg', 2204, '89be1e5b9def7c91f547135d8a359534', 1, 'user_users', 1);
 /*!40000 ALTER TABLE `storage_files` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `storage_services`
---
-
-DROP TABLE IF EXISTS `storage_services`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `storage_services` (
+-- Дамп структуры для таблица zf3_cms.storage_services
+CREATE TABLE IF NOT EXISTS `storage_services` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_id` int(11) DEFAULT NULL,
   `config` text,
@@ -176,27 +143,16 @@ CREATE TABLE `storage_services` (
   PRIMARY KEY (`id`),
   KEY `storage_services_storage_types__fk` (`type_id`),
   CONSTRAINT `storage_services_storage_types__fk` FOREIGN KEY (`type_id`) REFERENCES `storage_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `storage_services`
---
-
-LOCK TABLES `storage_services` WRITE;
+-- Дамп данных таблицы zf3_cms.storage_services: ~2 rows (приблизительно)
 /*!40000 ALTER TABLE `storage_services` DISABLE KEYS */;
-INSERT INTO `storage_services` VALUES (1,1,NULL,1,0),(2,2,'{\"params\": {\"host\": \"10.51.2.206\", \"path\": \"/var/www/nrk/public\", \"password\": \"Lan2018KeyTgBLan@)!^\", \"username\": \"akazakbaev\"}, \"adapter\": \"ssh\", \"baseUrl\": \"https://tandoo.gov.kg/\"}',1,1);
+INSERT IGNORE INTO `storage_services` (`id`, `type_id`, `config`, `enabled`, `default`) VALUES
+	(1, 1, NULL, 1, 1);
 /*!40000 ALTER TABLE `storage_services` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `storage_types`
---
-
-DROP TABLE IF EXISTS `storage_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `storage_types` (
+-- Дамп структуры для таблица zf3_cms.storage_types
+CREATE TABLE IF NOT EXISTS `storage_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(128) DEFAULT NULL,
   `plugin` varchar(128) DEFAULT NULL,
@@ -204,26 +160,16 @@ CREATE TABLE `storage_types` (
   `enabled` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `storage_types`
---
-
-LOCK TABLES `storage_types` WRITE;
+-- Дамп данных таблицы zf3_cms.storage_types: ~2 rows (приблизительно)
 /*!40000 ALTER TABLE `storage_types` DISABLE KEYS */;
-INSERT INTO `storage_types` VALUES (1,'Local Storage','Zf\\Infocom\\Storage\\Storage\\Local','',1),(2,'Virtual File System','Zf\\Infocom\\Storage\\Storage\\Vfs',NULL,NULL);
+INSERT IGNORE INTO `storage_types` (`id`, `title`, `plugin`, `form`, `enabled`) VALUES
+	(1, 'Local Storage', 'Storage\\Storage\\Local', '', 1),
+	(2, 'Virtual File System', 'Storage\\Storage\\Vfs', NULL, NULL);
 /*!40000 ALTER TABLE `storage_types` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `user_allows`
---
-
-DROP TABLE IF EXISTS `user_allows`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_allows` (
+-- Дамп структуры для таблица zf3_cms.user_allows
+CREATE TABLE IF NOT EXISTS `user_allows` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `level_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL,
@@ -232,53 +178,35 @@ CREATE TABLE `user_allows` (
   KEY `user_allows_user_permissions__fk` (`permission_id`),
   CONSTRAINT `user_allows_user_levels__fk` FOREIGN KEY (`level_id`) REFERENCES `user_levels` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_allows_user_permissions__fk` FOREIGN KEY (`permission_id`) REFERENCES `user_permissions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user_allows`
---
-
-LOCK TABLES `user_allows` WRITE;
+-- Дамп данных таблицы zf3_cms.user_allows: ~5 rows (приблизительно)
 /*!40000 ALTER TABLE `user_allows` DISABLE KEYS */;
-INSERT INTO `user_allows` VALUES (8,1,1),(9,1,2);
+INSERT IGNORE INTO `user_allows` (`id`, `level_id`, `permission_id`) VALUES
+	(14, 1, 1),
+	(15, 1, 2),
+	(16, 1, 3),
+	(17, 1, 4),
+	(18, 1, 5);
 /*!40000 ALTER TABLE `user_allows` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `user_levels`
---
-
-DROP TABLE IF EXISTS `user_levels`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_levels` (
+-- Дамп структуры для таблица zf3_cms.user_levels
+CREATE TABLE IF NOT EXISTS `user_levels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(20) NOT NULL,
   `description` text,
   `type` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `user_levels`
---
-
-LOCK TABLES `user_levels` WRITE;
+-- Дамп данных таблицы zf3_cms.user_levels: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `user_levels` DISABLE KEYS */;
-INSERT INTO `user_levels` VALUES (1,'admin','admin','admin');
+INSERT IGNORE INTO `user_levels` (`id`, `title`, `description`, `type`) VALUES
+	(1, 'admin', 'admin', 'admin');
 /*!40000 ALTER TABLE `user_levels` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `user_logins`
---
-
-DROP TABLE IF EXISTS `user_logins`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_logins` (
+-- Дамп структуры для таблица zf3_cms.user_logins
+CREATE TABLE IF NOT EXISTS `user_logins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -286,58 +214,62 @@ CREATE TABLE `user_logins` (
   `ip` varchar(255) NOT NULL,
   `creation_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user_logins`
---
-
-LOCK TABLES `user_logins` WRITE;
+-- Дамп данных таблицы zf3_cms.user_logins: ~19 rows (приблизительно)
 /*!40000 ALTER TABLE `user_logins` DISABLE KEYS */;
-INSERT INTO `user_logins` VALUES (1,1,'admin',1,'127.0.0.1','2018-10-09 11:56:37'),(2,1,'admin',1,'127.0.0.1','2018-10-09 11:57:45'),(3,1,'admin',1,'127.0.0.1','2018-10-09 12:15:02'),(4,1,'admin',1,'127.0.0.1','2018-10-10 11:09:52'),(5,1,'admin',1,'127.0.0.1','2018-10-10 12:58:21'),(6,1,'admin',1,'127.0.0.1','2018-10-12 11:50:18'),(7,1,'admin',1,'127.0.0.1','2018-10-12 13:40:41');
+INSERT IGNORE INTO `user_logins` (`id`, `user_id`, `username`, `status`, `ip`, `creation_date`) VALUES
+	(1, 1, 'admin', 1, '127.0.0.1', '2018-10-09 11:56:37'),
+	(2, 1, 'admin', 1, '127.0.0.1', '2018-10-09 11:57:45'),
+	(3, 1, 'admin', 1, '127.0.0.1', '2018-10-09 12:15:02'),
+	(4, 1, 'admin', 1, '127.0.0.1', '2018-10-10 11:09:52'),
+	(5, 1, 'admin', 1, '127.0.0.1', '2018-10-10 12:58:21'),
+	(6, 1, 'admin', 1, '127.0.0.1', '2018-10-12 11:50:18'),
+	(7, 1, 'admin', 1, '127.0.0.1', '2018-10-12 13:40:41'),
+	(8, 1, 'admin', 1, '127.0.0.1', '2018-10-19 10:07:25'),
+	(9, 1, 'admin', 1, '127.0.0.1', '2018-11-09 10:42:19'),
+	(10, 1, 'admin', 1, '127.0.0.1', '2018-11-09 11:07:27'),
+	(11, 1, 'admin', 1, '127.0.0.1', '2018-11-11 05:16:55'),
+	(12, 1, 'admin', 1, '127.0.0.1', '2018-11-11 07:21:19'),
+	(13, 1, 'admin', 1, '127.0.0.1', '2018-11-11 11:07:12'),
+	(14, 1, 'admin', 1, '127.0.0.1', '2019-10-28 13:32:16'),
+	(15, 1, 'admin', 1, '127.0.0.1', '2019-11-02 08:54:50'),
+	(16, 1, 'admin', 1, '127.0.0.1', '2019-11-03 14:07:04'),
+	(17, 1, 'admin', 1, '127.0.0.1', '2019-11-03 14:09:02'),
+	(18, 1, 'admin', 1, '127.0.0.1', '2019-11-03 16:16:30'),
+	(19, 1, 'admin', 1, '127.0.0.1', '2019-11-12 18:11:17'),
+	(20, 1, 'admin', 1, '127.0.0.1', '2019-11-17 11:25:29'),
+	(21, 1, 'admin', 1, '127.0.0.1', '2019-11-17 12:23:47'),
+	(22, 1, 'admin', 1, '127.0.0.1', '2019-11-17 13:59:28');
 /*!40000 ALTER TABLE `user_logins` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `user_permissions`
---
-
-DROP TABLE IF EXISTS `user_permissions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_permissions` (
+-- Дамп структуры для таблица zf3_cms.user_permissions
+CREATE TABLE IF NOT EXISTS `user_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user_permissions`
---
-
-LOCK TABLES `user_permissions` WRITE;
+-- Дамп данных таблицы zf3_cms.user_permissions: ~4 rows (приблизительно)
 /*!40000 ALTER TABLE `user_permissions` DISABLE KEYS */;
-INSERT INTO `user_permissions` VALUES (1,'languages.list','Languages List Page'),(2,'settings.permissions','Permission Page');
+INSERT IGNORE INTO `user_permissions` (`id`, `name`, `description`) VALUES
+	(1, 'languages.list', 'Languages List Page'),
+	(2, 'settings.permissions', 'Permission Page'),
+	(3, 'settings.general', 'Settings General Page'),
+	(4, 'languages.create', 'Languages Add Page'),
+	(5, 'settings.mail', 'Mail Settings');
 /*!40000 ALTER TABLE `user_permissions` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `user_users`
---
-
-DROP TABLE IF EXISTS `user_users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_users` (
+-- Дамп структуры для таблица zf3_cms.user_users
+CREATE TABLE IF NOT EXISTS `user_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(128) NOT NULL,
   `username` varchar(128) NOT NULL,
   `password` varchar(60) NOT NULL,
   `level_id` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1',
+  `locale` char(5) NOT NULL DEFAULT 'en_EN',
   `creation_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_users_email_uindex` (`email`),
@@ -345,25 +277,13 @@ CREATE TABLE `user_users` (
   KEY `user_users_user_levels__fk` (`level_id`),
   CONSTRAINT `user_users_user_levels__fk` FOREIGN KEY (`level_id`) REFERENCES `user_levels` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `user_users`
---
-
-LOCK TABLES `user_users` WRITE;
+-- Дамп данных таблицы zf3_cms.user_users: ~1 rows (приблизительно)
 /*!40000 ALTER TABLE `user_users` DISABLE KEYS */;
-INSERT INTO `user_users` VALUES (1,'kazakbaev-89@mail.ru','admin','$2y$10$FEznmCetodvLsMrr5/raPuupsdZp2WxmXgYcm3TH2ZBrHq.DYGDQG',1,1,'2018-10-09 11:55:21');
+INSERT IGNORE INTO `user_users` (`id`, `email`, `username`, `password`, `level_id`, `status`, `locale`, `creation_date`) VALUES
+	(1, 'kazakbaev-89@mail.ru', 'admin', '$2y$10$FEznmCetodvLsMrr5/raPuupsdZp2WxmXgYcm3TH2ZBrHq.DYGDQG', 1, 1, 'en_EN', '2018-10-09 11:55:21');
 /*!40000 ALTER TABLE `user_users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-10-13 13:56:39

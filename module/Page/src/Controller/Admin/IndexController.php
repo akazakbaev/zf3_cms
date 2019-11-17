@@ -39,8 +39,7 @@ class IndexController extends AdminController
 
     public function createAction()
     {
-        $languageOptions = $this->getEvent()->getApplication()->getServiceManager()->get(LanguageOptions::class);
-        $form = new Create('create', $this->entityManager, $languageOptions);
+        $form = new Create('create', $this->entityManager, $this->languages());
 
         $item = new PagePages();
 
@@ -63,7 +62,7 @@ class IndexController extends AdminController
 
                     $this->entityManager->getConnection()->commit();
 
-                    $this->redirect()->toRoute('pages_general');
+                    $this->redirect()->toRoute('admin_pages');
                 }
                 catch(\Exception $e)
                 {
@@ -81,14 +80,11 @@ class IndexController extends AdminController
 
     public function editAction()
     {
-        if(!$this->requireUser()) return;
-        if(!$this->requireAccess('user.list', null)) return;
-
         $id = $this->params()->fromRoute('id', false);
 
         $item = $this->entityManager->getRepository(PagePages::class)->find($id);
 
-        $form = new Create('edit', $this->entityManager);
+        $form = new Create('edit', $this->entityManager, $this->languages());
 
         $form->bind($item);
 
@@ -106,7 +102,7 @@ class IndexController extends AdminController
 
                     $this->entityManager->getConnection()->commit();
 
-                    $this->redirect()->toRoute('pages_general');
+                    $this->redirect()->toRoute('admin_pages');
                 }
                 catch(\Exception $e)
                 {

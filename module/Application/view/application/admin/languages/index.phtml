@@ -46,12 +46,13 @@ $this->pageBreadcrumbs()
                                     <th><?= $this->translate('Options')?></th>
                                 </tr>
                             </thead>
+                            <?php /* @var \Application\Entity\ApplicationTranslateKey $item */?>
                             <?php foreach ($items as $item):?>
                                 <tr>
-                                    <td><?= $this->translate($item->getKey())?></td>
+                                    <td><?= $this->translate($item->getTranslateText())?></td>
 
                                     <td>
-                                        <a href="<?= $this->url('admin_languages', ['action' => 'edit', 'id' => $item->getTranslateKeyId()])?>">
+                                        <a href="<?= $this->url('admin_languages', ['action' => 'edit', 'id' => $item->getId()])?>">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     </td>

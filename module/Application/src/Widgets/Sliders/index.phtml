@@ -1,0 +1,27 @@
+<?php /** @var \Application\Entity\ApplicationSliders $item */?>
+
+
+<header id="page-top">
+    <div class="container">
+        <div class="heading">
+            <h1>
+                ЦЕНТР ЭНЕРГОСБЕРЕЖЕНИЯ -
+            </h1>
+            <span>ВЕСЬ КОМПЛЕКС РАБОТ ПО ПОВЫШЕНИЮ ЭНЕРГОЭФФЕКТИВНОСТИ ЖИЛЫХ И ПРОМЫШЛЕННЫХ ОБЪЕКТОВ</span>
+            <p class="small">
+                Lorem Ipsum is simply dummy text of the printing and tLorem Ipsum is  Lorem Ipsum is simply dummy of the simply dummy text of the ypesetting.
+            </p>
+
+        </div>
+        <div class="heading-image animate-panel" data-child="img-animate" data-effect="fadeInRight">
+            <?php $rowCount = 0; $numOfCols = 4?>
+            <?php foreach($items as $item):?>
+            <?php if($item->getLink()):?><a href="<?= $item->getLink()?>"><?php endif;?>
+                <?= $this->itemPhoto($item->getFileId(), 'thumb.normal', $item->getTitle(), ['class' => 'img-animate image-slider'])?>
+            <?php if($item->getLink()):?></a><?php endif;?>
+            <?php $rowCount++;?>
+            <?php if($rowCount % $numOfCols == 0) echo '<br>'?>
+            <?php endforeach;?>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,23 @@
+<?php
+
+$this->pageBreadcrumbs()
+    ->setItems(
+        [
+            'first' => ['label' => 'Person', 'link' => $this->url('user_general')],
+            'second' => ['label' => 'Person Edit', 'active' => true]
+        ]
+    )
+    ->setTitle('Team')
+    ->setDescription('TEAM_BROWSE_DESCRIPTION')
+;
+
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="hpanel">
+            <div class="panel-body">
+                <?php echo $this->formRender()->render($form); ?>
+            </div>
+        </div>
+    </div>
+</div>

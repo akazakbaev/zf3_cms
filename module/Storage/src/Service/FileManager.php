@@ -1,7 +1,7 @@
 <?php
 namespace Storage\Service;
 
-use Application\Entity\ApplicationFiles;
+
 use Application\Exception\ImageException;
 use Application\Image\Image;
 use Application\Classes\AbstractEntityItem;
@@ -260,6 +260,16 @@ class FileManager
         $this->entityManager->flush();
 
         return $this;
+    }
+
+    public function setMainImageSize($x = 700, $y = 700)
+    {
+        $this->_mainImageSizes = ['x' => $x, 'y' => $y];
+    }
+
+    public function setThumbImageSize($x = 400, $y = 400)
+    {
+        $this->_thumbImageSizes = ['x' => $x, 'y' => $y];
     }
 }
 

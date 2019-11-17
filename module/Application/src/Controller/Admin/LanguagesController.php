@@ -41,9 +41,6 @@ class LanguagesController extends AdminController
 
     public function indexAction()
     {
-        if(!$this->requireUser()) return;
-        if(!$this->requireAccess('languages.list', null)) return;
-
         $page = $this->params()->fromQuery('page', 1);
         $query = $this->params()->fromQuery('query');
 
@@ -62,9 +59,6 @@ class LanguagesController extends AdminController
 
     public function createAction()
     {
-        if(!$this->requireUser()) return;
-        if(!$this->requireAccess('languages.create', null)) return;
-
         $languageOptions = $this->getEvent()->getApplication()->getServiceManager()->get(LanguageOptions::class);
 
         $form = new CreatePhrase('create', $languageOptions);
@@ -90,7 +84,7 @@ class LanguagesController extends AdminController
 
             if($this->languageManager->save($values))
             {
-                return $this->redirect()->toRoute('languages', array('action' => 'index'));
+                return $this->redirect()->toRoute('admin_languages', array('action' => 'index'));
             }
             else
             {
@@ -111,9 +105,6 @@ class LanguagesController extends AdminController
 
     public function editAction()
     {
-        if(!$this->requireUser()) return;
-        if(!$this->requireAccess('languages.create', null)) return;
-
         $id = $this->params()->fromRoute('id', false);
 
         $item = $this->languageManager->getItemById($id);
@@ -151,12 +142,12 @@ class LanguagesController extends AdminController
 
             $this->languageManager->save($values, $item);
 
-            return $this->redirect()->toRoute('languages', array('action' => 'index'));
+            return $this->redirect()->toRoute('admin_languages', array('action' => 'index'));
         }
         else
         {
             $values = [
-                'key' => $item->getKey(),
+                'key' => $item->getTranslateText(),
                 'js' => $item->getJs()
             ];
 

@@ -6,3 +6,5 @@ data/*
 !data/cache/.gitkeep
 phpunit.xml
 .idea/*
+public/files
+temporary/

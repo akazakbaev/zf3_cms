@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * StorageTypes
  *
- * @ORM\Table(name="storage_types", uniqueConstraints={@ORM\UniqueConstraint(name="storage_types_plugin_uindex", columns={"plugin"})})
+ * @ORM\Table(name="storage_types")
  * @ORM\Entity
  */
 class StorageTypes
@@ -17,22 +17,21 @@ class StorageTypes
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="storage_types_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="title", type="string", length=128, nullable=false)
+     * @ORM\Column(name="title", type="string", length=128, nullable=true)
      */
     private $title;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="plugin", type="string", length=128, nullable=false)
+     * @ORM\Column(name="plugin", type="string", length=128, nullable=true)
      */
     private $plugin;
 
@@ -67,33 +66,33 @@ class StorageTypes
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @param string $title
+     * @param null|string $title
      */
-    public function setTitle(string $title): void
+    public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getPlugin(): string
+    public function getPlugin(): ?string
     {
         return $this->plugin;
     }
 
     /**
-     * @param string $plugin
+     * @param null|string $plugin
      */
-    public function setPlugin(string $plugin): void
+    public function setPlugin(?string $plugin): void
     {
         $this->plugin = $plugin;
     }

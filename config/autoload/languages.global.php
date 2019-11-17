@@ -15,7 +15,7 @@ use Zend\Cache\Storage\Adapter\Filesystem;
 
 return [
     'translator' => [
-        'locale' => 'ru_RU',
+        'locale' => 'en_EN',
 //        'remote_translation' => [
 //            [
 //                'type' => \Application\Service\DatabaseTranslationLoader::class,
@@ -24,7 +24,7 @@ return [
 
     ],
     'languages' => [
-        'defaultLocale' => 'ru_RU',
+        'defaultLocale' => 'en_EN',
         'languages' => ['ru' => 'ru_RU', 'en' => 'en_EN'],
     ]
 ];

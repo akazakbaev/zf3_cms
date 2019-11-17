@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * StorageFiles
  *
- * @ORM\Table(name="storage_files", indexes={@ORM\Index(name="IDX_6BE18979ED5CA9E6", columns={"service_id"})})
+ * @ORM\Table(name="storage_files", indexes={@ORM\Index(name="storage_files_storage_services__fk", columns={"service_id"})})
  * @ORM\Entity
  */
 class StorageFiles
@@ -17,8 +17,7 @@ class StorageFiles
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="storage_files_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -32,70 +31,70 @@ class StorageFiles
     /**
      * @var string|null
      *
-     * @ORM\Column(name="type", type="string", length=20, nullable=true)
+     * @ORM\Column(name="type", type="text", length=255, nullable=true)
      */
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="storage_path", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="storage_path", type="string", length=255, nullable=true)
      */
     private $storagePath;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="parent_type", type="string", length=20, nullable=false)
+     * @ORM\Column(name="parent_type", type="text", length=255, nullable=true)
      */
     private $parentType;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="parent_id", type="integer", nullable=false)
+     * @ORM\Column(name="parent_id", type="integer", nullable=true)
      */
     private $parentId;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="extension", type="string", length=8, nullable=false)
+     * @ORM\Column(name="extension", type="text", length=255, nullable=true)
      */
     private $extension;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="mime_major", type="string", length=64, nullable=true)
+     * @ORM\Column(name="mime_major", type="text", length=255, nullable=true)
      */
     private $mimeMajor;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="mime_minor", type="string", length=64, nullable=true)
+     * @ORM\Column(name="mime_minor", type="text", length=255, nullable=true)
      */
     private $mimeMinor;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="size", type="bigint", nullable=true)
+     * @ORM\Column(name="size", type="integer", nullable=true, options={"unsigned"=true})
      */
     private $size;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="hash", type="string", length=64, nullable=false)
+     * @ORM\Column(name="hash", type="text", length=255, nullable=true)
      */
     private $hash;
 
@@ -123,14 +122,10 @@ class StorageFiles
      */
     private $service;
 
-    private $tmpName;
-
-    private $error;
-
     /**
      * @return int
      */
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -176,81 +171,81 @@ class StorageFiles
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getStoragePath(): string
+    public function getStoragePath(): ?string
     {
         return $this->storagePath;
     }
 
     /**
-     * @param string $storagePath
+     * @param null|string $storagePath
      */
-    public function setStoragePath(string $storagePath): void
+    public function setStoragePath(?string $storagePath): void
     {
         $this->storagePath = $storagePath;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getParentType(): string
+    public function getParentType(): ?string
     {
         return $this->parentType;
     }
 
     /**
-     * @param string $parentType
+     * @param null|string $parentType
      */
-    public function setParentType(string $parentType): void
+    public function setParentType(?string $parentType): void
     {
         $this->parentType = $parentType;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getParentId(): int
+    public function getParentId(): ?int
     {
         return $this->parentId;
     }
 
     /**
-     * @param int $parentId
+     * @param int|null $parentId
      */
-    public function setParentId(int $parentId): void
+    public function setParentId(?int $parentId): void
     {
         $this->parentId = $parentId;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getExtension(): string
+    public function getExtension(): ?string
     {
         return $this->extension;
     }
 
     /**
-     * @param string $extension
+     * @param null|string $extension
      */
-    public function setExtension(string $extension): void
+    public function setExtension(?string $extension): void
     {
         $this->extension = $extension;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param null|string $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -304,17 +299,17 @@ class StorageFiles
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getHash(): string
+    public function getHash(): ?string
     {
         return $this->hash;
     }
 
     /**
-     * @param string $hash
+     * @param null|string $hash
      */
-    public function setHash(string $hash): void
+    public function setHash(?string $hash): void
     {
         $this->hash = $hash;
     }
@@ -365,38 +360,6 @@ class StorageFiles
     public function setService(StorageServices $service): void
     {
         $this->service = $service;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTmpName()
-    {
-        return $this->tmpName;
-    }
-
-    /**
-     * @param mixed $tmpName
-     */
-    public function setTmpName($tmpName): void
-    {
-        $this->tmpName = $tmpName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * @param mixed $error
-     */
-    public function setError($error): void
-    {
-        $this->error = $error;
     }
 
     public function toArray()

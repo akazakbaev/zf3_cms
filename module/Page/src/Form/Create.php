@@ -92,9 +92,9 @@ class Create extends AbstractLanguageForm
         ];
     }
 
-    public function __construct($name = null, $entityManager, LanguageOptions $languageOptions)
+    public function __construct($name = null, $entityManager, array $languages)
     {
-        $this->setLanguageOptions($languageOptions);
+        $this->setLanguages($languages);
 
         parent::__construct($name);
 

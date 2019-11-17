@@ -91,7 +91,7 @@ class LanguageManager
             if($item == false)
                 $item = new ApplicationTranslateKey();
 
-            $item->setKey($data['key']);
+            $item->setTranslateText($data['key']);
             $item->setModule('application');
             $item->setJs($data['js']);
 
@@ -108,10 +108,10 @@ class LanguageManager
 
             return true;
 
-        }catch(\Exception $e){
-
+        }catch(\Exception $e)
+        {
             $this->entityManager->getConnection()->rollBack();
-
+var_dump($e->getMessage());die;
             return false;
         }
     }
@@ -120,20 +120,25 @@ class LanguageManager
     {
         foreach ($data as $k => $v)
         {
-            $qb = $this->entityManager->createQueryBuilder();
+            $item = null;
 
-            $query = $qb->from(ApplicationTranslates::class, 't1')
-                ->select('t1')
-                ->where('t1.locale = ?1')
-                ->setParameter('1', $k)
-                ->andWhere('t1.translateKey = ?2')
-                ->setParameter('2', $translateKey)
-                ->setMaxResults(1)
-                ->getQuery()
+            if($translateKey->getId())
+            {
+                $qb = $this->entityManager->createQueryBuilder();
 
-                ;
+                $query = $qb->from(ApplicationTranslates::class, 't1')
+                    ->select('t1')
+                    ->where('t1.locale = ?1')
+                    ->setParameter('1', $k)
+                    ->andWhere('t1.translateKey = ?2')
+                    ->setParameter('2', $translateKey)
+                    ->setMaxResults(1)
+                    ->getQuery()
 
-            $item = $query->getOneOrNullResult();
+                    ;
+
+                $item = $query->getOneOrNullResult();
+            }
 
             if($item == null) $item = new ApplicationTranslates();
 

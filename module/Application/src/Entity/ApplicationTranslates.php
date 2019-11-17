@@ -22,9 +22,9 @@ class ApplicationTranslates
     private $id;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="locale", type="integer", nullable=false)
+     * @ORM\Column(name="locale", type="text", length=5, nullable=false)
      */
     private $locale;
 

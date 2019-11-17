@@ -2,6 +2,7 @@
 
 namespace User\Entity;
 
+use Application\Classes\AbstractEntityItem;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_users", uniqueConstraints={@ORM\UniqueConstraint(name="user_users_email_uindex", columns={"email"}), @ORM\UniqueConstraint(name="user_users_username_uindex", columns={"username"})}, indexes={@ORM\Index(name="user_users_user_levels__fk", columns={"level_id"})})
  * @ORM\Entity(repositoryClass="User\Entity\Repository\UserUsersRepository")
  */
-class UserUsers
+class UserUsers extends AbstractEntityItem
 {
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
@@ -69,6 +70,12 @@ class UserUsers
      */
     private $level;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="locale", type="string", length=5, nullable=false, options={"fixed"=true})
+     */
+    private $locale;
 
     /**
      * Get id.
@@ -222,5 +229,26 @@ class UserUsers
     public function getLevel()
     {
         return $this->level;
+    }
+
+    public function getTitle($lang = null)
+    {
+        return $this->getUsername();
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

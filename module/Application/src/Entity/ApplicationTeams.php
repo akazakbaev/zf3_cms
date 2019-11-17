@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use Application\Classes\AbstractEntityItem;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,8 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="application_teams")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\Entity\Repository\ApplicationTeamsRepository")
  */
-class ApplicationTeams
+class ApplicationTeams extends AbstractEntityItem
 {
     /**
      * @var int

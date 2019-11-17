@@ -5,11 +5,10 @@ namespace Storage\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Storage\Exception\StoreException;
 use Storage\Storage\AbstractService;
-
 /**
  * StorageServices
  *
- * @ORM\Table(name="storage_services", indexes={@ORM\Index(name="IDX_D0F9DD2EC54C8C93", columns={"type_id"})})
+ * @ORM\Table(name="storage_services", indexes={@ORM\Index(name="storage_services_storage_types__fk", columns={"type_id"})})
  * @ORM\Entity
  */
 class StorageServices
@@ -19,31 +18,30 @@ class StorageServices
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="storage_services_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var jsonb|null
+     * @var string|null
      *
-     * @ORM\Column(name="config", type="jsonb", nullable=true)
+     * @ORM\Column(name="config", type="text", length=65535, nullable=true)
      */
     private $config;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="enabled", type="smallint", nullable=false)
+     * @ORM\Column(name="enabled", type="smallint", nullable=true)
      */
-    private $enabled = '0';
+    private $enabled;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="default", type="smallint", nullable=false)
+     * @ORM\Column(name="default", type="smallint", nullable=true)
      */
-    private $default = '0';
+    private $default;
 
     /**
      * @var \Storage\Entity\StorageTypes
@@ -72,33 +70,49 @@ class StorageServices
     }
 
     /**
-     * @return int
+     * @return null|string
      */
-    public function getEnabled(): int
+    public function getConfig(): ?string
+    {
+        return $this->config;
+    }
+
+    /**
+     * @param null|string $config
+     */
+    public function setConfig(?string $config): void
+    {
+        $this->config = $config;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getEnabled(): ?int
     {
         return $this->enabled;
     }
 
     /**
-     * @param int $enabled
+     * @param int|null $enabled
      */
-    public function setEnabled(int $enabled): void
+    public function setEnabled(?int $enabled): void
     {
         $this->enabled = $enabled;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getDefault(): int
+    public function getDefault(): ?int
     {
         return $this->default;
     }
 
     /**
-     * @param int $default
+     * @param int|null $default
      */
-    public function setDefault(int $default): void
+    public function setDefault(?int $default): void
     {
         $this->default = $default;
     }
@@ -117,22 +131,6 @@ class StorageServices
     public function setType(StorageTypes $type): void
     {
         $this->type = $type;
-    }
-
-    /**
-     * @return null|jsonb
-     */
-    public function getConfig()
-    {
-        return $this->config;
-    }
-
-    /**
-     * @param null|jsonb $config
-     */
-    public function setConfig( $config): void
-    {
-        $this->config = $config;
     }
 
     /**
@@ -159,8 +157,6 @@ class StorageServices
         }
 
         $config = [];
-
-        $config = array();
 
         if( $this->getConfig())
         {

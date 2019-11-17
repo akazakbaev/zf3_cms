@@ -8,10 +8,8 @@
 namespace Page\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Ishrm\Entity\StDeppost;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
-use Ishrm\Entity\StEmplhistory;
 use Zend\Paginator\Paginator;
 
 class PagePagesRepository extends EntityRepository

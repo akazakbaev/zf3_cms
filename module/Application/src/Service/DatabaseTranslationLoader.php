@@ -52,7 +52,7 @@ class DatabaseTranslationLoader implements RemoteLoaderInterface
 
         $this->loadTranslates();
 
-        return $this->translates[$locale];
+        return isset($this->translates[$locale]) ? $this->translates[$locale] : [];
     }
 
     public function loadTranslates()
@@ -67,7 +67,7 @@ class DatabaseTranslationLoader implements RemoteLoaderInterface
 
         $qb =$this->entityManager->createQueryBuilder();
         $query = $qb->from(ApplicationTranslateKey::class, 't1')
-            ->select('t1.key, t2.translate, t2.locale')
+            ->select('t1.translateText, t2.translate, t2.locale')
             ->join('t1.translates', 't2')
             ->getQuery()
         ;
@@ -78,7 +78,7 @@ class DatabaseTranslationLoader implements RemoteLoaderInterface
 
         foreach ($data as $row)
         {
-            $translates[$row['locale']][$row['key']] = $row['translate'];
+            $translates[$row['locale']][$row['translateText']] = $row['translate'];
         }
 
         $this->translates = $translates;

@@ -18,8 +18,8 @@
             ->prependStylesheet($this->basePath('fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css'))
             ->prependStylesheet($this->basePath('vendor/bootstrap/dist/css/bootstrap.css'))
             ->prependStylesheet($this->basePath('vendor/animate.css/animate.css'))
-            ->prependStylesheet($this->basePath('vendor/metisMenu/dist/metisMenu.css'))
             ->prependStylesheet($this->basePath('vendor/fontawesome/css/font-awesome.css'))
+            ->prependStylesheet($this->basePath('themes/styles/languages.css'))
         ?>
 
         <!-- Scripts -->
@@ -27,7 +27,6 @@
             ->prependFile($this->basePath('scripts/homer.js'))
             ->prependFile($this->basePath('vendor/sparkline/index.js'))
             ->prependFile($this->basePath('vendor/iCheck/icheck.min.js'))
-            ->prependFile($this->basePath('vendor/metisMenu/dist/metisMenu.min.js'))
             ->prependFile($this->basePath('vendor/bootstrap/dist/js/bootstrap.min.js'))
             ->prependFile($this->basePath('vendor/slimScroll/jquery.slimscroll.min.js'))
             ->prependFile($this->basePath('vendor/jquery-ui/jquery-ui.min.js'))
@@ -50,12 +49,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="index.html" class="navbar-brand">
-                        <img src="<?= $this->basePath('themes/images/logo.png')?>" alt="">
+                    <a href="<?= $this->url('home')?>" class="navbar-brand">
+                        <img src="<?= $this->basePath('themes/images/logo_evidence.png')?>" alt="">
                     </a>
-                    <div class="brand-desc">
-                        Research Institute
-                    </div>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -84,6 +80,7 @@
                         <li><a class="page-scroll" page-scroll href="#team"><?= $this->translate('Trainings')?></a></li>
                         <li><a class="page-scroll" page-scroll href="#pricing"><?= $this->translate('News')?> </a></li>
                         <li><a class="page-scroll" page-scroll href="#clients"><?= $this->translate('Contacts')?>  </a></li>
+                        <?= $this->languageSwitch()?>
                     </ul>
                 </div>
             </div>
